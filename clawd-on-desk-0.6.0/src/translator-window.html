@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <title>Translate</title>
+  <style>
+    :root {
+      --alien:        #B8D930;
+      --alien-dim:    #8AAB26;
+      --alien-glow:   #d8f25c;
+      --bg-deep:      #0d130b;
+      --bg-mid:       #161e10;
+      --bg-strong:    #1f2a17;
+      --border:       #B8D930;
+      --border-soft:  rgba(184,217,48,0.35);
+      --text:         #e8f0d8;
+      --text-dim:     #9aa67a;
+      --text-faint:   #6c7757;
+      --danger:       #ff6b6b;
+    }
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0; width: 100%; height: 100%;
+      background: transparent;
+      font-family: "SFMono-Regular", "Menlo", "Consolas", monospace;
+      font-size: 12px;
+      color: var(--text);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    .panel {
+      position: absolute;
+      inset: 4px;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-deep);
+      border: 2px solid var(--border);
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.6),
+        4px 4px 0 0 rgba(0,0,0,0.55);
+      overflow: hidden;
+    }
+
+    .header {
+      flex: 0 0 auto;
+      height: 28px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 6px 0 8px;
+      background: var(--bg-strong);
+      border-bottom: 2px solid var(--border);
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      font-size: 10px;
+      text-transform: uppercase;
+      color: var(--alien);
+      -webkit-app-region: drag;
+    }
+    .header .title { display: flex; align-items: center; gap: 6px; }
+    .header .glyph { color: var(--alien); }
+    .header .actions { -webkit-app-region: no-drag; display: flex; gap: 4px; }
+    .header button {
+      width: 20px; height: 20px;
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      color: var(--alien);
+      font-size: 11px;
+      cursor: pointer;
+      padding: 0;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .header button:hover { background: var(--alien); color: var(--bg-deep); }
+
+    .input-row {
+      flex: 0 0 auto;
+      display: flex;
+      gap: 6px;
+      padding: 8px;
+      background: var(--bg-strong);
+      border-bottom: 2px solid var(--border-soft);
+    }
+    .input-row input {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg-deep);
+      color: var(--text);
+      border: 1px solid var(--border-soft);
+      border-radius: 0;
+      padding: 6px 8px;
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    .input-row input::placeholder { color: var(--text-faint); }
+    .input-row input:focus { border-color: var(--alien); }
+    .input-row button {
+      flex: 0 0 auto;
+      background: var(--alien);
+      color: var(--bg-deep);
+      border: 1px solid var(--alien);
+      padding: 0 12px;
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      border-radius: 0;
+      transition: background 0.12s;
+    }
+    .input-row button:hover { background: var(--alien-glow); }
+
+    .body {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 8px 10px;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    .body::-webkit-scrollbar { width: 6px; }
+    .body::-webkit-scrollbar-thumb { background: var(--alien-dim); }
+    .body::-webkit-scrollbar-track { background: transparent; }
+
+    .empty, .loading, .error {
+      color: var(--text-faint);
+      text-align: center;
+      padding: 18px 6px;
+      font-size: 11px;
+      letter-spacing: 0.4px;
+    }
+    .error { color: var(--danger); }
+
+    .meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 6px;
+      font-size: 10px;
+      letter-spacing: 1px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+    }
+    .meta .direction { color: var(--alien); }
+    .meta .phon { color: var(--text-dim); font-family: inherit; }
+
+    .translation {
+      font-size: 14px;
+      color: var(--text);
+      padding: 6px 8px;
+      margin-bottom: 8px;
+      background: rgba(184,217,48,0.10);
+      border-left: 2px solid var(--alien);
+      white-space: pre-wrap;
+      word-wrap: break-word;
+      letter-spacing: 0.3px;
+    }
+
+    .senses {
+      list-style: none;
+      margin: 0;
+      padding: 0 0 4px 0;
+    }
+    .senses li {
+      font-size: 11.5px;
+      color: var(--text);
+      padding: 3px 0;
+      border-bottom: 1px dashed var(--border-soft);
+      line-height: 1.5;
+    }
+    .senses li:last-child { border-bottom: none; }
+    .senses li .pos {
+      color: var(--alien-dim);
+      margin-right: 6px;
+      letter-spacing: 0.5px;
+    }
+
+    .examples {
+      margin-top: 6px;
+      padding-top: 6px;
+      border-top: 1px dashed var(--border-soft);
+      font-size: 11px;
+      color: var(--text-dim);
+      white-space: pre-wrap;
+    }
+    .examples h4 {
+      margin: 0 0 4px;
+      font-size: 9px;
+      letter-spacing: 1.5px;
+      color: var(--alien);
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .examples .ex { margin-bottom: 4px; }
+
+    .footer {
+      flex: 0 0 auto;
+      padding: 4px 8px;
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+      background: var(--bg-strong);
+      border-top: 1px solid var(--border-soft);
+      display: flex;
+      justify-content: space-between;
+    }
+    .footer .src { color: var(--alien-dim); }
+  </style>
+</head>
+<body>
+  <div class="panel">
+    <div class="header">
+      <div class="title">
+        <span class="glyph">⊹</span>
+        <span id="head-title">TRANSLATE</span>
+      </div>
+      <div class="actions">
+        <button id="btn-close" title="Close (Esc)">×</button>
+      </div>
+    </div>
+
+    <div class="input-row">
+      <input id="text" autocomplete="off" spellcheck="false" />
+      <button id="btn-go">GO</button>
+    </div>
+
+    <div class="body" id="body">
+      <div class="empty" id="empty">Type a word or sentence and press Enter.</div>
+    </div>
+
+    <div class="footer">
+      <span id="hint">Esc to close</span>
+      <span class="src">Youdao · MyMemory</span>
+    </div>
+  </div>
+
+<script>
+(function () {
+  const api = window.translatorAPI;
+  const txt = document.getElementById("text");
+  const btnGo = document.getElementById("btn-go");
+  const btnClose = document.getElementById("btn-close");
+  const headTitle = document.getElementById("head-title");
+  const body = document.getElementById("body");
+  const empty = document.getElementById("empty");
+  const hint = document.getElementById("hint");
+
+  const I18N = {
+    en: { head: "TRANSLATE", placeholder: "Type a word or sentence…", empty: "Type a word or sentence and press Enter.", loading: "Translating…", esc: "Esc to close", go: "GO" },
+    zh: { head: "翻译",       placeholder: "输入单词或句子…",         empty: "输入文字按回车开始翻译。",          loading: "翻译中…",     esc: "Esc 关闭",      go: "翻译" },
+    es: { head: "TRADUCIR",   placeholder: "Escribe una palabra…",    empty: "Escribe algo y pulsa Enter.",        loading: "Traduciendo…", esc: "Esc para cerrar", go: "IR" },
+  };
+
+  let curLang = "en";
+
+  api.onBootstrap(({ lang, initialText }) => {
+    curLang = lang || "en";
+    const t = I18N[curLang] || I18N.en;
+    headTitle.textContent = t.head;
+    txt.placeholder = t.placeholder;
+    btnGo.textContent = t.go;
+    hint.textContent = t.esc;
+    empty.textContent = t.empty;
+    if (initialText) {
+      txt.value = initialText;
+    }
+    setTimeout(() => { txt.focus(); txt.select(); }, 30);
+  });
+
+  api.onSetText((text) => {
+    txt.value = text;
+    txt.focus(); txt.select();
+  });
+
+  api.onFocus(() => { txt.focus(); txt.select(); });
+
+  api.onLoading(() => {
+    const t = I18N[curLang] || I18N.en;
+    body.innerHTML = `<div class="loading">${escape(t.loading)}</div>`;
+  });
+
+  api.onResult((r) => { renderResult(r); });
+
+  function doTranslate() {
+    const t = txt.value.trim();
+    if (!t) return;
+    api.translate(t);
+  }
+
+  btnGo.addEventListener("click", doTranslate);
+  btnClose.addEventListener("click", () => api.close());
+  txt.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); doTranslate(); }
+    else if (e.key === "Escape") { e.preventDefault(); api.close(); }
+  });
+
+  function renderResult(r) {
+    if (!r) return;
+    const t = I18N[curLang] || I18N.en;
+    if (r.error && !r.translation) {
+      body.innerHTML = `<div class="error">${escape(r.error)}</div>`;
+      return;
+    }
+    const dir = r.direction === "ZH_CN2EN" ? "ZH → EN"
+              : r.direction === "EN2ZH_CN" ? "EN → ZH"
+              : (r.direction || "AUTO");
+    const phon = [r.phoneticUK ? `UK /${r.phoneticUK}/` : "", r.phoneticUS ? `US /${r.phoneticUS}/` : ""].filter(Boolean).join("  ");
+
+    const senses = (r.senses && r.senses.length)
+      ? `<ul class="senses">${r.senses.slice(0, 8).map(s => `<li>${s.pos ? `<span class="pos">${escape(s.pos)}</span>` : ""}${escape(s.def)}</li>`).join("")}</ul>`
+      : "";
+
+    const examples = (r.examples && r.examples.length)
+      ? `<div class="examples"><h4>Examples</h4>${r.examples.slice(0, 2).map(e => `<div class="ex">${escape(e)}</div>`).join("")}</div>`
+      : "";
+
+    body.innerHTML = `
+      <div class="meta">
+        <span class="direction">${escape(dir)}</span>
+        ${phon ? `<span class="phon">${escape(phon)}</span>` : ""}
+      </div>
+      ${r.translation ? `<div class="translation">${escape(r.translation)}</div>` : ""}
+      ${senses}
+      ${examples}
+    `;
+  }
+
+  function escape(s) {
+    return String(s == null ? "" : s)
+      .replaceAll("&", "&amp;")
+      .replaceAll("<", "&lt;")
+      .replaceAll(">", "&gt;");
+  }
+})();
+</script>
+</body>
+</html>

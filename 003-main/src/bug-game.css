@@ -1,0 +1,236 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+body {
+  background: #0a1a18;
+  color: #78C8A0;
+  font-family: "Nunito", "Quicksand", "M PLUS Rounded 1c", sans-serif;
+  overflow: hidden;
+}
+
+#game-container {
+  width: 280px;
+  height: 400px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Title bar ── */
+#title-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 10px;
+  background: #0d2420;
+  border-bottom: 1px solid #1a3a34;
+  -webkit-app-region: drag;
+}
+
+#title {
+  font-size: 12px;
+  font-weight: 700;
+  color: #78C8A0;
+}
+
+#close-btn {
+  -webkit-app-region: no-drag;
+  background: none;
+  border: 1px solid #3D8A8366;
+  border-radius: 4px;
+  color: #78C8A0;
+  font-size: 11px;
+  width: 22px;
+  height: 22px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.15s;
+}
+#close-btn:hover {
+  background: #FF6B6B33;
+  border-color: #FF6B6B;
+  color: #FF6B6B;
+}
+
+/* ── HUD ── */
+#hud {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  font-size: 12px;
+  font-weight: 600;
+  color: #3D8A83;
+}
+
+#score-display span { color: #FFD700; }
+#timer-display span { color: #FF6B6B; }
+#wpm-display span { color: #78C8A0; }
+
+/* ── Arena ── */
+#arena {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 20px;
+  padding: 10px;
+}
+
+#target-word {
+  font-size: 28px;
+  font-weight: 800;
+  color: #FF6B6B;
+  letter-spacing: 2px;
+  min-height: 40px;
+  text-align: center;
+  text-shadow: 0 0 10px #FF6B6B44;
+  transition: all 0.2s;
+  position: relative;
+}
+
+#target-word.correct {
+  color: #78C8A0;
+  text-shadow: 0 0 15px #78C8A066;
+  animation: crush 0.3s ease-out;
+}
+
+#target-word .matched {
+  color: #78C8A0;
+}
+#target-word .unmatched {
+  color: #FF6B6B;
+}
+
+#input-field {
+  width: 200px;
+  padding: 8px 14px;
+  background: #0d2420;
+  border: 2px solid #3D8A83;
+  border-radius: 8px;
+  color: #78C8A0;
+  font-size: 18px;
+  font-weight: 600;
+  text-align: center;
+  outline: none;
+  font-family: inherit;
+  caret-color: #78C8A0;
+}
+
+#input-field:focus {
+  border-color: #78C8A0;
+  box-shadow: 0 0 8px #3D8A8344;
+}
+
+/* ── Feedback ── */
+#feedback {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  font-weight: 700;
+  transition: opacity 0.3s;
+}
+
+.fb-crush { color: #FFD700; animation: fb-pop 0.3s ease-out; }
+.fb-perfect { color: #78C8A0; animation: fb-pop 0.3s ease-out; }
+
+/* ── Overlays ── */
+#start-overlay, #results-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(10, 26, 24, 0.95);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  z-index: 100;
+}
+
+#start-overlay.hidden, #results-overlay.hidden {
+  display: none;
+}
+
+.overlay-title {
+  font-size: 24px;
+  font-weight: 800;
+  color: #FFD700;
+  text-shadow: 0 0 12px #FFD70044;
+}
+
+.overlay-desc {
+  font-size: 12px;
+  color: #78C8A0;
+  text-align: center;
+  line-height: 1.5;
+}
+
+.overlay-hint {
+  font-size: 11px;
+  color: #3D8A83;
+  animation: blink 1.5s infinite;
+}
+
+#results-score {
+  font-size: 36px;
+  font-weight: 800;
+  color: #FFD700;
+}
+
+#results-stats {
+  font-size: 11px;
+  color: #78C8A0;
+  text-align: center;
+  line-height: 1.6;
+}
+
+#results-grade {
+  font-size: 48px;
+  font-weight: 900;
+  margin-top: 5px;
+}
+
+/* ── Animations ── */
+@keyframes crush {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.3) rotate(5deg); opacity: 0.5; }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes fb-pop {
+  0% { transform: scale(0.5); opacity: 0; }
+  60% { transform: scale(1.2); }
+  100% { transform: scale(1); opacity: 1; }
+}
+
+@keyframes blink {
+  0%, 100% { opacity: 0.4; }
+  50% { opacity: 1; }
+}
+
+/* Bug emoji floating background */
+#arena::before {
+  content: "🐛 🪲 🐜 🦗";
+  position: absolute;
+  font-size: 30px;
+  opacity: 0.06;
+  animation: float-bugs 8s infinite linear;
+  pointer-events: none;
+}
+
+@keyframes float-bugs {
+  0% { transform: translateY(100%) rotate(0deg); }
+  100% { transform: translateY(-200%) rotate(360deg); }
+}

@@ -1,0 +1,8 @@
+{
+  "name": "@pixel-planet/characters",
+  "version": "0.1.0",
+  "private": true,
+  "main": "./src/index.ts",
+  "types": "./src/index.ts",
+  "description": "Single source of truth for the 5 alien residents."
+}

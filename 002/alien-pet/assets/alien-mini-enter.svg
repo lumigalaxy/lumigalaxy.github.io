@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      /* One-shot entry: slide in from off-screen right, settle, wave — ~3.2s total */
+      .outer-tilt { transform-origin: 7.5px 14px; animation: outerTilt 3.2s cubic-bezier(0.22, 1, 0.36, 1) 1 forwards; }
+      .body-slide { animation: bodySlide 3.2s cubic-bezier(0.22, 1, 0.36, 1) 1 forwards; }
+      .arm-wave   { transform-box: fill-box; transform-origin: 100% 0%; animation: armWave 3.2s ease-in-out 1 forwards; }
+      .flower-settle { transform-origin: 7.75px 5px; animation: flowerSettle 3.2s ease-in-out 1 forwards; }
+
+      @keyframes outerTilt {
+        0%, 30% { transform: rotate(0deg); }
+        45%     { transform: rotate(-18deg); }
+        65%     { transform: rotate(-10deg); }
+        100%    { transform: rotate(-12deg); }
+      }
+      @keyframes bodySlide {
+        0%        { transform: translate(25px, 0); }
+        18%       { transform: translate(-3px, -0.8px); }
+        24%       { transform: translate(1.4px, 0.4px); }
+        30%, 100% { transform: translate(0, 0); }
+      }
+      @keyframes armWave {
+        0%, 30%    { transform: rotate(0deg); }
+        38%        { transform: rotate(-30deg); }
+        43%        { transform: rotate(12deg); }
+        48%        { transform: rotate(-25deg); }
+        53%        { transform: rotate(12deg); }
+        58%        { transform: rotate(-20deg); }
+        63%        { transform: rotate(8deg); }
+        70%, 100%  { transform: rotate(0deg); }
+      }
+      @keyframes flowerSettle {
+        0%, 30%   { transform: rotate(35deg); }
+        40%       { transform: rotate(-8deg); }
+        50%       { transform: rotate(14deg); }
+        60%       { transform: rotate(0deg); }
+        100%      { transform: rotate(8deg); }
+      }
+    </style>
+  </defs>
+
+  <g class="outer-tilt">
+    <g class="body-slide">
+
+      <g fill="#7BA829">
+        <rect x="6"   y="13.5" width="0.5" height="1"/>
+        <rect x="6.5" y="13.5" width="0.5" height="1"/>
+        <rect x="8"   y="13.5" width="0.5" height="1"/>
+        <rect x="8.5" y="13.5" width="0.5" height="1"/>
+      </g>
+
+      <g class="flower-settle">
+        <g fill="#FFFFFF">
+          <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+          <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+          <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+          <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+          <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+          <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+        </g>
+        <g fill="#FFE870">
+          <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+          <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+          <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+        </g>
+        <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+        <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+        <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+        <g fill="#7BA829">
+          <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3"   width="0.5" height="0.5"/>
+          <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4"   width="0.5" height="0.5"/>
+          <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+        </g>
+      </g>
+
+      <g fill="#B8D930">
+        <rect x="6.5" y="5"  width="2"   height="0.5"/>
+        <rect x="6"   y="5.5" width="3"   height="0.5"/>
+        <rect x="5.5" y="6"  width="4"   height="0.5"/>
+        <rect x="5"   y="6.5" width="5"   height="0.5"/>
+        <rect x="4.5" y="7"  width="6"   height="0.5"/>
+        <rect x="4"   y="7.5" width="7"   height="0.5"/>
+        <rect x="3.5" y="8"  width="8"   height="2.5"/>
+        <rect x="4"   y="10.5" width="7"   height="0.5"/>
+        <rect x="4.5" y="11" width="6"   height="0.5"/>
+        <rect x="5"   y="11.5" width="5"   height="0.5"/>
+        <rect x="5.5" y="12" width="4"   height="1.5"/>
+      </g>
+      <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+      <g class="arm-wave">
+        <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+      </g>
+      <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+      <g fill="#000000">
+        <rect x="4" y="7.5" width="2" height="2.5"/>
+        <rect x="9" y="7.5" width="2" height="2.5"/>
+      </g>
+      <g fill="#FFFFFF">
+        <rect x="4"    y="7.5" width="1"   height="0.5"/>
+        <rect x="4.5"  y="8"   width="0.5" height="0.5"/>
+        <rect x="5"    y="9"   width="0.5" height="0.5"/>
+        <rect x="10"   y="7.5" width="1"   height="0.5"/>
+        <rect x="10.5" y="8"   width="0.5" height="0.5"/>
+        <rect x="9.5"  y="9"   width="0.5" height="0.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

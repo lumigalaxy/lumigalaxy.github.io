@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>Bug Crusher</title>
+  <link rel="stylesheet" href="bug-game.css">
+</head>
+<body>
+  <div id="game-container">
+    <div id="title-bar">
+      <span id="title">🐛 Bug Crusher</span>
+      <button id="close-btn">✕</button>
+    </div>
+    <div id="hud">
+      <div id="score-display">Score: <span id="score">0</span></div>
+      <div id="timer-display">⏱ <span id="timer">30</span>s</div>
+      <div id="wpm-display">WPM: <span id="wpm">0</span></div>
+    </div>
+    <div id="arena">
+      <div id="target-word"></div>
+      <input id="input-field" type="text" autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" placeholder="Type here...">
+    </div>
+    <div id="feedback"></div>
+    <!-- Start overlay -->
+    <div id="start-overlay">
+      <div class="overlay-title">🐛 Bug Crusher</div>
+      <div class="overlay-desc">Type the bugs to crush them!<br>30 seconds — how fast can you go?</div>
+      <div class="overlay-hint">Press any key to start</div>
+    </div>
+    <!-- Results overlay -->
+    <div id="results-overlay" class="hidden">
+      <div class="overlay-title">Results</div>
+      <div id="results-score"></div>
+      <div id="results-stats"></div>
+      <div id="results-grade"></div>
+      <div class="overlay-hint">Press any key to retry</div>
+    </div>
+  </div>
+  <script src="bug-game.js"></script>
+</body>
+</html>

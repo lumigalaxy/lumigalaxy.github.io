@@ -1,0 +1,102 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .body-attention { transform-origin: 7.5px 13.5px; animation: attention 1s infinite ease-in-out; }
+      .bell-ring { transform-origin: 14px 5px; animation: bell-ring 0.3s infinite ease-in-out; }
+      .bang-pop { animation: bang-pop 1s infinite ease-in-out; }
+      .flower-bob { transform-origin: 7.75px 5px; animation: flower-bob 1s infinite ease-in-out; }
+
+      @keyframes attention {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(-0.2px, -0.5px); }
+        50% { transform: translate(0.2px, -0.3px); }
+        75% { transform: translate(-0.2px, -0.3px); }
+      }
+      @keyframes bell-ring {
+        0%, 100% { transform: rotate(-15deg); }
+        50% { transform: rotate(15deg); }
+      }
+      @keyframes bang-pop {
+        0%, 100% { transform: scale(1); opacity: 1; }
+        50% { transform: scale(1.3); opacity: 0.8; }
+      }
+      @keyframes flower-bob {
+        0%, 100% { transform: rotate(-5deg); }
+        50% { transform: rotate(5deg); }
+      }
+    </style>
+  </defs>
+
+  <rect x="3" y="15" width="9" height="0.5" fill="#000000" opacity="0.5"/>
+
+  <g class="body-attention">
+    <g class="flower-bob">
+      <g fill="#FFFFFF">
+        <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+        <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+        <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+        <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFE870">
+        <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+        <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+      <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+      <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+      <g fill="#7BA829">
+        <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3" width="0.5" height="0.5"/>
+        <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4" width="0.5" height="0.5"/>
+        <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+      </g>
+    </g>
+
+    <g fill="#B8D930">
+      <rect x="6.5" y="5" width="2" height="0.5"/>
+      <rect x="6" y="5.5" width="3" height="0.5"/>
+      <rect x="5.5" y="6" width="4" height="0.5"/>
+      <rect x="5" y="6.5" width="5" height="0.5"/>
+      <rect x="4.5" y="7" width="6" height="0.5"/>
+      <rect x="4" y="7.5" width="7" height="0.5"/>
+      <rect x="3.5" y="8" width="8" height="2.5"/>
+      <rect x="4" y="10.5" width="7" height="0.5"/>
+      <rect x="4.5" y="11" width="6" height="0.5"/>
+      <rect x="5" y="11.5" width="5" height="0.5"/>
+      <rect x="5.5" y="12" width="4" height="1.5"/>
+    </g>
+    <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+    <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+    <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+    <g fill="#7BA829">
+      <rect id="outer-left-leg" x="6" y="13.5" width="0.5" height="1"/>
+      <rect id="inner-left-leg" x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect id="inner-right-leg" x="8" y="13.5" width="0.5" height="1"/>
+      <rect id="outer-right-leg" x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <g fill="#000000">
+      <rect id="left-eye" x="4" y="7.5" width="2" height="2.5"/>
+      <rect id="right-eye" x="9" y="7.5" width="2" height="2.5"/>
+    </g>
+    <g fill="#FFFFFF">
+      <rect x="4" y="7.5" width="1" height="0.5"/>
+      <rect x="4.5" y="8" width="0.5" height="0.5"/>
+      <rect x="10" y="7.5" width="1" height="0.5"/>
+      <rect x="10.5" y="8" width="0.5" height="0.5"/>
+    </g>
+  </g>
+
+  <!-- Exclamation mark bubble -->
+  <g class="bell-ring">
+    <circle cx="14" cy="5" r="2" fill="#FFD700" stroke="#D97706" stroke-width="0.15"/>
+    <g class="bang-pop" fill="#D97706">
+      <rect x="13.75" y="3.75" width="0.5" height="1.5"/>
+      <rect x="13.75" y="5.75" width="0.5" height="0.5"/>
+    </g>
+  </g>
+</svg>

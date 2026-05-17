@@ -1,0 +1,112 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .body-recoil { transform-origin: 7.5px 13.5px; animation: recoil-right 2.5s 1 ease-out; }
+      .flower-jiggle { transform-origin: 7.75px 5px; animation: flower-jiggle 1.2s 2 ease-out; }
+      .eye-squint { animation: eye-squint 2.5s 1 ease-out; transform-origin: 5px 8.75px; }
+      .stars-pop { opacity: 0; animation: stars-pop 2.5s 1 ease-out; transform-origin: 3px 6px; }
+
+      @keyframes recoil-right {
+        0%   { transform: translate(0, 0) rotate(0deg); }
+        12%  { transform: translate(1.4px, -0.4px) rotate(9deg); }
+        25%  { transform: translate(1.2px, -0.2px) rotate(6deg); }
+        40%  { transform: translate(0.6px, 0) rotate(3deg); }
+        60%  { transform: translate(-0.2px, 0) rotate(-1deg); }
+        100% { transform: translate(0, 0) rotate(0deg); }
+      }
+      @keyframes flower-jiggle {
+        0%, 100% { transform: rotate(0deg); }
+        25%      { transform: rotate(22deg); }
+        50%      { transform: rotate(-10deg); }
+        75%      { transform: rotate(16deg); }
+      }
+      @keyframes eye-squint {
+        0%, 100% { transform: scaleY(1); }
+        12%, 50% { transform: scaleY(0.35); }
+      }
+      @keyframes stars-pop {
+        0%   { opacity: 0; transform: scale(0.4) translate(0, 0); }
+        15%  { opacity: 1; transform: scale(1) translate(-0.5px, -0.3px); }
+        60%  { opacity: 1; transform: scale(1.1) translate(-1.2px, -0.8px); }
+        100% { opacity: 0; transform: scale(0.6) translate(-2px, -1.2px); }
+      }
+    </style>
+  </defs>
+
+  <rect x="3" y="14.5" width="9" height="0.5" fill="#000000" opacity="0.35"/>
+
+  <g class="body-recoil">
+    <g class="flower-jiggle">
+      <g fill="#FFFFFF">
+        <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+        <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+        <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+        <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFE870">
+        <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+        <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+      <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+      <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+      <g fill="#7BA829">
+        <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3" width="0.5" height="0.5"/>
+        <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4" width="0.5" height="0.5"/>
+        <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+      </g>
+    </g>
+
+    <g fill="#B8D930">
+      <rect x="6.5" y="5" width="2" height="0.5"/>
+      <rect x="6" y="5.5" width="3" height="0.5"/>
+      <rect x="5.5" y="6" width="4" height="0.5"/>
+      <rect x="5" y="6.5" width="5" height="0.5"/>
+      <rect x="4.5" y="7" width="6" height="0.5"/>
+      <rect x="4" y="7.5" width="7" height="0.5"/>
+      <rect x="3.5" y="8" width="8" height="2.5"/>
+      <rect x="4" y="10.5" width="7" height="0.5"/>
+      <rect x="4.5" y="11" width="6" height="0.5"/>
+      <rect x="5" y="11.5" width="5" height="0.5"/>
+      <rect x="5.5" y="12" width="4" height="1.5"/>
+    </g>
+    <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+    <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+    <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+    <g fill="#7BA829">
+      <rect x="6" y="13.5" width="0.5" height="1"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect x="8" y="13.5" width="0.5" height="1"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <!-- left eye squinted (hit side) -->
+    <g class="eye-squint">
+      <rect x="4" y="8.5" width="2" height="1" fill="#000000"/>
+    </g>
+    <!-- right eye normal -->
+    <g fill="#000000">
+      <rect x="9" y="7.5" width="2" height="2.5"/>
+    </g>
+    <g fill="#FFFFFF">
+      <rect x="9"    y="7.5" width="1"   height="0.5"/>
+      <rect x="9.5"  y="8"   width="0.5" height="0.5"/>
+      <rect x="10.5" y="9"   width="0.5" height="0.5"/>
+    </g>
+
+    <!-- star particles on left (poke site) -->
+    <g class="stars-pop" fill="#FFE870">
+      <rect x="1.5" y="5" width="0.5" height="0.5"/>
+      <rect x="1"   y="5.5" width="0.5" height="0.5"/>
+      <rect x="2"   y="5.5" width="0.5" height="0.5"/>
+      <rect x="1.5" y="6" width="0.5" height="0.5"/>
+      <rect x="2.5" y="7" width="0.5" height="0.5"/>
+      <rect x="0.5" y="6.5" width="0.5" height="0.5"/>
+    </g>
+  </g>
+</svg>

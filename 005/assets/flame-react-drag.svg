@@ -1,0 +1,109 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* Being held and carried — body sways, tips streak back, arms flail */
+  .body-sway {
+    transform-origin: 7.5px 3px;
+    animation: sway 1.0s infinite alternate ease-in-out;
+  }
+  .leg-dangle-1 {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+    animation: dangle-a 0.4s infinite linear;
+  }
+  .leg-dangle-2 {
+    transform-box: fill-box;
+    transform-origin: 50% 0%;
+    animation: dangle-b 0.4s infinite linear;
+  }
+  .arm-flail-l {
+    transform-box: fill-box;
+    transform-origin: 100% 50%;
+    animation: flail-l 0.2s infinite alternate ease-in-out;
+  }
+  .arm-flail-r {
+    transform-box: fill-box;
+    transform-origin: 0% 50%;
+    animation: flail-r 0.2s infinite alternate ease-in-out;
+  }
+  /* Tips: stream back (horizontal) while flying */
+  .ft-drag {
+    transform-origin: 7.5px -1px;
+    animation: tips-drag 0.5s infinite ease-in-out;
+  }
+  .shadow-drag {
+    transform-origin: 7.5px 14px;
+    animation: shadow-drag 1.0s infinite alternate ease-in-out;
+  }
+
+  @keyframes sway {
+    0%   { transform: rotate(-4deg) translate(-1px,0); }
+    100% { transform: rotate( 4deg) translate( 1px,0); }
+  }
+  @keyframes dangle-a {
+    0%,100% { transform: rotate( 20deg) scaleY(0.8); }
+    50%     { transform: rotate(-15deg) scaleY(1.0); }
+  }
+  @keyframes dangle-b {
+    0%,100% { transform: rotate(-15deg) scaleY(1.0); }
+    50%     { transform: rotate( 20deg) scaleY(0.8); }
+  }
+  @keyframes flail-l {
+    0%   { transform: rotate(50deg); }
+    100% { transform: rotate(90deg); }
+  }
+  @keyframes flail-r {
+    0%   { transform: rotate(-50deg); }
+    100% { transform: rotate(-90deg); }
+  }
+  @keyframes tips-drag {
+    0%,100% { transform: rotate(30deg) scaleY(0.6); }
+    50%     { transform: rotate(35deg) scaleY(0.5); }
+  }
+  @keyframes shadow-drag {
+    0%   { transform: scaleX(0.7) translate(-0.5px,0); opacity:.22; }
+    100% { transform: scaleX(0.8) translate( 0.5px,0); opacity:.28; }
+  }
+</style></defs>
+
+<!-- Small shadow (lifted off ground) -->
+<rect class="shadow-drag" x="3" y="14" width="10" height="1" fill="#FF5522"/>
+
+<!-- Swaying lifted body -->
+<g class="body-sway">
+  <!-- Dangling legs -->
+  <g fill="#DD3D1E">
+    <rect class="leg-dangle-1" x="5"  y="11" width="1" height="3"/>
+    <rect class="leg-dangle-2" x="9"  y="11" width="1" height="3"/>
+  </g>
+
+  <!-- Tips (swept back) -->
+  <g class="ft-drag">
+    <rect x="7"  y="-6" width="1" height="1" fill="#CC3311"/>
+    <rect x="6"  y="-5" width="3" height="2" fill="#CC3311"/>
+    <rect x="5"  y="-3" width="5" height="2" fill="#DD4422"/>
+    <rect x="3"  y="-4" width="2" height="1" fill="#CC3311"/>
+    <rect x="3"  y="-3" width="3" height="2" fill="#DD4422"/>
+    <rect x="10" y="-4" width="2" height="1" fill="#CC3311"/>
+    <rect x="9"  y="-3" width="3" height="2" fill="#DD4422"/>
+  </g>
+
+  <!-- Body -->
+  <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+  <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+  <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+  <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+  <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+  <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+  <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+  <!-- Scared wide eyes -->
+  <rect x="4" y="3" width="2" height="2" fill="#330000"/>
+  <rect x="9" y="3" width="2" height="2" fill="#330000"/>
+  <rect x="4" y="3" width="1" height="1" fill="#ffffff" opacity=".90"/>
+  <rect x="9" y="3" width="1" height="1" fill="#ffffff" opacity=".90"/>
+  <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+  <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+  <!-- Arms flailing -->
+  <g class="arm-flail-l" fill="#EE4422"><rect x="0"  y="5" width="2" height="2"/></g>
+  <g class="arm-flail-r" fill="#EE4422"><rect x="13" y="5" width="2" height="2"/></g>
+</g>
+</svg>

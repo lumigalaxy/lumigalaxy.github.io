@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* JS-controlled IDs — transition only, no animation */
+  #eyes-js, #body-js { transition: transform 0.2s ease-out; }
+
+  .breathe-anim { transform-origin: 7.5px 5px;  animation: fbrth  3.2s infinite ease-in-out; }
+  .eyes-blink   { transform-origin: 7.5px 4px;  animation: fblink 4.5s infinite ease-in-out; }
+  .ft-mini      { transform-origin: 7.5px -1px; animation: ftwave 1.6s infinite ease-in-out; }
+
+  @keyframes fbrth {
+    0%,100% { transform: scaleX(1) scaleY(1) translateY(0); }
+    50%     { transform: scaleX(1.02) scaleY(0.98) translateY(0.4px); }
+  }
+  @keyframes fblink {
+    0%,8%,100% { transform: scaleY(1); }
+    3%         { transform: scaleY(0.07); }
+    5%         { transform: scaleY(1); }
+    6%         { transform: scaleY(0.07); }
+  }
+  @keyframes ftwave {
+    0%,100% { transform: rotate(0deg) scaleY(1); }
+    35%     { transform: rotate(-3deg) scaleY(1.06); }
+    70%     { transform: rotate(2deg) scaleY(0.96); }
+  }
+</style></defs>
+
+<g transform="rotate(-12, 7.5, 15)">
+  <!-- Tips -->
+  <g class="ft-mini">
+    <rect x="7"  y="-6" width="1" height="1" fill="#CC3311"/>
+    <rect x="6"  y="-5" width="3" height="2" fill="#CC3311"/>
+    <rect x="5"  y="-3" width="5" height="2" fill="#DD4422"/>
+    <rect x="3"  y="-4" width="2" height="1" fill="#CC3311"/>
+    <rect x="3"  y="-3" width="3" height="2" fill="#DD4422"/>
+    <rect x="10" y="-4" width="2" height="1" fill="#CC3311"/>
+    <rect x="9"  y="-3" width="3" height="2" fill="#DD4422"/>
+  </g>
+
+  <!-- Legs (static, outside body-js) -->
+  <rect x="5"  y="11" width="1" height="2" fill="#DD3D1E"/>
+  <rect x="9"  y="11" width="1" height="2" fill="#DD3D1E"/>
+
+  <!-- Body — JS shifts; breathe on child -->
+  <g id="body-js">
+    <g class="breathe-anim">
+      <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+      <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+      <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+      <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+      <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+      <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+      <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+      <!-- Eyes — JS tracks; blink on child -->
+      <g id="eyes-js">
+        <g class="eyes-blink" fill="#330000">
+          <rect x="4" y="3" width="2" height="2"/>
+          <rect x="9" y="3" width="2" height="2"/>
+          <rect x="4" y="3" width="1" height="1" fill="#ffffff" opacity=".70"/>
+          <rect x="9" y="3" width="1" height="1" fill="#ffffff" opacity=".70"/>
+        </g>
+      </g>
+      <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+      <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+      <rect x="-1" y="5"  width="3" height="2" fill="#EE4422"/>
+      <rect x="13" y="5"  width="2" height="2" fill="#EE4422"/>
+    </g>
+  </g>
+</g>
+</svg>

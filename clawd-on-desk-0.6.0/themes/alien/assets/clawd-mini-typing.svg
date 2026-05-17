@@ -1,0 +1,131 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .breathe-anim { transform-origin: 7.5px 13.5px; animation: breathe 2.4s infinite ease-in-out; }
+      .flower-bob   { transform-origin: 7.75px 5px; animation: flower-bob 2.4s infinite ease-in-out; }
+      .arm-tap-l    { transform-box: fill-box; transform-origin: 50% 0%; animation: tap-l 0.3s infinite ease-in-out; }
+      .arm-tap-r    { transform-box: fill-box; transform-origin: 50% 0%; animation: tap-r 0.3s 0.15s infinite ease-in-out; }
+      .key-flash-1  { animation: key-flash 0.6s infinite steps(2); }
+      .key-flash-2  { animation: key-flash 0.6s 0.15s infinite steps(2); }
+      .key-flash-3  { animation: key-flash 0.6s 0.3s infinite steps(2); }
+      .focus-eyes   { transform-origin: 7.5px 8.75px; animation: focus-blink 4s infinite ease-in-out; }
+
+      #eyes-js, #body-js { transition: transform 0.2s ease-out; }
+
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%      { transform: scale(1.03, 0.97); }
+      }
+      @keyframes flower-bob {
+        0%, 100% { transform: rotate(8deg); }
+        50%      { transform: rotate(14deg); }
+      }
+      @keyframes tap-l {
+        0%, 100% { transform: rotate(15deg); }
+        50%      { transform: rotate(50deg); }
+      }
+      @keyframes tap-r {
+        0%, 100% { transform: rotate(-15deg); }
+        50%      { transform: rotate(-50deg); }
+      }
+      @keyframes key-flash {
+        0%, 100% { fill: #2a3540; }
+        50%      { fill: #FFE870; }
+      }
+      @keyframes focus-blink {
+        0%, 8%, 100% { transform: scaleY(1); }
+        4%           { transform: scaleY(0.1); }
+      }
+    </style>
+  </defs>
+
+  <g transform="rotate(-12, 7.5, 14)">
+
+    <g fill="#7BA829">
+      <rect x="6"   y="13.5" width="0.5" height="1"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect x="8"   y="13.5" width="0.5" height="1"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <g id="body-js">
+      <g class="breathe-anim">
+
+        <g class="flower-bob">
+          <g fill="#FFFFFF">
+            <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+            <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+            <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+            <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+            <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+            <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+          </g>
+          <g fill="#FFE870">
+            <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+            <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+            <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+          </g>
+          <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+          <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+          <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+          <g fill="#7BA829">
+            <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3"   width="0.5" height="0.5"/>
+            <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4"   width="0.5" height="0.5"/>
+            <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+          </g>
+        </g>
+
+        <g fill="#B8D930">
+          <rect x="6.5" y="5"  width="2" height="0.5"/>
+          <rect x="6"   y="5.5" width="3" height="0.5"/>
+          <rect x="5.5" y="6"  width="4" height="0.5"/>
+          <rect x="5"   y="6.5" width="5" height="0.5"/>
+          <rect x="4.5" y="7"  width="6" height="0.5"/>
+          <rect x="4"   y="7.5" width="7" height="0.5"/>
+          <rect x="3.5" y="8"  width="8" height="2.5"/>
+          <rect x="4"   y="10.5" width="7" height="0.5"/>
+          <rect x="4.5" y="11" width="6" height="0.5"/>
+          <rect x="5"   y="11.5" width="5" height="0.5"/>
+          <rect x="5.5" y="12" width="4" height="1.5"/>
+        </g>
+        <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+        <!-- mini keyboard floating below the body -->
+        <g>
+          <rect x="3.5" y="13.5" width="8" height="0.7" fill="#1f2933"/>
+          <rect x="3.5" y="13.5" width="8" height="0.2" fill="#3a4555"/>
+          <rect class="key-flash-1" x="4"   y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+          <rect class="key-flash-2" x="5"   y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+          <rect class="key-flash-3" x="6"   y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+          <rect class="key-flash-2" x="7"   y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+          <rect class="key-flash-3" x="8"   y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+          <rect class="key-flash-1" x="9"   y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+          <rect class="key-flash-2" x="10"  y="13.7" width="0.7" height="0.3" fill="#2a3540"/>
+        </g>
+
+        <!-- tapping arms -->
+        <g class="arm-tap-l">
+          <rect x="5" y="12" width="0.5" height="1.7" fill="#B8D930"/>
+        </g>
+        <g class="arm-tap-r">
+          <rect x="9.5" y="12" width="0.5" height="1.7" fill="#B8D930"/>
+        </g>
+
+        <g id="eyes-js">
+          <g class="focus-eyes">
+            <g fill="#000000">
+              <rect x="4" y="8" width="2" height="2"/>
+              <rect x="9" y="8" width="2" height="2"/>
+            </g>
+            <g fill="#FFFFFF">
+              <rect x="4"   y="8" width="1"   height="0.5"/>
+              <rect x="4.5" y="8.5" width="0.5" height="0.5"/>
+              <rect x="10"  y="8" width="1"   height="0.5"/>
+              <rect x="10.5" y="8.5" width="0.5" height="0.5"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,104 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .slow-breathe { transform-origin: 7.5px 13.5px; animation: slow-breathe 4s infinite ease-in-out; }
+      .flower-droop { transform-origin: 7.75px 5px; animation: flower-droop 4s infinite ease-in-out; }
+      .zzz-1 { animation: zzz 3.2s infinite ease-out; opacity: 0; }
+      .zzz-2 { animation: zzz 3.2s 1.1s infinite ease-out; opacity: 0; }
+      .zzz-3 { animation: zzz 3.2s 2.2s infinite ease-out; opacity: 0; }
+      .body-sag { animation: sag 4s infinite ease-in-out; transform-origin: 7.5px 14px; }
+
+      #eyes-js, #body-js { transition: transform 0.2s ease-out; }
+
+      @keyframes slow-breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%      { transform: scale(1.05, 0.95); }
+      }
+      @keyframes flower-droop {
+        0%, 100% { transform: rotate(35deg); }
+        50%      { transform: rotate(42deg); }
+      }
+      @keyframes sag {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(0.4px); }
+      }
+      @keyframes zzz {
+        0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+        15%  { opacity: 0.95; }
+        100% { opacity: 0; transform: translate(2.5px, -3.5px) scale(1.2); }
+      }
+    </style>
+  </defs>
+
+  <g transform="rotate(-12, 7.5, 14)">
+
+    <g fill="#7BA829">
+      <rect x="6"   y="13.5" width="0.5" height="1"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect x="8"   y="13.5" width="0.5" height="1"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <g class="body-sag">
+      <g id="body-js">
+        <g class="slow-breathe">
+
+          <g class="flower-droop">
+            <g fill="#FFFFFF">
+              <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+              <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+              <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+              <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+              <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+              <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+            </g>
+            <g fill="#FFE870">
+              <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+              <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+              <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+            </g>
+            <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+            <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+            <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+            <g fill="#7BA829">
+              <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3"   width="0.5" height="0.5"/>
+              <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4"   width="0.5" height="0.5"/>
+              <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+            </g>
+          </g>
+
+          <g fill="#B8D930">
+            <rect x="6.5" y="5"  width="2" height="0.5"/>
+            <rect x="6"   y="5.5" width="3" height="0.5"/>
+            <rect x="5.5" y="6"  width="4" height="0.5"/>
+            <rect x="5"   y="6.5" width="5" height="0.5"/>
+            <rect x="4.5" y="7"  width="6" height="0.5"/>
+            <rect x="4"   y="7.5" width="7" height="0.5"/>
+            <rect x="3.5" y="8"  width="8" height="2.5"/>
+            <rect x="4"   y="10.5" width="7" height="0.5"/>
+            <rect x="4.5" y="11" width="6" height="0.5"/>
+            <rect x="5"   y="11.5" width="5" height="0.5"/>
+            <rect x="5.5" y="12" width="4" height="1.5"/>
+          </g>
+          <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+          <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+          <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+          <!-- closed eyes (--) -->
+          <g id="eyes-js" fill="#000000">
+            <rect x="4"   y="9"   width="2"   height="0.5"/>
+            <rect x="9"   y="9"   width="2"   height="0.5"/>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- floating Z's -->
+    <g fill="#FFFFFF" opacity="0.85" font-family="monospace" font-size="3.5px" font-weight="bold">
+      <text class="zzz-1" x="11" y="0" text-anchor="middle">z</text>
+      <text class="zzz-2" x="12" y="-1.5" text-anchor="middle">z</text>
+      <text class="zzz-3" x="13" y="-3" text-anchor="middle">z</text>
+    </g>
+  </g>
+</svg>

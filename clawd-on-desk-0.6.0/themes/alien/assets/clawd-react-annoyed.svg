@@ -1,0 +1,134 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .body-rage { transform-origin: 7.5px 13.5px; animation: rage-shake 0.12s infinite linear, rage-color 0.6s infinite ease-in-out; }
+      .flower-rage { transform-origin: 7.75px 5px; animation: flower-rage 0.4s infinite ease-in-out; }
+      .steam-1 { animation: steam 1.4s infinite ease-out; }
+      .steam-2 { animation: steam 1.4s 0.45s infinite ease-out; }
+      .steam-3 { animation: steam 1.4s 0.9s infinite ease-out; }
+      .vein-pulse { animation: vein-pulse 0.9s infinite ease-in-out; }
+
+      @keyframes rage-shake {
+        0%, 100% { transform: translate(0, 0); }
+        20% { transform: translate(-0.4px, 0.2px); }
+        40% { transform: translate(0.4px, -0.2px); }
+        60% { transform: translate(-0.3px, -0.3px); }
+        80% { transform: translate(0.3px, 0.3px); }
+      }
+      @keyframes rage-color {
+        0%, 100% { filter: none; }
+        50% { filter: hue-rotate(-25deg) saturate(1.4); }
+      }
+      @keyframes flower-rage {
+        0%, 100% { transform: rotate(-30deg); }
+        50%      { transform: rotate(30deg); }
+      }
+      @keyframes steam {
+        0%   { opacity: 0; transform: translate(0, 0) scale(0.7); }
+        20%  { opacity: 1; }
+        100% { opacity: 0; transform: translate(0, -3.5px) scale(1.3); }
+      }
+      @keyframes vein-pulse {
+        0%, 100% { opacity: 0.4; transform: scale(1); }
+        50%      { opacity: 1; transform: scale(1.15); }
+      }
+    </style>
+  </defs>
+
+  <rect x="3" y="14.5" width="9" height="0.5" fill="#000000" opacity="0.4"/>
+
+  <!-- steam puffs above head -->
+  <g fill="#FFFFFF" opacity="0.85">
+    <g class="steam-1">
+      <rect x="3.5" y="-2" width="0.5" height="0.5"/>
+      <rect x="3"   y="-1.5" width="1"   height="0.5"/>
+      <rect x="3.5" y="-1" width="0.5" height="0.5"/>
+    </g>
+    <g class="steam-2">
+      <rect x="11"   y="-2" width="0.5" height="0.5"/>
+      <rect x="10.5" y="-1.5" width="1"   height="0.5"/>
+      <rect x="11"   y="-1" width="0.5" height="0.5"/>
+    </g>
+    <g class="steam-3">
+      <rect x="7"   y="-3.5" width="0.5" height="0.5"/>
+      <rect x="6.5" y="-3"   width="1"   height="0.5"/>
+      <rect x="7"   y="-2.5" width="0.5" height="0.5"/>
+    </g>
+  </g>
+
+  <g class="body-rage">
+    <g class="flower-rage">
+      <g fill="#FFFFFF">
+        <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+        <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+        <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+        <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFE870">
+        <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+        <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+      <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+      <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+      <g fill="#7BA829">
+        <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3" width="0.5" height="0.5"/>
+        <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4" width="0.5" height="0.5"/>
+        <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+      </g>
+    </g>
+
+    <g fill="#B8D930">
+      <rect x="6.5" y="5" width="2" height="0.5"/>
+      <rect x="6" y="5.5" width="3" height="0.5"/>
+      <rect x="5.5" y="6" width="4" height="0.5"/>
+      <rect x="5" y="6.5" width="5" height="0.5"/>
+      <rect x="4.5" y="7" width="6" height="0.5"/>
+      <rect x="4" y="7.5" width="7" height="0.5"/>
+      <rect x="3.5" y="8" width="8" height="2.5"/>
+      <rect x="4" y="10.5" width="7" height="0.5"/>
+      <rect x="4.5" y="11" width="6" height="0.5"/>
+      <rect x="5" y="11.5" width="5" height="0.5"/>
+      <rect x="5.5" y="12" width="4" height="1.5"/>
+    </g>
+    <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+    <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+    <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+    <g fill="#7BA829">
+      <rect x="6" y="13.5" width="0.5" height="1"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect x="8" y="13.5" width="0.5" height="1"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <!-- angry eyes: lowered + slanted brows -->
+    <g fill="#000000">
+      <!-- brow lines (V slope) -->
+      <rect x="3.5" y="6.5" width="0.5" height="0.5"/>
+      <rect x="4"   y="7"   width="0.5" height="0.5"/>
+      <rect x="4.5" y="7.5" width="1.5" height="0.5"/>
+      <rect x="9"   y="7.5" width="1.5" height="0.5"/>
+      <rect x="10.5" y="7"  width="0.5" height="0.5"/>
+      <rect x="11"  y="6.5" width="0.5" height="0.5"/>
+      <!-- narrow angry eyes -->
+      <rect x="4.5" y="8.5" width="1.5" height="0.5"/>
+      <rect x="9"   y="8.5" width="1.5" height="0.5"/>
+      <rect x="4.5" y="9"   width="1"   height="0.5"/>
+      <rect x="9.5" y="9"   width="1"   height="0.5"/>
+    </g>
+
+    <!-- vein on forehead -->
+    <g class="vein-pulse" fill="#FF5555">
+      <rect x="2.5" y="5" width="0.5" height="0.5"/>
+      <rect x="2.5" y="5.5" width="0.5" height="0.5"/>
+      <rect x="2"   y="5.5" width="0.5" height="0.5"/>
+      <rect x="3"   y="5.5" width="0.5" height="0.5"/>
+      <rect x="2.5" y="6" width="0.5" height="0.5"/>
+    </g>
+  </g>
+</svg>

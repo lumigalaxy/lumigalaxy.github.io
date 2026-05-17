@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .crab-slide  { animation: crab-slide 2.4s infinite ease-in-out; transform-origin: 7.5px 13.5px; }
+      .body-bob    { animation: body-bob 0.6s infinite ease-in-out; transform-origin: 7.5px 13.5px; }
+      .breathe-anim{ transform-origin: 7.5px 13.5px; animation: breathe 2s infinite ease-in-out; }
+      .flower-sway { transform-origin: 7.75px 5px; animation: flower-sway 1.2s infinite ease-in-out; }
+      .leg-l-1     { transform-box: fill-box; transform-origin: 50% 0%; animation: leg-step-a 0.6s infinite ease-in-out; }
+      .leg-l-2     { transform-box: fill-box; transform-origin: 50% 0%; animation: leg-step-b 0.6s infinite ease-in-out; }
+      .leg-r-1     { transform-box: fill-box; transform-origin: 50% 0%; animation: leg-step-b 0.6s infinite ease-in-out; }
+      .leg-r-2     { transform-box: fill-box; transform-origin: 50% 0%; animation: leg-step-a 0.6s infinite ease-in-out; }
+      .arm-pump-l  { transform-box: fill-box; transform-origin: 50% 0%; animation: pump-l 0.6s infinite ease-in-out; }
+      .arm-pump-r  { transform-box: fill-box; transform-origin: 50% 0%; animation: pump-r 0.6s infinite ease-in-out; }
+      .eye-look    { animation: eye-look 2.4s infinite ease-in-out; }
+
+      #eyes-js, #body-js { transition: transform 0.2s ease-out; }
+
+      @keyframes crab-slide {
+        0%   { transform: translateX(0); }
+        25%  { transform: translateX(-2.5px); }
+        50%  { transform: translateX(0); }
+        75%  { transform: translateX(2.5px); }
+        100% { transform: translateX(0); }
+      }
+      @keyframes body-bob {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-0.4px); }
+      }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%      { transform: scale(1.04, 0.96); }
+      }
+      @keyframes flower-sway {
+        0%, 100% { transform: rotate(-10deg); }
+        50%      { transform: rotate(15deg); }
+      }
+      @keyframes leg-step-a {
+        0%, 100% { transform: rotate(-12deg) translateY(0); }
+        50%      { transform: rotate(12deg) translateY(-0.3px); }
+      }
+      @keyframes leg-step-b {
+        0%, 100% { transform: rotate(12deg) translateY(-0.3px); }
+        50%      { transform: rotate(-12deg) translateY(0); }
+      }
+      @keyframes pump-l {
+        0%, 100% { transform: rotate(15deg); }
+        50%      { transform: rotate(-25deg); }
+      }
+      @keyframes pump-r {
+        0%, 100% { transform: rotate(-15deg); }
+        50%      { transform: rotate(25deg); }
+      }
+      @keyframes eye-look {
+        0%, 24%   { transform: translateX(0); }
+        25%, 48%  { transform: translateX(-0.4px); }
+        50%, 74%  { transform: translateX(0); }
+        75%, 100% { transform: translateX(0.4px); }
+      }
+    </style>
+  </defs>
+
+  <g transform="rotate(-12, 7.5, 14)">
+    <g class="crab-slide">
+      <g class="body-bob">
+
+        <!-- crabwalk: legs alternate left/right -->
+        <g fill="#7BA829">
+          <g class="leg-l-1"><rect x="6"   y="13.5" width="0.5" height="1"/></g>
+          <g class="leg-l-2"><rect x="6.5" y="13.5" width="0.5" height="1"/></g>
+          <g class="leg-r-1"><rect x="8"   y="13.5" width="0.5" height="1"/></g>
+          <g class="leg-r-2"><rect x="8.5" y="13.5" width="0.5" height="1"/></g>
+        </g>
+
+        <g id="body-js">
+          <g class="breathe-anim">
+
+            <g class="flower-sway">
+              <g fill="#FFFFFF">
+                <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+                <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+                <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+                <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+                <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+                <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+              </g>
+              <g fill="#FFE870">
+                <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+                <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+                <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+              </g>
+              <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+              <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+              <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+              <g fill="#7BA829">
+                <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3"   width="0.5" height="0.5"/>
+                <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4"   width="0.5" height="0.5"/>
+                <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+              </g>
+            </g>
+
+            <g fill="#B8D930">
+              <rect x="6.5" y="5"  width="2" height="0.5"/>
+              <rect x="6"   y="5.5" width="3" height="0.5"/>
+              <rect x="5.5" y="6"  width="4" height="0.5"/>
+              <rect x="5"   y="6.5" width="5" height="0.5"/>
+              <rect x="4.5" y="7"  width="6" height="0.5"/>
+              <rect x="4"   y="7.5" width="7" height="0.5"/>
+              <rect x="3.5" y="8"  width="8" height="2.5"/>
+              <rect x="4"   y="10.5" width="7" height="0.5"/>
+              <rect x="4.5" y="11" width="6" height="0.5"/>
+              <rect x="5"   y="11.5" width="5" height="0.5"/>
+              <rect x="5.5" y="12" width="4" height="1.5"/>
+            </g>
+            <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+            <g class="arm-pump-l">
+              <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+            </g>
+            <g class="arm-pump-r">
+              <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+            </g>
+
+            <g id="eyes-js">
+              <g class="eye-look" fill="#000000">
+                <rect x="4" y="7.5" width="2" height="2.5"/>
+                <rect x="9" y="7.5" width="2" height="2.5"/>
+              </g>
+              <g class="eye-look" fill="#FFFFFF">
+                <rect x="4"    y="7.5" width="1"   height="0.5"/>
+                <rect x="4.5"  y="8"   width="0.5" height="0.5"/>
+                <rect x="10"   y="7.5" width="1"   height="0.5"/>
+                <rect x="10.5" y="8"   width="0.5" height="0.5"/>
+              </g>
+            </g>
+          </g>
+        </g>
+
+      </g>
+    </g>
+  </g>
+</svg>

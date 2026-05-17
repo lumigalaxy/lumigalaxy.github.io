@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <title>外星人形象预览 - Clawd on Desk</title>
+  <style>
+    body {
+      margin: 0;
+      padding: 30px;
+      background: #5DADE2;
+      font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", sans-serif;
+      color: #fff;
+    }
+    h1 {
+      text-align: center;
+      text-shadow: 2px 2px 0 rgba(0,0,0,0.2);
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+      gap: 20px;
+      margin-top: 30px;
+    }
+    .card {
+      background: rgba(255,255,255,0.15);
+      border-radius: 12px;
+      padding: 16px;
+      backdrop-filter: blur(10px);
+      text-align: center;
+    }
+    .card h3 {
+      margin: 0 0 10px;
+      font-size: 14px;
+      opacity: 0.9;
+    }
+    .svg-box {
+      background: rgba(255,255,255,0.1);
+      border-radius: 8px;
+      padding: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 280px;
+    }
+    .svg-box object,
+    .svg-box img {
+      width: 260px;
+      height: 260px;
+    }
+    .legend {
+      text-align: center;
+      margin-bottom: 20px;
+      opacity: 0.95;
+    }
+  </style>
+</head>
+<body>
+  <h1>🛸 外星人像素风 · 全状态动画预览</h1>
+  <p class="legend">9 个核心动画状态 + 30 个映射到次要 clawd 动画</p>
+
+  <div class="grid">
+    <div class="card">
+      <h3>static-base</h3>
+      <div class="svg-box" style="background:#5DADE2"><object data="assets/svg/alien-static-base.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">静态基础版（无动画）</p>
+    </div>
+    <div class="card">
+      <h3>idle-living</h3>
+      <div class="svg-box" style="background:#5DADE2"><object data="assets/svg/alien-idle-living.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">呼吸 / 眨眼 / 左右看 / 打哈欠（16s 循环）</p>
+    </div>
+    <div class="card">
+      <h3>sleeping</h3>
+      <div class="svg-box" style="background:#34495E"><object data="assets/svg/alien-sleeping.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">慢呼吸 / 花朵垂下 / Zzz 粒子</p>
+    </div>
+    <div class="card">
+      <h3>working-typing</h3>
+      <div class="svg-box" style="background:#5DADE2"><object data="assets/svg/alien-working-typing.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">小键盘 / 手指敲击 / 眼睛看键盘</p>
+    </div>
+    <div class="card">
+      <h3>working-thinking</h3>
+      <div class="svg-box" style="background:#5DADE2"><object data="assets/svg/alien-working-thinking.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">侧身摆动 / 手托下巴 / 思考气泡</p>
+    </div>
+    <div class="card">
+      <h3>happy</h3>
+      <div class="svg-box" style="background:#F39C12"><object data="assets/svg/alien-happy.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">弹跳 / 花朵旋转 / ^_^ 眼 / 金色闪光</p>
+    </div>
+    <div class="card">
+      <h3>error</h3>
+      <div class="svg-box" style="background:#E74C3C"><object data="assets/svg/alien-error.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">抖动 / 红色闪烁 / XX 眼 / 花朵垂下</p>
+    </div>
+    <div class="card">
+      <h3>notification</h3>
+      <div class="svg-box" style="background:#5DADE2"><object data="assets/svg/alien-notification.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">注意跳动 / 头顶金色感叹号 / 铃铛摆动</p>
+    </div>
+    <div class="card">
+      <h3>mini-idle</h3>
+      <div class="svg-box" style="background:#5DADE2"><object data="assets/svg/alien-mini-idle.svg?v=7" type="image/svg+xml"></object></div>
+      <p style="font-size:12px;opacity:0.85;margin-top:8px">简化呼吸 + 偶尔眨眼（mini 条状栏用）</p>
+    </div>
+  </div>
+
+  <div style="max-width:900px;margin:40px auto;padding:20px;background:rgba(255,255,255,0.08);border-radius:12px;">
+    <h3 style="margin-top:0">✅ 完成清单</h3>
+    <p style="font-size:13px;opacity:0.9;line-height:1.8">
+      <strong>9 个核心 alien-*.svg</strong>：static-base / idle-living / sleeping / working-typing / working-thinking / happy / error / notification / mini-idle<br>
+      <strong>40 个 clawd-*.svg</strong>：全部替换为对应的 alien 版本（次要动画映射到最接近的核心状态）<br>
+      <br>
+      <strong>次要动画映射：</strong><br>
+      • idle-* / react-drag/left/right / wake → <em>idle-living</em><br>
+      • react-double* / mini-happy / working-juggling → <em>happy</em><br>
+      • react-annoyed → <em>error</em><br>
+      • working-building/carrying/sweeping / mini-typing → <em>working-typing</em><br>
+      • working-conducting/debugger/ultrathink/wizard → <em>working-thinking</em><br>
+      • collapse-sleep / mini-sleep / mini-enter-sleep → <em>sleeping</em><br>
+      • mini-crabwalk/enter/peek → <em>mini-idle</em><br>
+      • mini-alert → <em>notification</em><br>
+      • about-hero → <em>static-base</em>
+    </p>
+  </div>
+</body>
+</html>

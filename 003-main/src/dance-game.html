@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' 'unsafe-inline';">
+  <link rel="stylesheet" href="dance-game.css">
+  <title>Clawd Dance!</title>
+</head>
+<body>
+  <div id="game-container">
+    <!-- Title bar (draggable) -->
+    <div id="title-bar">
+      <span id="title-text">◈ CLAWD DANCE ◈</span>
+      <button id="close-btn">✕</button>
+    </div>
+
+    <!-- Score area -->
+    <div id="score-area">
+      <div id="combo-display">
+        <span id="combo-count">0</span>
+        <span id="combo-label">COMBO</span>
+      </div>
+      <div id="score-display">
+        <span id="score-label">SCORE</span>
+        <span id="score-count">0</span>
+      </div>
+    </div>
+
+    <!-- Hit feedback -->
+    <div id="feedback" class="hidden"></div>
+
+    <!-- Lane area -->
+    <div id="lanes">
+      <div class="lane" data-key="left">
+        <div class="target-zone">←</div>
+      </div>
+      <div class="lane" data-key="up">
+        <div class="target-zone">↑</div>
+      </div>
+      <div class="lane" data-key="down">
+        <div class="target-zone">↓</div>
+      </div>
+      <div class="lane" data-key="right">
+        <div class="target-zone">→</div>
+      </div>
+    </div>
+
+    <!-- Start / Game Over overlay -->
+    <div id="overlay">
+      <div id="overlay-content">
+        <div id="overlay-title">CLAWD DANCE</div>
+        <div id="overlay-sub">按任意箭头键开始</div>
+        <div id="overlay-hint">← ↑ ↓ →</div>
+      </div>
+    </div>
+
+    <!-- Results overlay -->
+    <div id="results" class="hidden">
+      <div id="results-content">
+        <div id="results-title">STAGE CLEAR!</div>
+        <div id="results-score">0</div>
+        <div id="results-stats"></div>
+        <div id="results-grade"></div>
+        <div id="results-hint">按任意键重新开始</div>
+      </div>
+    </div>
+  </div>
+
+  <script src="dance-game.js"></script>
+</body>
+</html>

@@ -1,0 +1,783 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI技巧：全自动哄老婆四步法则</title>
+    <style>
+        :root {
+            --primary: #6366f1;
+            --primary-dark: #4f46e5;
+            --secondary: #ec4899;
+            --dark: #1e293b;
+            --light: #f8fafc;
+            --gray: #64748b;
+            --gray-light: #e2e8f0;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 8px 10px -6px rgba(0, 0, 0, 0.1);
+            --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            background: linear-gradient(135deg, #1e3a8a 0%, #3b82f6 100%);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmMTAiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.1;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+        }
+        
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 12px 32px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .btn:hover {
+            transform: translateY(-2px);
+            box-shadow: var(--shadow-lg);
+            background: var(--light);
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s ease;
+        }
+        
+        .nav.scrolled {
+            padding: 0.5rem 0;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        /* Steps Section */
+        .steps {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+        
+        .section-title h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+        
+        .section-title p {
+            font-size: 1.125rem;
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .steps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-top: 4rem;
+        }
+        
+        .step-card {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .step-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--secondary));
+        }
+        
+        .step-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin: 0 auto 1.5rem;
+        }
+        
+        .step-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+        
+        .step-card p {
+            color: var(--gray);
+            margin-bottom: 1.5rem;
+        }
+        
+        .step-features {
+            text-align: left;
+            margin-top: 1rem;
+        }
+        
+        .step-features li {
+            list-style: none;
+            margin-bottom: 0.5rem;
+            color: var(--gray);
+            display: flex;
+            align-items: center;
+        }
+        
+        .step-features li::before {
+            content: '✓';
+            color: var(--primary);
+            font-weight: bold;
+            margin-right: 0.5rem;
+        }
+        
+        /* Tech Section */
+        .tech {
+            padding: 100px 0;
+            background: var(--light);
+        }
+        
+        .tech-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 4rem;
+            align-items: center;
+        }
+        
+        .tech-text h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+        
+        .tech-text p {
+            color: var(--gray);
+            margin-bottom: 2rem;
+        }
+        
+        .tech-stack {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .tech-item {
+            background: white;
+            padding: 1rem;
+            border-radius: 10px;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .tech-item:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .tech-item h4 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--primary);
+        }
+        
+        .tech-item p {
+            font-size: 0.875rem;
+            color: var(--gray);
+            margin: 0;
+        }
+        
+        .tech-visual {
+            position: relative;
+        }
+        
+        .tech-visual img {
+            width: 100%;
+            border-radius: 20px;
+            box-shadow: var(--shadow-lg);
+        }
+        
+        /* Case Study */
+        .case-study {
+            padding: 100px 0;
+            background: white;
+        }
+        
+        .case-content {
+            background: var(--light);
+            border-radius: 20px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+        }
+        
+        .case-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: var(--dark);
+        }
+        
+        .timeline {
+            position: relative;
+            padding-left: 2rem;
+        }
+        
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: var(--primary);
+        }
+        
+        .timeline-item {
+            position: relative;
+            margin-bottom: 2rem;
+        }
+        
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -2.5rem;
+            top: 0.5rem;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: var(--primary);
+            border: 3px solid white;
+            box-shadow: var(--shadow);
+        }
+        
+        .timeline-item h4 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+        
+        .timeline-item p {
+            color: var(--gray);
+            margin: 0;
+        }
+        
+        /* Code Section */
+        .code-section {
+            padding: 100px 0;
+            background: var(--dark);
+            color: white;
+        }
+        
+        .code-content {
+            text-align: center;
+        }
+        
+        .code-content h3 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+        }
+        
+        .code-block {
+            background: #1e293b;
+            border-radius: 10px;
+            padding: 2rem;
+            margin: 2rem auto;
+            max-width: 800px;
+            text-align: left;
+            font-family: 'Fira Code', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            overflow-x: auto;
+        }
+        
+        .code-block pre {
+            margin: 0;
+        }
+        
+        /* CTA Section */
+        .cta {
+            padding: 100px 0;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
+            color: white;
+            text-align: center;
+        }
+        
+        .cta-content h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+        
+        .cta-content p {
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1rem;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 3rem 0;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .footer p {
+            margin-bottom: 1rem;
+            opacity: 0.7;
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .tech-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .steps-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .case-content {
+                padding: 2rem;
+            }
+            
+            .btn-secondary {
+                margin-left: 0;
+                margin-top: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="#" class="nav-logo">AI技巧</a>
+                <ul class="nav-links">
+                    <li><a href="#steps">四步法则</a></li>
+                    <li><a href="#tech">技术实现</a></li>
+                    <li><a href="#case">实战案例</a></li>
+                    <li><a href="#code">代码示例</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>AI技巧：全自动哄老婆四步法则</h1>
+                <p>基于数字游牧人Samuel的原创方法，利用AI技术实现自动化的情感关怀系统</p>
+                <a href="#steps" class="btn">开始探索</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Steps Section -->
+    <section class="steps" id="steps">
+        <div class="container">
+            <div class="section-title">
+                <h2>四步法则详解</h2>
+                <p>通过系统化的方法，利用AI技术实现自动化的情感关怀</p>
+            </div>
+            <div class="steps-grid">
+                <div class="step-card fade-in">
+                    <div class="step-number">1</div>
+                    <h3>数据收集与分析</h3>
+                    <p>建立个人偏好数据库，通过日常互动收集信息，了解配偶的喜好、习惯和需求。</p>
+                    <ul class="step-features">
+                        <li>智能语音助手记录日常对话</li>
+                        <li>日历系统跟踪重要日期</li>
+                        <li>情绪识别算法分析语气变化</li>
+                        <li>偏好学习系统持续优化</li>
+                    </ul>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">2</div>
+                    <h3>智能提醒与规划</h3>
+                    <p>基于收集的数据，AI系统自动生成个性化的关怀计划和提醒。</p>
+                    <ul class="step-features">
+                        <li>智能日历管理系统</li>
+                        <li>个性化提醒引擎</li>
+                        <li>情境感知推荐算法</li>
+                        <li>多渠道提醒（短信、微信、语音）</li>
+                    </ul>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">3</div>
+                    <h3>自动化执行与互动</h3>
+                    <p>根据计划自动执行关怀行动，包括发送消息、准备惊喜、安排活动等。</p>
+                    <ul class="step-features">
+                        <li>自动消息生成系统</li>
+                        <li>智能购物助手</li>
+                        <li>活动安排协调器</li>
+                        <li>实时互动反馈系统</li>
+                    </ul>
+                </div>
+                <div class="step-card fade-in">
+                    <div class="step-number">4</div>
+                    <h3>效果评估与优化</h3>
+                    <p>持续监测互动效果，通过反馈数据不断优化AI系统的表现。</p>
+                    <ul class="step-features">
+                        <li>情感分析反馈系统</li>
+                        <li>效果评估指标体系</li>
+                        <li>机器学习模型优化</li>
+                        <li>个性化调整算法</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Tech Section -->
+    <section class="tech" id="tech">
+        <div class="container">
+            <div class="section-title">
+                <h2>技术架构与实现</h2>
+                <p>采用现代化技术栈，构建高效、可靠的AI关怀系统</p>
+            </div>
+            <div class="tech-content">
+                <div class="tech-text fade-in">
+                    <h3>系统架构</h3>
+                    <p>系统采用分层架构设计，确保各模块之间的解耦和可扩展性。通过数据采集、智能分析、执行和反馈优化四个核心层，实现完整的AI关怀功能。</p>
+                    <div class="tech-stack">
+                        <div class="tech-item">
+                            <h4>前端技术</h4>
+                            <p>React/Vue.js、WebSockets、响应式设计</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4>后端技术</h4>
+                            <p>Node.js/Python、MongoDB/PostgreSQL、Redis</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4>AI能力</h4>
+                            <p>机器学习、情感分析、自然语言处理</p>
+                        </div>
+                        <div class="tech-item">
+                            <h4>云服务</h4>
+                            <p>阿里云/腾讯云、百度AI、科大讯飞</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="tech-visual fade-in">
+                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=modern%20AI%20system%20architecture%20diagram%20with%20data%20flow%20and%20technology%20stacks%2C%20clean%20professional%20design%2C%20blue%20color%20scheme&image_size=landscape_16_9" alt="AI系统架构图">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Case Study -->
+    <section class="case-study" id="case">
+        <div class="container">
+            <div class="section-title">
+                <h2>实战案例演示</h2>
+                <p>通过智能纪念日提醒系统，展示四步法则的实际应用</p>
+            </div>
+            <div class="case-content fade-in">
+                <h3>智能纪念日提醒系统</h3>
+                <div class="timeline">
+                    <div class="timeline-item">
+                        <h4>数据收集阶段</h4>
+                        <p>系统自动记录结婚纪念日、生日等重要日期，分析过往庆祝方式和偏好，收集配偶的兴趣爱好数据。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>智能提醒阶段</h4>
+                        <p>提前7天发送个性化提醒，基于历史数据推荐庆祝方案，提供多种选择供用户决策。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>自动执行阶段</h4>
+                        <p>根据用户选择自动预订餐厅，智能推荐并购买礼物，安排活动流程和时间。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>实时互动阶段</h4>
+                        <p>发送温馨消息和祝福，提供实时支持和建议，记录互动过程和反馈。</p>
+                    </div>
+                    <div class="timeline-item">
+                        <h4>效果评估阶段</h4>
+                        <p>收集活动反馈数据，分析情感反应和满意度，优化下一次庆祝方案。</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Code Section -->
+    <section class="code-section" id="code">
+        <div class="container">
+            <div class="code-content">
+                <h3>代码示例：智能消息生成</h3>
+                <div class="code-block">
+                    <pre>// 智能消息生成算法示例
+function generatePersonalizedMessage(userData, occasion) {
+  // 分析用户偏好
+  const preferences = analyzeUserPreferences(userData);
+  
+  // 选择合适的语气和内容
+  const tone = determineTone(preferences, occasion);
+  const content = generateContent(occasion, preferences);
+  
+  // 生成最终消息
+  return {
+    message: `${content}`,
+    timing: calculateOptimalTime(userData),
+    channel: selectBestChannel(userData)
+  };
+}
+
+// 效果评估函数
+function evaluateMessageEffectiveness(message, response) {
+  const sentiment = analyzeSentiment(response);
+  const engagement = measureEngagement(response);
+  
+  return {
+    score: calculateEffectivenessScore(sentiment, engagement),
+    improvements: identifyAreasForImprovement(sentiment, engagement)
+  };
+}</pre>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- CTA Section -->
+    <section class="cta">
+        <div class="container">
+            <div class="cta-content">
+                <h2>开始构建你的AI关怀系统</h2>
+                <p>利用四步法则，创造更智能、更高效、更温暖的情感关怀体验</p>
+                <a href="#" class="btn">立即开始</a>
+                <a href="#" class="btn btn-secondary">了解更多</a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <p>© 2026 AI技巧：全自动哄老婆四步法则</p>
+                <p>基于数字游牧人Samuel的原创方法</p>
+                <p>知识分享时间：10-15分钟</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('scrolled');
+            } else {
+                nav.classList.remove('scrolled');
+            }
+        });
+        
+        // Scroll reveal animation
+        function revealOnScroll() {
+            const elements = document.querySelectorAll('.fade-in');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 100) {
+                    element.classList.add('visible');
+                }
+            });
+        }
+        
+        window.addEventListener('scroll', revealOnScroll);
+        window.addEventListener('load', revealOnScroll);
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>

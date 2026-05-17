@@ -1,0 +1,1418 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clawd 桌宠 - 样例展示</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a0ca3;
+            --secondary: #7209b7;
+            --accent: #f72585;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --gray: #6c757d;
+            --gray-light: #e9ecef;
+            --success: #4cc9f0;
+            --warning: #fca311;
+            --danger: #f72585;
+            --shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+            --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+            --gradient-primary: linear-gradient(135deg, var(--primary), var(--secondary));
+            --gradient-secondary: linear-gradient(135deg, var(--secondary), var(--accent));
+            --gradient-accent: linear-gradient(135deg, var(--accent), var(--warning));
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Poppins', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            line-height: 1.6;
+            color: var(--dark);
+            background: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        .nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.1);
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .nav.scrolled {
+            padding: 0.75rem 0;
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .nav-logo {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-logo:hover {
+            transform: scale(1.05);
+        }
+        
+        .nav-logo img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            box-shadow: var(--shadow);
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+        
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            position: relative;
+            padding: 0.5rem 0;
+        }
+        
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 3px;
+            background: var(--gradient-primary);
+            transition: width 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            border-radius: 3px;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        .nav-links a.active {
+            color: var(--primary);
+        }
+        
+        .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        /* Hero Section */
+        .hero {
+            padding: 200px 0 150px;
+            text-align: center;
+            background: var(--gradient-primary);
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmMTAiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.1;
+            animation: float 20s ease-in-out infinite;
+        }
+        
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .hero h1 {
+            font-size: 4rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            line-height: 1.2;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+            animation: fadeInUp 1s ease-out;
+        }
+        
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2.5rem;
+            opacity: 0.95;
+            animation: fadeInUp 1s ease-out 0.2s both;
+        }
+        
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 15px 35px;
+            background: white;
+            color: var(--primary);
+            border: none;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-decoration: none;
+            transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            box-shadow: var(--shadow-lg);
+            position: relative;
+            overflow: hidden;
+            animation: fadeInUp 1s ease-out 0.4s both;
+        }
+        
+        .btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(67, 97, 238, 0.2), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .btn:hover::before {
+            left: 100%;
+        }
+        
+        .btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+            margin-left: 1.5rem;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--primary);
+        }
+        
+        /* Main Content */
+        .main-content {
+            background: var(--light);
+            border-radius: 40px 40px 0 0;
+            margin-top: -50px;
+            padding: 100px 0;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 -10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        /* Section Title */
+        .section-title {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+        
+        .section-title h2 {
+            font-size: 3rem;
+            font-weight: 700;
+            color: var(--dark);
+            margin-bottom: 1.5rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title h2::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 120px;
+            height: 6px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+        
+        .section-title p {
+            font-size: 1.25rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+        
+        /* Gallery Grid */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 3rem;
+            margin-bottom: 6rem;
+        }
+        
+        .gallery-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            text-align: center;
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .gallery-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        
+        .gallery-card:hover {
+            transform: translateY(-15px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .gallery-image {
+            width: 100%;
+            height: 280px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        .gallery-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: var(--gradient-primary);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .gallery-card:hover .gallery-image::before {
+            opacity: 0.1;
+        }
+        
+        .gallery-image img,
+        .gallery-image svg {
+            max-width: 85%;
+            max-height: 85%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .gallery-card:hover .gallery-image img,
+        .gallery-card:hover .gallery-image svg {
+            transform: scale(1.05);
+        }
+        
+        .gallery-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+        
+        .gallery-card:hover h3 {
+            color: var(--primary);
+        }
+        
+        .gallery-card p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Animation States Section */
+        .animation-section {
+            background: var(--dark);
+            color: white;
+            padding: 100px 0;
+            border-radius: 40px;
+            margin: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animation-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.1;
+        }
+        
+        .animation-section .section-title h2 {
+            color: white;
+        }
+        
+        .animation-section .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .animation-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 2.5rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .animation-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .animation-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(67, 97, 238, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .animation-card:hover::before {
+            left: 100%;
+        }
+        
+        .animation-card:hover {
+            background: rgba(255, 255, 255, 0.12);
+            transform: scale(1.08);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .animation-icon {
+            width: 140px;
+            height: 140px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            transition: all 0.3s ease;
+        }
+        
+        .animation-card:hover .animation-icon {
+            background: rgba(255, 255, 255, 0.15);
+            transform: scale(1.1);
+        }
+        
+        .animation-icon img {
+            width: 80%;
+            height: 80%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .animation-card:hover .animation-icon img {
+            transform: scale(1.1);
+        }
+        
+        .animation-card h4 {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 0.75rem;
+            color: white;
+        }
+        
+        .animation-card p {
+            font-size: 0.95rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+        
+        /* Features Section */
+        .features-section {
+            padding: 6rem 0;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .feature-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem 2.5rem;
+            text-align: center;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .feature-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-secondary);
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .feature-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--gradient-primary);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3rem;
+            color: white;
+            box-shadow: var(--shadow);
+            transition: all 0.3s ease;
+        }
+        
+        .feature-card:hover .feature-icon {
+            transform: scale(1.1);
+            box-shadow: 0 15px 30px rgba(67, 97, 238, 0.3);
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+        
+        .feature-card:hover h3 {
+            color: var(--primary);
+        }
+        
+        .feature-card p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Mini Mode Section */
+        .mini-mode-section {
+            background: var(--gradient-secondary);
+            color: white;
+            padding: 100px 0;
+            border-radius: 40px;
+            margin: 6rem 0;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mini-mode-section::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciPjxkZWZzPjxwYXR0ZXJuIGlkPSJwYXR0ZXJuIiB3aWR0aD0iNDAiIGhlaWdodD0iNDAiIHBhdHRlcm5Vbml0cz0idXNlclNwYWNlT25Vc2UiPjxwYXRoIGQ9Ik0wIDBoNDB2NDBoLTQweiIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjZmZmZmZmMDUiIHN0cm9rZS13aWR0aD0iMSIvPjwvcGF0dGVybj48L2RlZnM+PHJlY3QgeD0iMCIgeT0iMCIgd2lkdGg9IjEwMCUiIGhlaWdodD0iMTAwJSIgZmlsbD0idXJsKCNwYXR0ZXJuKSIvPjwvc3ZnPg==');
+            opacity: 0.1;
+        }
+        
+        .mini-mode-section .section-title h2 {
+            color: white;
+        }
+        
+        .mini-mode-section .section-title p {
+            color: rgba(255, 255, 255, 0.8);
+        }
+        
+        .mini-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+            gap: 2rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .mini-card {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .mini-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transition: left 0.6s ease;
+        }
+        
+        .mini-card:hover::before {
+            left: 100%;
+        }
+        
+        .mini-card:hover {
+            transform: scale(1.15);
+            background: rgba(255, 255, 255, 0.15);
+            border-color: rgba(255, 255, 255, 0.3);
+        }
+        
+        .mini-icon {
+            width: 100px;
+            height: 100px;
+            margin: 0 auto 1.5rem;
+            background: rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+        
+        .mini-card:hover .mini-icon {
+            background: rgba(255, 255, 255, 0.2);
+            transform: scale(1.1);
+        }
+        
+        .mini-icon img {
+            width: 70%;
+            height: 70%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .mini-card:hover .mini-icon img {
+            transform: scale(1.2);
+        }
+        
+        .mini-card h4 {
+            font-size: 1.1rem;
+            font-weight: 600;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        /* How it Works */
+        .how-it-works {
+            padding: 6rem 0;
+        }
+        
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+        
+        .workflow-card {
+            background: white;
+            border-radius: 25px;
+            padding: 3rem;
+            box-shadow: var(--shadow);
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            border: 1px solid var(--gray-light);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .workflow-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-accent);
+        }
+        
+        .workflow-card:hover {
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+        }
+        
+        .workflow-image {
+            width: 100%;
+            height: 300px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, #f8f9fa 0%, #e9ecef 100%);
+            border-radius: 20px;
+            margin-bottom: 2rem;
+            overflow: hidden;
+        }
+        
+        .workflow-image svg {
+            max-width: 90%;
+            max-height: 90%;
+            object-fit: contain;
+            transition: all 0.3s ease;
+        }
+        
+        .workflow-card:hover .workflow-image svg {
+            transform: scale(1.05);
+        }
+        
+        .workflow-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+            transition: color 0.3s ease;
+        }
+        
+        .workflow-card:hover h3 {
+            color: var(--primary);
+        }
+        
+        .workflow-card p {
+            color: var(--gray);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        
+        /* Footer */
+        .footer {
+            background: var(--dark);
+            color: white;
+            padding: 4rem 0 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .footer::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--gradient-primary);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 3rem;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .footer-section h3 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-section h3::after {
+            content: '';
+            position: absolute;
+            bottom: -5px;
+            left: 0;
+            width: 50px;
+            height: 3px;
+            background: var(--gradient-primary);
+            border-radius: 3px;
+        }
+        
+        .footer-section p,
+        .footer-section li {
+            color: rgba(255, 255, 255, 0.7);
+            margin-bottom: 0.75rem;
+            line-height: 1.6;
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+        
+        .footer-section a:hover {
+            color: white;
+            transform: translateX(5px);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: rgba(255, 255, 255, 0.5);
+        }
+        
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-20px); }
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        .fade-in.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+        
+        .float-animation {
+            animation: float 4s ease-in-out infinite;
+        }
+        
+        .pulse-animation {
+            animation: pulse 3s ease-in-out infinite;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .hero p {
+                font-size: 1.25rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title h2 {
+                font-size: 2rem;
+            }
+            
+            .section-title p {
+                font-size: 1.1rem;
+            }
+            
+            .gallery-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .animation-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .features-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .mini-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .workflow-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+            
+            .btn {
+                display: block;
+                width: 80%;
+                margin: 1rem auto;
+                text-align: center;
+            }
+            
+            .btn-secondary {
+                margin-left: auto;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero p {
+                font-size: 1.1rem;
+            }
+            
+            .section-title h2 {
+                font-size: 1.75rem;
+            }
+            
+            .animation-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mini-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .gallery-card,
+            .workflow-card {
+                padding: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav" id="nav">
+        <div class="container">
+            <div class="nav-content">
+                <a href="index.html" class="nav-logo">
+                    <img src="assets/icon.png" alt="Clawd">
+                    Clawd 桌宠
+                </a>
+                <ul class="nav-links">
+                    <li><a href="index.html">AI技巧</a></li>
+                    <li><a href="examples.html" class="active">样例展示</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <div class="hero-content">
+                <h1>Clawd 桌宠</h1>
+                <p>来自 Tera-IX 星的可爱桌面宠物，让你的编程时光不再孤单</p>
+                <a href="#meet-clawd" class="btn">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
+                    </svg>
+                    认识 Clawd
+                </a>
+                <a href="#animations" class="btn btn-secondary">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="23 4 23 10 17 10"></polyline>
+                        <polyline points="1 20 1 14 7 14"></polyline>
+                        <path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"></path>
+                    </svg>
+                    查看动画
+                </a>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Main Content -->
+    <div class="main-content">
+        <div class="container">
+            <!-- Clawd Introduction -->
+            <div id="meet-clawd" class="section-title">
+                <h2>认识 Clawd</h2>
+                <p>Clawd 是一只可爱的独眼小怪物，来自遥远的 Tera-IX 星，专门陪伴程序员工作</p>
+            </div>
+            
+            <div class="gallery-grid">
+                <div class="gallery-card fade-in">
+                    <div class="gallery-image float-animation">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Main Body -->
+                            <ellipse cx="100" cy="120" rx="60" ry="50" fill="#6ee7b7"/>
+                            <!-- Head -->
+                            <circle cx="100" cy="80" r="45" fill="#6ee7b7"/>
+                            <!-- Eye -->
+                            <circle cx="100" cy="75" r="25" fill="white"/>
+                            <circle cx="100" cy="75" r="15" fill="#1e3a8a"/>
+                            <circle cx="105" cy="70" r="5" fill="white"/>
+                            <!-- Horns -->
+                            <path d="M70 45 Q65 25 75 20 Q85 15 80 35 Q75 50 70 45" fill="#34d399"/>
+                            <path d="M130 45 Q135 25 125 20 Q115 15 120 35 Q125 50 130 45" fill="#34d399"/>
+                            <!-- Mouth -->
+                            <path d="M80 100 Q100 115 120 100" stroke="#1e3a8a" stroke-width="3" fill="none"/>
+                            <!-- Arms -->
+                            <ellipse cx="50" cy="115" rx="12" ry="20" fill="#6ee7b7"/>
+                            <ellipse cx="150" cy="115" rx="12" ry="20" fill="#6ee7b7"/>
+                            <!-- Feet -->
+                            <ellipse cx="75" cy="165" rx="18" ry="10" fill="#34d399"/>
+                            <ellipse cx="125" cy="165" rx="18" ry="10" fill="#34d399"/>
+                        </svg>
+                    </div>
+                    <h3>Clawd 的形象</h3>
+                    <p>一只可爱的独眼小怪物，拥有柔软的绿色身体和发光的双角，总是带着温暖的微笑</p>
+                </div>
+                
+                <div class="gallery-card fade-in">
+                    <div class="gallery-image">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background -->
+                            <rect x="0" y="0" width="200" height="200" fill="#1e3a8a"/>
+                            <!-- Clawd Thinking -->
+                            <ellipse cx="100" cy="130" rx="55" ry="45" fill="#6ee7b7"/>
+                            <circle cx="100" cy="90" r="40" fill="#6ee7b7"/>
+                            <!-- Eye (Thinking) -->
+                            <circle cx="100" cy="85" r="22" fill="white"/>
+                            <circle cx="95" cy="80" r="12" fill="#1e3a8a"/>
+                            <circle cx="98" cy="76" r="4" fill="white"/>
+                            <!-- Thought Bubble -->
+                            <ellipse cx="150" cy="50" rx="25" ry="20" fill="white" opacity="0.9"/>
+                            <circle cx="165" cy="35" r="8" fill="white" opacity="0.8"/>
+                            <circle cx="172" cy="25" r="5" fill="white" opacity="0.7"/>
+                            <!-- Code in bubble -->
+                            <text x="142" y="55" font-size="8" fill="#1e3a8a">const x = 42;</text>
+                            <!-- Horns -->
+                            <path d="M70 55 Q65 35 75 30 Q85 25 80 45 Q75 60 70 55" fill="#34d399"/>
+                            <path d="M130 55 Q135 35 125 30 Q115 25 120 45 Q125 60 130 55" fill="#34d399"/>
+                            <!-- Arms (Typing pose) -->
+                            <ellipse cx="60" cy="120" rx="10" ry="18" fill="#6ee7b7"/>
+                            <ellipse cx="140" cy="120" rx="10" ry="18" fill="#6ee7b7"/>
+                        </svg>
+                    </div>
+                    <h3>思考中的 Clawd</h3>
+                    <p>当你提出问题时，Clawd 会认真思考，双角闪烁着智慧的光芒，脑袋里装满了代码灵感</p>
+                </div>
+                
+                <div class="gallery-card fade-in">
+                    <div class="gallery-image">
+                        <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                            <!-- Background -->
+                            <rect x="0" y="0" width="200" height="200" fill="#10b981"/>
+                            <!-- Clawd Happy -->
+                            <ellipse cx="100" cy="125" rx="55" ry="45" fill="#6ee7b7"/>
+                            <circle cx="100" cy="85" r="42" fill="#6ee7b7"/>
+                            <!-- Happy Eye -->
+                            <circle cx="100" cy="80" r="24" fill="white"/>
+                            <circle cx="100" cy="80" r="14" fill="#1e3a8a"/>
+                            <circle cx="106" cy="74" r="5" fill="white"/>
+                            <!-- Big Smile -->
+                            <path d="M75 105 Q100 130 125 105" stroke="#1e3a8a" stroke-width="4" fill="none"/>
+                            <!-- Sparkles -->
+                            <text x="50" y="60" font-size="20">✨</text>
+                            <text x="140" y="55" font-size="18">⭐</text>
+                            <text x="30" y="120" font-size="16">🌟</text>
+                            <text x="160" y="115" font-size="18">✨</text>
+                            <!-- Horns (Glowing) -->
+                            <path d="M70 50 Q65 28 75 22 Q85 17 80 38 Q75 55 70 50" fill="#fbbf24"/>
+                            <path d="M130 50 Q135 28 125 22 Q115 17 120 38 Q125 55 130 50" fill="#fbbf24"/>
+                            <!-- Bouncing effect -->
+                            <ellipse cx="75" cy="168" rx="16" ry="9" fill="#34d399"/>
+                            <ellipse cx="125" cy="168" rx="16" ry="9" fill="#34d399"/>
+                        </svg>
+                    </div>
+                    <h3>开心的 Clawd</h3>
+                    <p>任务完成时，Clawd 会开心地蹦跳，浑身散发着成功的光芒，庆祝你的每一个编程成就</p>
+                </div>
+            </div>
+            
+            <!-- Animation States -->
+            <div id="animations" class="animation-section">
+                <div class="section-title">
+                    <h2>12种动画状态</h2>
+                    <p>Clawd 会根据你的工作状态展现不同的可爱动画，让你的编程过程更加有趣</p>
+                </div>
+                
+                <div class="animation-grid">
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-idle-look.svg" alt="Idle">
+                        </div>
+                        <h4>待机模式</h4>
+                        <p>眼球跟随鼠标移动，身体微微倾斜，时刻关注你的一举一动</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-working-typing.svg" alt="Typing">
+                        </div>
+                        <h4>打字中</h4>
+                        <p>认真地敲击键盘，仿佛在和你一起编写代码</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-working-building.svg" alt="Building">
+                        </div>
+                        <h4>构建项目</h4>
+                        <p>努力工作的样子，为你的项目加油助威</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-subagent-juggling.svg" alt="Juggling">
+                        </div>
+                        <h4>杂耍表演</h4>
+                        <p>子代理运行时，开心地表演杂耍，展示它的多才多艺</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-error.svg" alt="Error">
+                        </div>
+                        <h4>出错了</h4>
+                        <p>遇到bug时的样子，和你一起着急但不放弃</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-happy.svg" alt="Happy">
+                        </div>
+                        <h4>开心庆祝</h4>
+                        <p>任务完成！开心地蹦跳庆祝，为你的成功喝彩</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-notification.svg" alt="Notification">
+                        </div>
+                        <h4>通知提醒</h4>
+                        <p>有新消息！好奇地看着你，提醒你查看</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-working-sweeping.svg" alt="Sweeping">
+                        </div>
+                        <h4>清理整理</h4>
+                        <p>整理代码中，帮助你保持代码的整洁有序</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-working-carrying.svg" alt="Carrying">
+                        </div>
+                        <h4>搬运文件</h4>
+                        <p>创建新文件中，像勤劳的小助手一样帮忙搬运</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-sleeping.svg" alt="Sleeping">
+                        </div>
+                        <h4>睡觉休息</h4>
+                        <p>长时间无活动，进入甜美的梦乡，养精蓄锐</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-thinking.svg" alt="Thinking">
+                        </div>
+                        <h4>思考问题</h4>
+                        <p>用户提问时，认真思考，努力寻找最佳答案</p>
+                    </div>
+                    
+                    <div class="animation-card fade-in">
+                        <div class="animation-icon">
+                            <img src="assets/svg/clawd-subagent-conducting.svg" alt="Conducting">
+                        </div>
+                        <h4>指挥若定</h4>
+                        <p>多个子代理运行，像指挥家一样统筹全局</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Features Section -->
+            <div class="features-section">
+                <div class="section-title">
+                    <h2>特色功能</h2>
+                    <p>Clawd 不仅仅是一个桌宠，更是你的编程伙伴，拥有丰富的互动功能</p>
+                </div>
+                
+                <div class="features-grid">
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">👁️</div>
+                        <h3>眼球追踪</h3>
+                        <p>待机状态下，Clawd 的大眼睛会跟随你的鼠标移动，身体微微倾斜，可爱极了</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">💤</div>
+                        <h3>睡眠序列</h3>
+                        <p>60秒无活动后，Clawd 会打哈欠、打盹、倒下睡觉，移动鼠标会被惊醒弹起</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">✋</div>
+                        <h3>点击穿透</h3>
+                        <p>透明区域的点击直接穿透到下方窗口，只有Clawd本体可以交互，不干扰你的工作</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">👆</div>
+                        <h3>点击反应</h3>
+                        <p>双击戳戳Clawd，连续点击4下，Clawd会东张西望，超级可爱的互动体验</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">✊</div>
+                        <h3>任意拖拽</h3>
+                        <p>随时可以抓起Clawd移动，使用Pointer Capture防止快速甩动时丢失</p>
+                    </div>
+                    
+                    <div class="feature-card fade-in">
+                        <div class="feature-icon">📍</div>
+                        <h3>位置记忆</h3>
+                        <p>重启后Clawd会回到上次的位置，就像它一直在那里等你一样</p>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Mini Mode Section -->
+            <div class="mini-mode-section">
+                <div class="section-title">
+                    <h2>极简模式</h2>
+                    <p>把 Clawd 拖到屏幕边缘，它会藏起来只露出一半，悬停时探出头，既可爱又不占用空间</p>
+                </div>
+                
+                <div class="mini-grid">
+                    <div class="mini-card fade-in">
+                        <div class="mini-icon">
+                            <img src="assets/svg/clawd-mini-idle.svg" alt="Mini Idle">
+                        </div>
+                        <h4>待机呼吸</h4>
+                    </div>
+                    
+                    <div class="mini-card fade-in">
+                        <div class="mini-icon">
+                            <img src="assets/svg/clawd-mini-peek.svg" alt="Mini Peek">
+                        </div>
+                        <h4>探头招手</h4>
+                    </div>
+                    
+                    <div class="mini-card fade-in">
+                        <div class="mini-icon">
+                            <img src="assets/svg/clawd-mini-alert.svg" alt="Mini Alert">
+                        </div>
+                        <h4>通知提醒</h4>
+                    </div>
+                    
+                    <div class="mini-card fade-in">
+                        <div class="mini-icon">
+                            <img src="assets/svg/clawd-mini-happy.svg" alt="Mini Happy">
+                        </div>
+                        <h4>开心庆祝</h4>
+                    </div>
+                    
+                    <div class="mini-card fade-in">
+                        <div class="mini-icon">
+                            <img src="assets/svg/clawd-mini-enter.svg" alt="Mini Enter">
+                        </div>
+                        <h4>进入模式</h4>
+                    </div>
+                    
+                    <div class="mini-card fade-in">
+                        <div class="mini-icon">
+                            <img src="assets/svg/clawd-mini-enter-sleep.svg" alt="Mini Sleep">
+                        </div>
+                        <h4>睡觉休息</h4>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- How it Works -->
+            <div class="how-it-works">
+                <div class="section-title">
+                    <h2>工作原理</h2>
+                    <p>Clawd 是如何感知你的工作状态并做出相应反应的</p>
+                </div>
+                
+                <div class="workflow-grid">
+                    <div class="workflow-card fade-in">
+                        <div class="workflow-image">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Flow Diagram -->
+                                <rect x="30" y="30" width="140" height="30" rx="5" fill="#4361ee"/>
+                                <text x="100" y="50" text-anchor="middle" fill="white" font-size="10">Claude Code 事件</text>
+                                
+                                <path d="M100 60 L100 75" stroke="#4361ee" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <rect x="40" y="80" width="120" height="25" rx="5" fill="#7209b7"/>
+                                <text x="100" y="97" text-anchor="middle" fill="white" font-size="9">Hook 脚本处理</text>
+                                
+                                <path d="M100 105 L100 120" stroke="#7209b7" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <rect x="35" y="125" width="130" height="25" rx="5" fill="#f72585"/>
+                                <text x="100" y="142" text-anchor="middle" fill="white" font-size="9">HTTP POST 到本地</text>
+                                
+                                <path d="M100 150 L100 165" stroke="#f72585" stroke-width="2" fill="none" marker-end="url(#arrowhead)"/>
+                                
+                                <rect x="45" y="170" width="110" height="25" rx="5" fill="#4cc9f0"/>
+                                <text x="100" y="187" text-anchor="middle" fill="white" font-size="9">状态机 + 动画</text>
+                                
+                                <defs>
+                                    <marker id="arrowhead" markerWidth="10" markerHeight="7" refX="0" refY="3.5" orient="auto">
+                                        <polygon points="0 0, 10 3.5, 0 7" fill="#4361ee"/>
+                                    </marker>
+                                </defs>
+                            </svg>
+                        </div>
+                        <h3>事件流程</h3>
+                        <p>Claude Code 触发事件 → Hook 脚本处理 → 本地 HTTP 服务接收 → 状态机处理 → 展示相应动画</p>
+                    </div>
+                    
+                    <div class="workflow-card fade-in">
+                        <div class="workflow-image">
+                            <svg viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
+                                <!-- Architecture Diagram -->
+                                <circle cx="100" cy="50" r="25" fill="#4361ee"/>
+                                <text x="100" y="55" text-anchor="middle" fill="white" font-size="10">主进程</text>
+                                
+                                <circle cx="50" cy="120" r="22" fill="#7209b7"/>
+                                <text x="50" y="125" text-anchor="middle" fill="white" font-size="8">状态机</text>
+                                
+                                <circle cx="100" cy="120" r="22" fill="#f72585"/>
+                                <text x="100" y="125" text-anchor="middle" fill="white" font-size="8">HTTP服务</text>
+                                
+                                <circle cx="150" cy="120" r="22" fill="#4cc9f0"/>
+                                <text x="150" y="125" text-anchor="middle" fill="white" font-size="8">窗口管理</text>
+                                
+                                <circle cx="100" cy="180" r="28" fill="#fca311"/>
+                                <text x="100" y="178" text-anchor="middle" fill="white" font-size="8">渲染进程</text>
+                                <text x="100" y="190" text-anchor="middle" fill="white" font-size="7">SVG动画</text>
+                                
+                                <line x1="100" y1="75" x2="50" y2="98" stroke="#94a3b8" stroke-width="2"/>
+                                <line x1="100" y1="75" x2="100" y2="98" stroke="#94a3b8" stroke-width="2"/>
+                                <line x1="100" y1="75" x2="150" y2="98" stroke="#94a3b8" stroke-width="2"/>
+                                <line x1="50" y1="142" x2="100" y2="152" stroke="#94a3b8" stroke-width="2"/>
+                                <line x1="100" y1="142" x2="100" y2="152" stroke="#94a3b8" stroke-width="2"/>
+                                <line x1="150" y1="142" x2="100" y2="152" stroke="#94a3b8" stroke-width="2"/>
+                            </svg>
+                        </div>
+                        <h3>系统架构</h3>
+                        <p>基于 Electron 架构，主进程处理业务逻辑，渲染进程负责动画展示，通过 IPC 通信实现实时响应</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>关于 Clawd</h3>
+                    <p>Clawd 是一只来自 Tera-IX 星的可爱桌面宠物，专门陪伴程序员工作，让编程时光不再孤单。</p>
+                    <p>基于 marciogranzotto/clawd-tank 的社区项目，由热爱编程的开发者共同维护。</p>
+                </div>
+                <div class="footer-section">
+                    <h3>快速链接</h3>
+                    <ul>
+                        <li><a href="index.html">AI技巧</a></li>
+                        <li><a href="examples.html">样例展示</a></li>
+                        <li><a href="#">GitHub 仓库</a></li>
+                        <li><a href="#">使用文档</a></li>
+                        <li><a href="#">贡献指南</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h3>联系我们</h3>
+                    <p>如果你有任何问题或建议，欢迎联系我们：</p>
+                    <p>邮箱：clawd@example.com</p>
+                    <p>GitHub：@clawd-project</p>
+                    <p>Discord：Clawd 社区</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>© 2026 Clawd 桌宠 - 来自 Tera-IX 星的编程伙伴</p>
+                <p style="margin-top: 0.5rem; font-size: 0.9rem;">MIT License | 基于 marciogranzotto/clawd-tank</p>
+            </div>
+        </div>
+    </footer>
+    
+    <script>
+        // Navigation scroll effect
+        window.addEventListener('scroll', function() {
+            const nav = document.getElementById('nav');
+            if (window.scrollY > 50) {

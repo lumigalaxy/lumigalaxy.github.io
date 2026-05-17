@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8" />
+  <meta http-equiv="Content-Security-Policy"
+        content="default-src 'self'; style-src 'self' 'unsafe-inline'; script-src 'self' 'unsafe-inline'; img-src 'self' data:;" />
+  <title>Alien Chat</title>
+  <style>
+    :root {
+      --alien:        #B8D930;       /* lemon-green primary */
+      --alien-dim:    #8AAB26;       /* darker accent */
+      --alien-glow:   #d8f25c;       /* hover */
+      --bg-deep:      #0d130b;       /* near-black, faint green tint */
+      --bg-mid:       #161e10;       /* card body */
+      --bg-strong:    #1f2a17;       /* header / input bg */
+      --border:       #B8D930;       /* pixel border */
+      --border-soft:  rgba(184,217,48,0.35);
+      --text:         #e8f0d8;
+      --text-dim:     #9aa67a;
+      --text-faint:   #6c7757;
+      --user-bubble:  #1c2a13;
+      --ai-bubble:    rgba(184,217,48,0.10);
+      --danger:       #ff6b6b;
+    }
+
+    * { box-sizing: border-box; }
+    html, body {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%;
+      background: transparent;
+      font-family: "SFMono-Regular", "Menlo", "Consolas", "DejaVu Sans Mono", monospace;
+      font-size: 12px;
+      color: var(--text);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* ── Outer wrapper: leaves space at bottom for the tail triangle ── */
+    .wrap {
+      position: absolute;
+      inset: 0;
+      padding: 4px 4px 14px 4px;   /* 14px reserved at bottom for the tail */
+      display: flex;
+    }
+
+    .panel {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      background: var(--bg-deep);
+      border: 2px solid var(--border);
+      border-radius: 0;            /* sharp pixel corners */
+      box-shadow:
+        inset 0 0 0 1px rgba(0,0,0,0.6),
+        0 0 0 1px rgba(0,0,0,0.5),
+        4px 4px 0 0 rgba(0,0,0,0.55);
+      overflow: hidden;
+      image-rendering: pixelated;
+    }
+
+    /* ── Header ── */
+    .header {
+      flex: 0 0 auto;
+      height: 30px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 8px;
+      background: var(--bg-strong);
+      border-bottom: 2px solid var(--border);
+      letter-spacing: 1.5px;
+      font-weight: 700;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: var(--alien);
+      -webkit-app-region: drag;     /* let users drag the bubble around */
+    }
+    .header .title { display: flex; align-items: center; gap: 6px; }
+    .header .alien-icon {
+      display: inline-block;
+      width: 12px; height: 12px;
+      background:
+        linear-gradient(var(--alien), var(--alien)) center/8px 8px no-repeat,
+        radial-gradient(circle, var(--alien) 30%, transparent 31%) center/4px 4px no-repeat;
+      box-shadow: inset 0 0 0 1px var(--bg-deep);
+    }
+    .header .actions {
+      display: flex; gap: 4px;
+      -webkit-app-region: no-drag;
+    }
+    .header button {
+      width: 22px; height: 22px;
+      display: flex; align-items: center; justify-content: center;
+      background: transparent;
+      border: 1px solid var(--border-soft);
+      color: var(--alien);
+      font-family: inherit;
+      font-size: 12px;
+      cursor: pointer;
+      padding: 0;
+      transition: background 0.12s, color 0.12s;
+    }
+    .header button:hover {
+      background: var(--alien);
+      color: var(--bg-deep);
+    }
+    .header button:disabled { opacity: 0.3; cursor: default; }
+
+    /* ── History (scrollable) ── */
+    .history {
+      flex: 1;
+      overflow-y: auto;
+      overflow-x: hidden;
+      padding: 10px 10px 6px;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      background:
+        linear-gradient(var(--bg-deep), var(--bg-deep)),
+        repeating-linear-gradient(0deg, rgba(184,217,48,0.025) 0 1px, transparent 1px 4px);
+      background-blend-mode: normal;
+    }
+    .history::-webkit-scrollbar { width: 6px; }
+    .history::-webkit-scrollbar-thumb {
+      background: var(--alien-dim);
+      border-radius: 0;
+    }
+    .history::-webkit-scrollbar-track { background: transparent; }
+
+    .empty-state {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      color: var(--text-faint);
+      text-align: center;
+      padding: 16px;
+    }
+    .empty-state .glyph {
+      font-size: 28px;
+      filter: hue-rotate(40deg) brightness(1.1);
+    }
+    .empty-state .hint { font-size: 10.5px; line-height: 1.5; max-width: 240px; }
+
+    .msg {
+      max-width: 84%;
+      padding: 6px 9px;
+      font-size: 12px;
+      line-height: 1.45;
+      word-wrap: break-word;
+      white-space: pre-wrap;
+      user-select: text;
+      -webkit-user-select: text;
+      letter-spacing: 0.2px;
+    }
+    .msg.user {
+      align-self: flex-end;
+      background: var(--user-bubble);
+      border: 1px solid var(--border-soft);
+      color: var(--text);
+      border-right: 2px solid var(--alien);
+    }
+    .msg.assistant {
+      align-self: flex-start;
+      background: var(--ai-bubble);
+      border: 1px solid var(--border);
+      color: var(--text);
+      border-left: 2px solid var(--alien);
+    }
+    .msg.assistant.streaming::after {
+      content: "▊";
+      color: var(--alien);
+      animation: blink 1s steps(2) infinite;
+      margin-left: 2px;
+    }
+    .msg.assistant.error {
+      color: var(--danger);
+      border-color: var(--danger);
+      border-left-color: var(--danger);
+      background: rgba(255,107,107,0.08);
+    }
+    .msg.assistant .role-tag,
+    .msg.user .role-tag {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 1px;
+      color: var(--text-faint);
+      margin-bottom: 2px;
+      text-transform: uppercase;
+    }
+    .msg.user .role-tag { text-align: right; color: var(--alien-dim); }
+    .msg.assistant .role-tag { color: var(--alien); }
+
+    @keyframes blink { 50% { opacity: 0; } }
+
+    /* ── Footer (input row) ── */
+    .footer {
+      flex: 0 0 auto;
+      padding: 8px;
+      background: var(--bg-strong);
+      border-top: 2px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+    .footer .meta {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 9.5px;
+      letter-spacing: 1px;
+      color: var(--text-faint);
+      text-transform: uppercase;
+    }
+    .footer .meta select {
+      flex: 1;
+      background: var(--bg-deep);
+      color: var(--alien);
+      border: 1px solid var(--border-soft);
+      border-radius: 0;
+      padding: 3px 6px;
+      font-family: inherit;
+      font-size: 10px;
+      letter-spacing: 0.5px;
+      text-transform: none;
+      outline: none;
+      cursor: pointer;
+    }
+    .footer .meta select:focus { border-color: var(--alien); }
+    .footer .meta .status { font-size: 9px; }
+    .footer .meta .status.ok { color: var(--alien); }
+    .footer .meta .status.err { color: var(--danger); }
+
+    .input-row {
+      display: flex;
+      gap: 6px;
+      align-items: stretch;
+    }
+    .input-row input {
+      flex: 1;
+      min-width: 0;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-soft);
+      color: var(--text);
+      padding: 8px 10px;
+      font-family: inherit;
+      font-size: 12px;
+      outline: none;
+      border-radius: 0;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    .input-row input::placeholder { color: var(--text-faint); }
+    .input-row input:focus { border-color: var(--alien); }
+    .input-row button {
+      flex: 0 0 auto;
+      min-width: 56px;
+      background: var(--alien);
+      color: var(--bg-deep);
+      border: 1px solid var(--alien);
+      font-family: inherit;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      cursor: pointer;
+      padding: 0 12px;
+      border-radius: 0;
+      transition: background 0.12s;
+    }
+    .input-row button:hover:not(:disabled) { background: var(--alien-glow); }
+    .input-row button:disabled {
+      background: var(--bg-mid);
+      color: var(--text-faint);
+      border-color: var(--border-soft);
+      cursor: default;
+    }
+
+    /* ── Tail triangle (positioned dynamically by JS) ── */
+    .tail {
+      position: absolute;
+      bottom: 0;
+      left: 50%;                       /* JS overrides via inline style */
+      transform: translateX(-50%);
+      width: 18px;
+      height: 14px;
+      pointer-events: none;
+    }
+    .tail svg { display: block; width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="panel">
+      <div class="header">
+        <div class="title">
+          <span class="alien-icon"></span>
+          <span>ALIEN</span>
+        </div>
+        <div class="actions">
+          <button id="btn-clear" title="Clear conversation">⌫</button>
+          <button id="btn-close" title="Close">×</button>
+        </div>
+      </div>
+
+      <div class="history" id="history">
+        <div class="empty-state" id="empty-state">
+          <div class="glyph">👽</div>
+          <div class="hint">Talk to Alien.<br/>Replies stream from a local model.</div>
+        </div>
+      </div>
+
+      <div class="footer">
+        <div class="meta">
+          <span>MODEL</span>
+          <select id="model" title="Model"></select>
+          <span class="status" id="status"></span>
+        </div>
+        <div class="input-row">
+          <input id="text" placeholder="Type a message…" autocomplete="off" />
+          <button id="send">SEND</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Tail pointing down at the alien -->
+  <div class="tail" id="tail">
+    <svg viewBox="0 0 18 14" preserveAspectRatio="none">
+      <polygon points="0,0 18,0 9,14" fill="#0d130b" stroke="#B8D930" stroke-width="1.2" stroke-linejoin="miter" />
+      <!-- mask the top edge so the tail joins the panel border -->
+      <rect x="1" y="-1" width="16" height="2" fill="#0d130b"/>
+    </svg>
+  </div>
+
+<script>
+(function () {
+  const api = window.chatBubbleAPI;
+  const historyEl = document.getElementById("history");
+  const emptyState = document.getElementById("empty-state");
+  const txt = document.getElementById("text");
+  const sendBtn = document.getElementById("send");
+  const modelSel = document.getElementById("model");
+  const statusEl = document.getElementById("status");
+  const btnClear = document.getElementById("btn-clear");
+  const btnClose = document.getElementById("btn-close");
+  const tailEl = document.getElementById("tail");
+
+  let chosenModel = "";
+  let currentAssistantMsg = null; // DOM node for streaming reply
+  let assembled = "";
+
+  // ── Boot ──
+  api.onBootstrap(({ models, model, lang, history }) => {
+    refreshModels(models, model);
+    txt.placeholder = placeholderFor(lang);
+    if (Array.isArray(history) && history.length > 0) {
+      hideEmpty();
+      for (const m of history) appendMessage(m.role, m.content);
+      scrollToBottom();
+    }
+  });
+
+  api.onFocus(() => { txt.focus(); txt.select && txt.select(); });
+
+  api.onTailAnchor(({ tailX }) => {
+    tailEl.style.left = tailX + "px";
+    tailEl.style.transform = "translateX(-50%)";
+  });
+
+  api.onReplyStart(({ user }) => {
+    hideEmpty();
+    appendMessage("user", user);
+    currentAssistantMsg = appendMessage("assistant", "", { streaming: true });
+    assembled = "";
+    setStatus("streaming…", "ok");
+    scrollToBottom();
+  });
+
+  api.onReplyChunk((chunk) => {
+    if (!currentAssistantMsg) return;
+    assembled += chunk;
+    setMessageBody(currentAssistantMsg, assembled);
+    scrollToBottom();
+  });
+
+  api.onReplyEnd(() => {
+    if (currentAssistantMsg) currentAssistantMsg.classList.remove("streaming");
+    currentAssistantMsg = null;
+    setStatus("", "");
+    sendBtn.disabled = false;
+    txt.disabled = false;
+    txt.focus();
+  });
+
+  api.onReplyError((msg) => {
+    if (currentAssistantMsg) {
+      currentAssistantMsg.classList.remove("streaming");
+      currentAssistantMsg.classList.add("error");
+      setMessageBody(currentAssistantMsg, "⚠ " + msg);
+    } else {
+      const node = appendMessage("assistant", "⚠ " + msg);
+      node.classList.add("error");
+    }
+    currentAssistantMsg = null;
+    setStatus("error", "err");
+    sendBtn.disabled = false;
+    txt.disabled = false;
+    txt.focus();
+  });
+
+  api.onHistoryCleared(() => {
+    historyEl.innerHTML = "";
+    historyEl.appendChild(emptyState);
+    showEmpty();
+    currentAssistantMsg = null;
+    setStatus("", "");
+    txt.disabled = false;
+    sendBtn.disabled = false;
+    txt.focus();
+  });
+
+  // ── Model list refresh ──
+  function refreshModels(models, current) {
+    modelSel.innerHTML = "";
+    if (!models || !models.length) {
+      const opt = document.createElement("option");
+      opt.value = ""; opt.textContent = "no model installed";
+      opt.disabled = true;
+      modelSel.appendChild(opt);
+      sendBtn.disabled = true;
+      setStatus("ollama unreachable", "err");
+      return;
+    }
+    for (const name of models) {
+      const opt = document.createElement("option");
+      opt.value = name; opt.textContent = name;
+      modelSel.appendChild(opt);
+    }
+    chosenModel = current || models[0];
+    modelSel.value = chosenModel;
+    sendBtn.disabled = false;
+    setStatus("ready", "ok");
+  }
+
+  api.listModels().then((res) => {
+    if (res && res.ok) refreshModels(res.models, res.model);
+    else refreshModels([], "");
+  }).catch(() => refreshModels([], ""));
+
+  modelSel.addEventListener("change", () => {
+    chosenModel = modelSel.value;
+    api.setModel(chosenModel);
+  });
+
+  // ── Send ──
+  function doSend() {
+    const text = txt.value.trim();
+    if (!text || sendBtn.disabled) return;
+    if (!chosenModel) { setStatus("no model", "err"); return; }
+    api.send(text, chosenModel);
+    txt.value = "";
+    sendBtn.disabled = true;
+    txt.disabled = true;
+  }
+
+  sendBtn.addEventListener("click", doSend);
+  txt.addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      doSend();
+    } else if (e.key === "Escape") {
+      e.preventDefault();
+      api.close();
+    }
+  });
+
+  // ── Header buttons ──
+  btnClose.addEventListener("click", () => api.close());
+  btnClear.addEventListener("click", () => {
+    if (historyEl.querySelectorAll(".msg").length === 0) return;
+    api.clearHistory();
+  });
+
+  // ── Helpers ──
+  function appendMessage(role, content, opts) {
+    const node = document.createElement("div");
+    node.className = "msg " + role;
+    if (opts && opts.streaming) node.classList.add("streaming");
+
+    const tag = document.createElement("span");
+    tag.className = "role-tag";
+    tag.textContent = role === "user" ? "you" : "alien";
+    node.appendChild(tag);
+
+    const body = document.createElement("span");
+    body.className = "msg-body";
+    body.textContent = content;
+    node.appendChild(body);
+
+    historyEl.appendChild(node);
+    return node;
+  }
+
+  function setMessageBody(node, text) {
+    const body = node.querySelector(".msg-body");
+    if (body) body.textContent = text;
+  }
+
+  function scrollToBottom() {
+    historyEl.scrollTop = historyEl.scrollHeight;
+  }
+
+  function setStatus(text, kind) {
+    statusEl.textContent = text;
+    statusEl.classList.remove("ok", "err");
+    if (kind) statusEl.classList.add(kind);
+  }
+
+  function placeholderFor(lang) {
+    if (lang === "zh") return "对外星人说点什么…";
+    if (lang === "es") return "Habla con el alien…";
+    return "Type a message…";
+  }
+
+  function hideEmpty() { if (emptyState && emptyState.parentNode) emptyState.style.display = "none"; }
+  function showEmpty() { if (emptyState) emptyState.style.display = "flex"; }
+
+  setTimeout(() => txt.focus(), 30);
+})();
+</script>
+</body>
+</html>

@@ -1,0 +1,19 @@
+#!/bin/bash
+# 启动 Clawd on Desk 桌宠
+PROJECT_DIR="/Users/chen/Desktop/Project/AI桌宠/clawd-on-desk-0.6.0"
+
+# 加载常见的 Node 安装路径（nvm / homebrew）
+export PATH="/opt/homebrew/bin:/usr/local/bin:$HOME/.nvm/versions/node/$(ls $HOME/.nvm/versions/node 2>/dev/null | tail -1)/bin:$PATH"
+
+# 如果已经在运行，则不重复启动
+if pgrep -f "clawd-on-desk-0.6.0.*electron" > /dev/null 2>&1; then
+    osascript -e 'display notification "桌宠已经在运行中" with title "Clawd on Desk"'
+    exit 0
+fi
+
+cd "$PROJECT_DIR" || exit 1
+
+# 后台启动，日志写入项目目录
+nohup npm start > "$PROJECT_DIR/launch.log" 2>&1 &
+
+osascript -e 'display notification "桌宠启动中..." with title "Clawd on Desk"'

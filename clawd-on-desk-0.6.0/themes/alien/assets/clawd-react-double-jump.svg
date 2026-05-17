@@ -1,0 +1,138 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .double-jump { transform-origin: 7.5px 13.5px; animation: dj-translate 2.6s 1 cubic-bezier(0.3, 0.6, 0.3, 1); }
+      .body-flip   { transform-origin: 7.5px 9.5px; animation: dj-flip 2.6s 1 cubic-bezier(0.3, 0.6, 0.3, 1); }
+      .flower-toss { transform-origin: 7.75px 5px; animation: dj-flower 2.6s 1 ease-in-out; }
+      .happy-eyes  { animation: dj-eyes 2.6s 1 ease-in-out; }
+      .arc-trail   { animation: dj-trail 2.6s 1 ease-out; opacity: 0; }
+      .arc-trail-2 { animation: dj-trail 2.6s 0.18s 1 ease-out; opacity: 0; }
+      .arc-trail-3 { animation: dj-trail 2.6s 0.36s 1 ease-out; opacity: 0; }
+      .shadow-pulse { animation: dj-shadow 2.6s 1 ease-out; transform-origin: 7.5px 15.25px; }
+
+      @keyframes dj-translate {
+        0%   { transform: translateY(0); }
+        18%  { transform: translateY(-2px); }
+        40%  { transform: translateY(-13px); }
+        62%  { transform: translateY(-13px); }
+        82%  { transform: translateY(-2px); }
+        100% { transform: translateY(0); }
+      }
+      @keyframes dj-flip {
+        0%   { transform: rotate(0deg); }
+        20%  { transform: rotate(-15deg); }
+        45%  { transform: rotate(180deg); }
+        72%  { transform: rotate(540deg); }
+        100% { transform: rotate(720deg); }
+      }
+      @keyframes dj-flower {
+        0%   { transform: rotate(0deg); }
+        20%  { transform: rotate(-30deg); }
+        50%  { transform: rotate(40deg); }
+        80%  { transform: rotate(-15deg); }
+        100% { transform: rotate(0deg); }
+      }
+      @keyframes dj-eyes {
+        0%, 100% { transform: scaleY(1); }
+        50%      { transform: scaleY(0.35); }
+      }
+      @keyframes dj-trail {
+        0%   { opacity: 0; transform: translate(0, 0) scale(0.6); }
+        15%  { opacity: 0.85; }
+        80%  { opacity: 0; transform: translate(0, 6px) scale(0.4); }
+        100% { opacity: 0; }
+      }
+      @keyframes dj-shadow {
+        0%, 100% { transform: scale(1, 1); opacity: 0.4; }
+        45%, 60% { transform: scale(0.45, 0.4); opacity: 0.18; }
+      }
+    </style>
+  </defs>
+
+  <g class="shadow-pulse">
+    <rect x="3" y="14.5" width="9" height="0.5" fill="#000000"/>
+  </g>
+
+  <!-- arc trails behind the jump -->
+  <g fill="#B8D930" opacity="0.55">
+    <g class="arc-trail">
+      <rect x="6" y="9" width="0.5" height="0.5"/>
+      <rect x="6.5" y="8.5" width="0.5" height="0.5"/>
+      <rect x="9" y="8.5" width="0.5" height="0.5"/>
+    </g>
+    <g class="arc-trail-2">
+      <rect x="5.5" y="10" width="0.5" height="0.5"/>
+      <rect x="9.5" y="10" width="0.5" height="0.5"/>
+    </g>
+    <g class="arc-trail-3">
+      <rect x="6"   y="11" width="0.5" height="0.5"/>
+      <rect x="9"   y="11" width="0.5" height="0.5"/>
+    </g>
+  </g>
+
+  <g class="double-jump">
+    <g class="body-flip">
+      <g class="flower-toss">
+        <g fill="#FFFFFF">
+          <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+          <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+          <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+          <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+          <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+          <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+        </g>
+        <g fill="#FFE870">
+          <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+          <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+          <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+        </g>
+        <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+        <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+        <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+        <g fill="#7BA829">
+          <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3" width="0.5" height="0.5"/>
+          <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4" width="0.5" height="0.5"/>
+          <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+        </g>
+      </g>
+
+      <g fill="#B8D930">
+        <rect x="6.5" y="5" width="2" height="0.5"/>
+        <rect x="6" y="5.5" width="3" height="0.5"/>
+        <rect x="5.5" y="6" width="4" height="0.5"/>
+        <rect x="5" y="6.5" width="5" height="0.5"/>
+        <rect x="4.5" y="7" width="6" height="0.5"/>
+        <rect x="4" y="7.5" width="7" height="0.5"/>
+        <rect x="3.5" y="8" width="8" height="2.5"/>
+        <rect x="4" y="10.5" width="7" height="0.5"/>
+        <rect x="4.5" y="11" width="6" height="0.5"/>
+        <rect x="5" y="11.5" width="5" height="0.5"/>
+        <rect x="5.5" y="12" width="4" height="1.5"/>
+      </g>
+      <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+      <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+      <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+      <g fill="#7BA829">
+        <rect x="6" y="13.5" width="0.5" height="1"/>
+        <rect x="6.5" y="13.5" width="0.5" height="1"/>
+        <rect x="8" y="13.5" width="0.5" height="1"/>
+        <rect x="8.5" y="13.5" width="0.5" height="1"/>
+      </g>
+
+      <!-- happy ^ ^ eyes -->
+      <g class="happy-eyes" fill="#000000">
+        <rect x="4"   y="8.5" width="0.5" height="0.5"/>
+        <rect x="4.5" y="8"   width="0.5" height="0.5"/>
+        <rect x="5"   y="8"   width="0.5" height="0.5"/>
+        <rect x="5.5" y="8.5" width="0.5" height="0.5"/>
+
+        <rect x="9"    y="8.5" width="0.5" height="0.5"/>
+        <rect x="9.5"  y="8"   width="0.5" height="0.5"/>
+        <rect x="10"   y="8"   width="0.5" height="0.5"/>
+        <rect x="10.5" y="8.5" width="0.5" height="0.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

@@ -1,0 +1,129 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .body-squash { transform-origin: 7.5px 13.5px; animation: drag-squash 0.45s infinite ease-in-out; }
+      .flower-flap { transform-origin: 7.75px 5px; animation: drag-flower 0.35s infinite ease-in-out; }
+      .arm-left-flail  { transform-box: fill-box; transform-origin: 50% 0%;  animation: drag-arm-l 0.35s infinite ease-in-out; }
+      .arm-right-flail { transform-box: fill-box; transform-origin: 50% 0%;  animation: drag-arm-r 0.35s infinite ease-in-out; }
+      .leg-dangle-l { transform-box: fill-box; transform-origin: 50% 0%; animation: drag-leg-l 0.5s infinite ease-in-out; }
+      .leg-dangle-r { transform-box: fill-box; transform-origin: 50% 0%; animation: drag-leg-r 0.5s infinite ease-in-out; }
+      .panic-mouth { animation: panic-mouth 0.35s infinite steps(2); }
+
+      @keyframes drag-squash {
+        0%, 100% { transform: translate(0, 0) scale(1, 1); }
+        25%      { transform: translate(-0.4px, -0.3px) scale(1.08, 0.92); }
+        50%      { transform: translate(0.2px, 0.1px) scale(0.94, 1.06); }
+        75%      { transform: translate(0.3px, -0.2px) scale(1.04, 0.95); }
+      }
+      @keyframes drag-flower {
+        0%, 100% { transform: rotate(-22deg); }
+        50%      { transform: rotate(28deg); }
+      }
+      @keyframes drag-arm-l {
+        0%, 100% { transform: rotate(35deg); }
+        50%      { transform: rotate(-65deg); }
+      }
+      @keyframes drag-arm-r {
+        0%, 100% { transform: rotate(-40deg); }
+        50%      { transform: rotate(60deg); }
+      }
+      @keyframes drag-leg-l {
+        0%, 100% { transform: rotate(10deg); }
+        50%      { transform: rotate(-18deg); }
+      }
+      @keyframes drag-leg-r {
+        0%, 100% { transform: rotate(-12deg); }
+        50%      { transform: rotate(16deg); }
+      }
+      @keyframes panic-mouth {
+        0%   { opacity: 1; }
+        50%  { opacity: 0; }
+        100% { opacity: 1; }
+      }
+    </style>
+  </defs>
+
+  <rect x="3" y="14.5" width="9" height="0.5" fill="#000000" opacity="0.25"/>
+
+  <g class="body-squash">
+    <!-- flower flapping -->
+    <g class="flower-flap">
+      <g fill="#FFFFFF">
+        <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+        <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+        <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+        <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFE870">
+        <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+        <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+      <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+      <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+      <g fill="#7BA829">
+        <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3" width="0.5" height="0.5"/>
+        <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4" width="0.5" height="0.5"/>
+        <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+      </g>
+    </g>
+
+    <!-- body -->
+    <g fill="#B8D930">
+      <rect x="6.5" y="5" width="2" height="0.5"/>
+      <rect x="6" y="5.5" width="3" height="0.5"/>
+      <rect x="5.5" y="6" width="4" height="0.5"/>
+      <rect x="5" y="6.5" width="5" height="0.5"/>
+      <rect x="4.5" y="7" width="6" height="0.5"/>
+      <rect x="4" y="7.5" width="7" height="0.5"/>
+      <rect x="3.5" y="8" width="8" height="2.5"/>
+      <rect x="4" y="10.5" width="7" height="0.5"/>
+      <rect x="4.5" y="11" width="6" height="0.5"/>
+      <rect x="5" y="11.5" width="5" height="0.5"/>
+      <rect x="5.5" y="12" width="4" height="1.5"/>
+    </g>
+    <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+    <!-- flailing arms -->
+    <g class="arm-left-flail">
+      <rect x="5" y="12" width="0.5" height="1.8" fill="#B8D930"/>
+    </g>
+    <g class="arm-right-flail">
+      <rect x="9.5" y="12" width="0.5" height="1.8" fill="#B8D930"/>
+    </g>
+
+    <!-- dangling legs -->
+    <g class="leg-dangle-l">
+      <rect x="6" y="13.5" width="0.5" height="1.2" fill="#7BA829"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1.2" fill="#7BA829"/>
+    </g>
+    <g class="leg-dangle-r">
+      <rect x="8" y="13.5" width="0.5" height="1.2" fill="#7BA829"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1.2" fill="#7BA829"/>
+    </g>
+
+    <!-- panicked wide eyes -->
+    <g fill="#FFFFFF">
+      <rect x="3.5" y="7"   width="3" height="3.5"/>
+      <rect x="8.5" y="7"   width="3" height="3.5"/>
+    </g>
+    <g fill="#000000">
+      <rect x="4.5" y="7.5" width="1.5" height="2"/>
+      <rect x="9"   y="7.5" width="1.5" height="2"/>
+    </g>
+    <!-- glint -->
+    <g fill="#FFFFFF">
+      <rect x="5"   y="7.5" width="0.5" height="0.5"/>
+      <rect x="9.5" y="7.5" width="0.5" height="0.5"/>
+    </g>
+
+    <!-- "!" above head -->
+    <g class="panic-mouth" fill="#FFFF66">
+      <rect x="10.5" y="2"   width="0.7" height="2.2"/>
+      <rect x="10.5" y="4.5" width="0.7" height="0.7"/>
+    </g>
+  </g>
+</svg>

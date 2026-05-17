@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>🛸 Alien Pet · 嵌入组件 Demo</title>
+<style>
+  :root {
+    --bg: #5DADE2;
+    --card: rgba(255, 255, 255, 0.15);
+    --border: rgba(255, 255, 255, 0.25);
+  }
+  * { box-sizing: border-box; }
+  body {
+    margin: 0;
+    padding: 32px 24px 120px;
+    background: linear-gradient(180deg, #5DADE2 0%, #3A7CA8 100%);
+    min-height: 100vh;
+    font-family: -apple-system, BlinkMacSystemFont, "PingFang SC", "Microsoft YaHei", sans-serif;
+    color: #fff;
+  }
+  h1 { text-align: center; text-shadow: 2px 2px 0 rgba(0,0,0,0.25); margin: 0 0 10px; }
+  p.legend { text-align: center; opacity: 0.95; margin: 0 0 36px; }
+  h2 { margin: 36px 0 16px; font-size: 18px; border-left: 6px solid #FFE870; padding-left: 12px; }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 18px;
+  }
+  .card {
+    background: var(--card);
+    border: 1px solid var(--border);
+    border-radius: 14px;
+    padding: 16px;
+    text-align: center;
+    backdrop-filter: blur(8px);
+  }
+  .card h3 { margin: 0 0 8px; font-size: 13px; opacity: 0.9; font-weight: 500; }
+  .card p.desc { margin: 8px 0 0; font-size: 12px; opacity: 0.8; }
+  .stage {
+    background: rgba(255,255,255,0.12);
+    border-radius: 10px;
+    padding: 10px;
+    display: flex; align-items: center; justify-content: center;
+    min-height: 200px;
+  }
+  .controls {
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 14px; justify-content: center;
+  }
+  button {
+    cursor: pointer;
+    padding: 6px 12px;
+    font-size: 12px;
+    border-radius: 8px;
+    border: 2px solid #111;
+    background: #FFE870;
+    color: #111;
+    font-weight: 600;
+    box-shadow: 2px 2px 0 #111;
+    transition: transform 0.08s;
+  }
+  button:hover  { transform: translate(-1px, -1px); box-shadow: 3px 3px 0 #111; }
+  button:active { transform: translate(1px, 1px);   box-shadow: 1px 1px 0 #111; }
+  .code-block {
+    background: rgba(0,0,0,0.35);
+    border-radius: 10px;
+    padding: 14px 18px;
+    font-family: "SF Mono", Menlo, Consolas, monospace;
+    font-size: 12.5px;
+    line-height: 1.6;
+    overflow-x: auto;
+    white-space: pre;
+    color: #FFE870;
+  }
+  .section { max-width: 1100px; margin: 0 auto; }
+</style>
+</head>
+<body>
+
+<div class="section">
+  <h1>🛸 Alien Pet · Web 嵌入组件</h1>
+  <p class="legend">从桌宠项目抽出的像素外星人，纯前端零依赖，一行 import 就能嵌到你的网页里</p>
+
+  <!-- ============ 方式 1：自定义元素 ============ -->
+  <h2>① 用法 A：自定义元素 &lt;alien-pet&gt;</h2>
+  <div class="code-block">&lt;script type="module" src="./alien-pet.js"&gt;&lt;/script&gt;
+&lt;alien-pet size="180" state="idle"&gt;&lt;/alien-pet&gt;</div>
+
+  <div class="grid" style="margin-top:16px">
+    <div class="card">
+      <h3>idle（默认）</h3>
+      <div class="stage"><alien-pet size="180" state="idle"></alien-pet></div>
+      <p class="desc">呼吸 / 眨眼 / 左右看</p>
+    </div>
+    <div class="card">
+      <h3>happy</h3>
+      <div class="stage" style="background:rgba(243,156,18,0.25)"><alien-pet size="180" state="happy" auto-idle="false"></alien-pet></div>
+      <p class="desc">弹跳 + 花朵旋转 + ^_^</p>
+    </div>
+    <div class="card">
+      <h3>thinking</h3>
+      <div class="stage"><alien-pet size="180" state="thinking" auto-idle="false"></alien-pet></div>
+      <p class="desc">托下巴 + 思考气泡</p>
+    </div>
+    <div class="card">
+      <h3>sleeping</h3>
+      <div class="stage" style="background:rgba(52,73,94,0.4)"><alien-pet size="180" state="sleeping" auto-idle="false"></alien-pet></div>
+      <p class="desc">慢呼吸 + Zzz 粒子</p>
+    </div>
+    <div class="card">
+      <h3>working</h3>
+      <div class="stage"><alien-pet size="180" state="working" auto-idle="false"></alien-pet></div>
+      <p class="desc">敲小键盘</p>
+    </div>
+    <div class="card">
+      <h3>notification</h3>
+      <div class="stage"><alien-pet size="180" state="notification" auto-idle="false"></alien-pet></div>
+      <p class="desc">头顶金色感叹号</p>
+    </div>
+  </div>
+
+  <!-- ============ 方式 2：JS API ============ -->
+  <h2>② 用法 B：JS API（程序化控制）</h2>
+  <div class="code-block">import { AlienPet } from './alien-pet.js';
+const pet = new AlienPet(document.getElementById('slot'), {
+  size: 220,
+  messages: ['你好，地球朋友！', '欢迎来到外星人星球 🛸'],
+});
+pet.setState('happy');    // 切换状态
+pet.say('我来啦~');        // 显示气泡
+pet.react('notification'); // 临时反应，几秒后自动回 idle</div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="stage" id="slot" style="min-height:240px"></div>
+    <div class="controls">
+      <button data-state="idle">idle</button>
+      <button data-state="happy">happy</button>
+      <button data-state="thinking">thinking</button>
+      <button data-state="working">working</button>
+      <button data-state="sleeping">sleeping</button>
+      <button data-state="notification">notification</button>
+      <button data-state="error">error</button>
+      <button id="btn-say">随机说话</button>
+      <button id="btn-greet">打招呼</button>
+    </div>
+    <p class="desc">点击外星人身体也会触发反应 + 气泡</p>
+  </div>
+
+  <!-- ============ 方式 3：悬浮挂载 ============ -->
+  <h2>③ 用法 C：悬浮挂载（跟随页面角落）</h2>
+  <div class="code-block">import { mountFloatingAlien } from './alien-pet.js';
+mountFloatingAlien({
+  corner: 'bottom-right',
+  size: 160,
+  messages: ['星球正在苏醒…', '你发现了一位旅行者'],
+});</div>
+
+  <div class="card" style="margin-top:16px">
+    <div class="controls">
+      <button id="btn-float-show">召唤悬浮外星人</button>
+      <button id="btn-float-hide">送它回家</button>
+      <button id="btn-float-greet">让它说话</button>
+    </div>
+    <p class="desc">召唤后会出现在浏览器窗口右下角</p>
+  </div>
+
+  <!-- ============ 状态一览 ============ -->
+  <h2>④ 支持的全部状态</h2>
+  <div class="code-block">idle · idle-follow · happy · thinking · working ·
+sleeping · notification · error · static ·
+mini-idle · mini-enter · mini-peek</div>
+</div>
+
+<script type="module">
+  import { AlienPet, mountFloatingAlien } from './alien-pet.js';
+
+  // --- 方式 B 初始化 ---
+  const pet = new AlienPet(document.getElementById('slot'), {
+    size: 220,
+    messages: [
+      '你好，我是 Clawd 外星人 🛸',
+      '这个星球太有趣了！',
+      '要不要一起探险？',
+      '我从 B612 星系来的',
+      '点我试试看~',
+    ],
+  });
+  document.querySelectorAll('[data-state]').forEach(btn => {
+    btn.addEventListener('click', () => {
+      pet.setState(btn.dataset.state, { persistent: true });
+    });
+  });
+  document.getElementById('btn-say').addEventListener('click', () => pet.sayRandom());
+  document.getElementById('btn-greet').addEventListener('click', () => {
+    pet.react('happy');
+    pet.say('👋 Hi, there！');
+  });
+
+  // --- 方式 C 悬浮挂载 ---
+  let floatingPet = null;
+  document.getElementById('btn-float-show').addEventListener('click', () => {
+    if (floatingPet) return;
+    floatingPet = mountFloatingAlien({
+      corner: 'bottom-right',
+      size: 160,
+      messages: ['星球正在苏醒…', '你发现了一位旅行者', '嘘——小声说话'],
+    });
+    setTimeout(() => floatingPet?.say('我来啦！'), 400);
+  });
+  document.getElementById('btn-float-hide').addEventListener('click', () => {
+    floatingPet?.destroy();
+    floatingPet = null;
+  });
+  document.getElementById('btn-float-greet').addEventListener('click', () => {
+    floatingPet?.sayRandom();
+  });
+</script>
+
+</body>
+</html>

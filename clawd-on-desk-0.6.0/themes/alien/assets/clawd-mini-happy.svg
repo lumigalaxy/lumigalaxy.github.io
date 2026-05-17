@@ -1,0 +1,143 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .hang-bounce { transform-origin: 7.5px 5.5px; animation: hang-bounce 0.55s infinite ease-in-out; }
+      .breathe-anim { transform-origin: 7.5px 13.5px; animation: breathe 2s infinite ease-in-out; }
+      .happy-eyes  { animation: happy-blink 1.6s infinite ease-in-out; transform-origin: 7.5px 8.75px; }
+      .flower-spin { transform-origin: 7.75px 5px; animation: flower-spin 1.4s infinite linear; }
+      .arm-cheer-l { transform-box: fill-box; transform-origin: 50% 100%; animation: cheer-l 0.55s infinite ease-in-out; }
+      .arm-cheer-r { transform-box: fill-box; transform-origin: 50% 100%; animation: cheer-r 0.55s infinite ease-in-out; }
+      .sparkle-1 { animation: sparkle 1.4s infinite ease-out; }
+      .sparkle-2 { animation: sparkle 1.4s 0.4s infinite ease-out; }
+      .sparkle-3 { animation: sparkle 1.4s 0.8s infinite ease-out; }
+
+      #eyes-js, #body-js { transition: transform 0.2s ease-out; }
+
+      @keyframes hang-bounce {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-1.2px); }
+      }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%      { transform: scale(1.04, 0.96); }
+      }
+      @keyframes happy-blink {
+        0%, 100% { transform: scaleY(1); }
+        50%      { transform: scaleY(0.4); }
+      }
+      @keyframes flower-spin {
+        0%   { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes cheer-l {
+        0%, 100% { transform: rotate(35deg); }
+        50%      { transform: rotate(-25deg); }
+      }
+      @keyframes cheer-r {
+        0%, 100% { transform: rotate(-35deg); }
+        50%      { transform: rotate(25deg); }
+      }
+      @keyframes sparkle {
+        0%, 90%, 100% { opacity: 0; transform: scale(0.4); }
+        20%, 60%      { opacity: 1; transform: scale(1.2); }
+      }
+    </style>
+  </defs>
+
+  <g transform="rotate(-12, 7.5, 14)">
+
+    <!-- legs gripping the edge above -->
+    <g fill="#7BA829">
+      <rect x="6"   y="13.5" width="0.5" height="1"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect x="8"   y="13.5" width="0.5" height="1"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <g class="hang-bounce">
+      <g id="body-js">
+        <g class="breathe-anim">
+
+          <g class="flower-spin">
+            <g fill="#FFFFFF">
+              <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+              <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+              <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+              <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+              <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+              <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+            </g>
+            <g fill="#FFE870">
+              <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+              <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+              <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+            </g>
+            <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+            <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+            <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+            <g fill="#7BA829">
+              <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3"   width="0.5" height="0.5"/>
+              <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4"   width="0.5" height="0.5"/>
+              <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+            </g>
+          </g>
+
+          <g fill="#B8D930">
+            <rect x="6.5" y="5"  width="2" height="0.5"/>
+            <rect x="6"   y="5.5" width="3" height="0.5"/>
+            <rect x="5.5" y="6"  width="4" height="0.5"/>
+            <rect x="5"   y="6.5" width="5" height="0.5"/>
+            <rect x="4.5" y="7"  width="6" height="0.5"/>
+            <rect x="4"   y="7.5" width="7" height="0.5"/>
+            <rect x="3.5" y="8"  width="8" height="2.5"/>
+            <rect x="4"   y="10.5" width="7" height="0.5"/>
+            <rect x="4.5" y="11" width="6" height="0.5"/>
+            <rect x="5"   y="11.5" width="5" height="0.5"/>
+            <rect x="5.5" y="12" width="4" height="1.5"/>
+          </g>
+          <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+          <g class="arm-cheer-l">
+            <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+          </g>
+          <g class="arm-cheer-r">
+            <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+          </g>
+
+          <g id="eyes-js">
+            <g class="happy-eyes" fill="#000000">
+              <rect x="4"   y="8.5" width="0.5" height="0.5"/>
+              <rect x="4.5" y="8"   width="0.5" height="0.5"/>
+              <rect x="5"   y="8"   width="0.5" height="0.5"/>
+              <rect x="5.5" y="8.5" width="0.5" height="0.5"/>
+
+              <rect x="9"    y="8.5" width="0.5" height="0.5"/>
+              <rect x="9.5"  y="8"   width="0.5" height="0.5"/>
+              <rect x="10"   y="8"   width="0.5" height="0.5"/>
+              <rect x="10.5" y="8.5" width="0.5" height="0.5"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- sparkles around -->
+    <g fill="#FFE870">
+      <g class="sparkle-1">
+        <rect x="1.5" y="6" width="0.5" height="0.5"/>
+        <rect x="1"   y="6.5" width="1.5" height="0.5"/>
+        <rect x="1.5" y="7" width="0.5" height="0.5"/>
+      </g>
+      <g class="sparkle-2">
+        <rect x="13" y="7" width="0.5" height="0.5"/>
+        <rect x="12.5" y="7.5" width="1.5" height="0.5"/>
+        <rect x="13" y="8" width="0.5" height="0.5"/>
+      </g>
+      <g class="sparkle-3">
+        <rect x="7" y="-1" width="0.5" height="0.5"/>
+        <rect x="6.5" y="-0.5" width="1.5" height="0.5"/>
+        <rect x="7" y="0" width="0.5" height="0.5"/>
+      </g>
+    </g>
+  </g>
+</svg>

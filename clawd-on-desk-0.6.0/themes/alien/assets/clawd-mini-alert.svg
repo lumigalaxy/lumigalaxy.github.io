@@ -1,0 +1,126 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .hang-shake { animation: alert-shake 0.13s infinite linear; transform-origin: 7.5px 14px; }
+      .breathe-anim { transform-origin: 7.5px 13.5px; animation: breathe 1.4s infinite ease-in-out; }
+      .flower-tilt { transform-origin: 7.75px 5px; animation: alert-flower 0.4s infinite ease-in-out; }
+      .ring-1 { animation: ring 1.2s infinite ease-out; opacity: 0; }
+      .ring-2 { animation: ring 1.2s 0.4s infinite ease-out; opacity: 0; }
+      .bang-pop { animation: bang-pop 0.7s infinite ease-out; transform-origin: 12px 3px; }
+      .eye-stare { animation: alert-eye 0.4s infinite ease-in-out; transform-origin: 7.5px 8.75px; }
+
+      #eyes-js, #body-js { transition: transform 0.2s ease-out; }
+
+      @keyframes alert-shake {
+        0%, 100% { transform: translate(0, 0); }
+        25% { transform: translate(-0.3px, 0.15px); }
+        75% { transform: translate(0.3px, -0.15px); }
+      }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%      { transform: scale(1.04, 0.96); }
+      }
+      @keyframes alert-flower {
+        0%, 100% { transform: rotate(-15deg); }
+        50%      { transform: rotate(20deg); }
+      }
+      @keyframes ring {
+        0%   { opacity: 0; transform: scale(0.6); }
+        25%  { opacity: 0.9; }
+        100% { opacity: 0; transform: scale(2.4); }
+      }
+      @keyframes bang-pop {
+        0%, 100% { opacity: 1; transform: scale(1); }
+        15%, 60% { opacity: 1; transform: scale(1.4); }
+        80%      { opacity: 0.4; transform: scale(0.7); }
+      }
+      @keyframes alert-eye {
+        0%, 100% { transform: scale(1); }
+        50%      { transform: scale(1.15); }
+      }
+    </style>
+  </defs>
+
+  <g transform="rotate(-12, 7.5, 14)">
+
+    <g fill="#7BA829">
+      <rect x="6"   y="13.5" width="0.5" height="1"/>
+      <rect x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect x="8"   y="13.5" width="0.5" height="1"/>
+      <rect x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <!-- ring waves emanating from head -->
+    <g fill="none" stroke="#FFE870" stroke-width="0.4">
+      <circle class="ring-1" cx="7.5" cy="9" r="3.5"/>
+      <circle class="ring-2" cx="7.5" cy="9" r="3.5"/>
+    </g>
+
+    <g class="hang-shake">
+      <g id="body-js">
+        <g class="breathe-anim">
+
+          <g class="flower-tilt">
+            <g fill="#FFFFFF">
+              <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+              <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+              <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+              <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+              <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+              <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+            </g>
+            <g fill="#FFE870">
+              <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+              <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+              <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+            </g>
+            <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+            <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+            <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+            <g fill="#7BA829">
+              <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3"   width="0.5" height="0.5"/>
+              <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4"   width="0.5" height="0.5"/>
+              <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+            </g>
+          </g>
+
+          <g fill="#B8D930">
+            <rect x="6.5" y="5"  width="2" height="0.5"/>
+            <rect x="6"   y="5.5" width="3" height="0.5"/>
+            <rect x="5.5" y="6"  width="4" height="0.5"/>
+            <rect x="5"   y="6.5" width="5" height="0.5"/>
+            <rect x="4.5" y="7"  width="6" height="0.5"/>
+            <rect x="4"   y="7.5" width="7" height="0.5"/>
+            <rect x="3.5" y="8"  width="8" height="2.5"/>
+            <rect x="4"   y="10.5" width="7" height="0.5"/>
+            <rect x="4.5" y="11" width="6" height="0.5"/>
+            <rect x="5"   y="11.5" width="5" height="0.5"/>
+            <rect x="5.5" y="12" width="4" height="1.5"/>
+          </g>
+          <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+          <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+          <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+
+          <g id="eyes-js">
+            <!-- wide alert eyes -->
+            <g class="eye-stare" fill="#FFFFFF">
+              <rect x="3.5" y="7"   width="3" height="3.5"/>
+              <rect x="8.5" y="7"   width="3" height="3.5"/>
+            </g>
+            <g class="eye-stare" fill="#000000">
+              <rect x="4.5" y="7.5" width="1.5" height="2"/>
+              <rect x="9"   y="7.5" width="1.5" height="2"/>
+            </g>
+          </g>
+        </g>
+      </g>
+    </g>
+
+    <!-- bang "!" floating top-right of head -->
+    <g class="bang-pop" fill="#FFCB3C">
+      <rect x="11.7" y="1.5" width="0.6" height="2.5"/>
+      <rect x="11.7" y="4.3" width="0.6" height="0.6"/>
+    </g>
+  </g>
+</svg>

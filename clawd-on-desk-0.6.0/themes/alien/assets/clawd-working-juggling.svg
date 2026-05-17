@@ -1,0 +1,121 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="500" height="500" shape-rendering="crispEdges">
+  <defs>
+    <style>
+      .body-jump { transform-origin: 7.5px 13.5px; animation: body-jump 0.8s infinite ease-in-out; }
+      .shadow-jump { transform-origin: 7.5px 15px; animation: shadow-jump 0.8s infinite ease-in-out; }
+      .hand-l-wave { transform-origin: 5px 12px; animation: hand-l-wave 0.8s infinite ease-in-out; }
+      .hand-r-wave { transform-origin: 10px 12px; animation: hand-r-wave 0.8s infinite ease-in-out; }
+      /* ^_^ eyes are static — shape itself conveys happiness */
+      .flower-spin { transform-origin: 7.75px 5px; animation: flower-spin 1.6s infinite linear; }
+      .sparkle-1 { animation: sparkle 1.2s infinite ease-in-out; }
+      .sparkle-2 { animation: sparkle 1.2s infinite ease-in-out 0.4s; }
+      .sparkle-3 { animation: sparkle 1.2s infinite ease-in-out 0.8s; }
+
+      @keyframes body-jump {
+        0%, 100% { transform: translate(0, 0) scaleY(1); }
+        30% { transform: translate(0, 0) scaleY(0.92); }
+        50% { transform: translate(0, -2px) scaleY(1.05); }
+        70% { transform: translate(0, 0) scaleY(0.96); }
+      }
+      @keyframes shadow-jump {
+        0%, 100% { transform: scaleX(1); opacity: 0.5; }
+        50% { transform: scaleX(0.7); opacity: 0.3; }
+      }
+      @keyframes hand-l-wave {
+        0%, 100% { transform: rotate(-20deg) translate(-0.3px, -1px); }
+        50% { transform: rotate(-40deg) translate(-0.5px, -1.5px); }
+      }
+      @keyframes hand-r-wave {
+        0%, 100% { transform: rotate(20deg) translate(0.3px, -1px); }
+        50% { transform: rotate(40deg) translate(0.5px, -1.5px); }
+      }
+      @keyframes flower-spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      @keyframes sparkle {
+        0%, 100% { opacity: 0; transform: scale(0.5); }
+        50% { opacity: 1; transform: scale(1); }
+      }
+    </style>
+  </defs>
+
+  <rect class="shadow-jump" x="3" y="14.5" width="9" height="0.5" fill="#000000" opacity="0.5"/>
+
+  <g class="body-jump">
+    <g class="flower-spin">
+      <g fill="#FFFFFF">
+        <rect x="7" y="0" width="0.5" height="0.5"/><rect x="7.5" y="0" width="0.5" height="0.5"/>
+        <rect x="6.5" y="0.5" width="0.5" height="0.5"/><rect x="8.5" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6" y="0.5" width="0.5" height="0.5"/><rect x="6" y="1" width="0.5" height="0.5"/><rect x="6" y="1.5" width="0.5" height="0.5"/>
+        <rect x="9" y="0.5" width="0.5" height="0.5"/><rect x="9" y="1" width="0.5" height="0.5"/><rect x="9" y="1.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1.5" width="0.5" height="0.5"/><rect x="8.5" y="1.5" width="0.5" height="0.5"/>
+        <rect x="7" y="2" width="0.5" height="0.5"/><rect x="7.5" y="2" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFE870">
+        <rect x="7" y="0.5" width="0.5" height="0.5"/><rect x="7.5" y="0.5" width="0.5" height="0.5"/><rect x="8" y="0.5" width="0.5" height="0.5"/>
+        <rect x="6.5" y="1" width="0.5" height="0.5"/><rect x="8.5" y="1" width="0.5" height="0.5"/>
+        <rect x="7" y="1.5" width="0.5" height="0.5"/><rect x="7.5" y="1.5" width="0.5" height="0.5"/><rect x="8" y="1.5" width="0.5" height="0.5"/>
+      </g>
+      <g fill="#FFC93C"><rect x="7" y="1" width="0.5" height="0.5"/><rect x="8" y="1" width="0.5" height="0.5"/></g>
+      <rect x="7.5" y="1" width="0.5" height="0.5" fill="#E67E22"/>
+      <rect x="7.5" y="1" width="0.25" height="0.25" fill="#FFF176"/>
+    </g>
+    <g fill="#7BA829">
+      <rect x="7.5" y="2.5" width="0.5" height="0.5"/><rect x="7.5" y="3" width="0.5" height="0.5"/>
+      <rect x="7.5" y="3.5" width="0.5" height="0.5"/><rect x="7.5" y="4" width="0.5" height="0.5"/>
+      <rect x="7.5" y="4.5" width="0.5" height="0.5"/>
+    </g>
+
+    <g fill="#B8D930">
+      <rect x="6.5" y="5" width="2" height="0.5"/>
+      <rect x="6" y="5.5" width="3" height="0.5"/>
+      <rect x="5.5" y="6" width="4" height="0.5"/>
+      <rect x="5" y="6.5" width="5" height="0.5"/>
+      <rect x="4.5" y="7" width="6" height="0.5"/>
+      <rect x="4" y="7.5" width="7" height="0.5"/>
+      <rect x="3.5" y="8" width="8" height="2.5"/>
+      <rect x="4" y="10.5" width="7" height="0.5"/>
+      <rect x="4.5" y="11" width="6" height="0.5"/>
+      <rect x="5" y="11.5" width="5" height="0.5"/>
+      <rect x="5.5" y="12" width="4" height="1.5"/>
+    </g>
+    <rect x="5.5" y="13" width="4" height="0.5" fill="#8BA82A" opacity="0.45"/>
+
+    <g class="hand-l-wave">
+      <rect x="5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+    </g>
+    <g class="hand-r-wave">
+      <rect x="9.5" y="12" width="0.5" height="1.5" fill="#B8D930"/>
+    </g>
+
+    <g fill="#7BA829">
+      <rect id="outer-left-leg" x="6" y="13.5" width="0.5" height="1"/>
+      <rect id="inner-left-leg" x="6.5" y="13.5" width="0.5" height="1"/>
+      <rect id="inner-right-leg" x="8" y="13.5" width="0.5" height="1"/>
+      <rect id="outer-right-leg" x="8.5" y="13.5" width="0.5" height="1"/>
+    </g>
+
+    <!-- Happy squinty eyes (^_^) — aligned to center of eye area -->
+    <g fill="#000000">
+      <rect id="left-eye" x="4" y="8.5" width="0.5" height="0.5"/>
+      <rect x="4.5" y="9" width="0.5" height="0.5"/>
+      <rect x="5" y="9.5" width="0.5" height="0.5"/>
+      <rect x="5.5" y="9" width="0.5" height="0.5"/>
+      <rect x="6" y="8.5" width="0.5" height="0.5"/>
+
+      <rect id="right-eye" x="9" y="8.5" width="0.5" height="0.5"/>
+      <rect x="9.5" y="9" width="0.5" height="0.5"/>
+      <rect x="10" y="9.5" width="0.5" height="0.5"/>
+      <rect x="10.5" y="9" width="0.5" height="0.5"/>
+      <rect x="11" y="8.5" width="0.5" height="0.5"/>
+    </g>
+  </g>
+
+  <!-- Sparkles -->
+  <g fill="#FFD700">
+    <rect class="sparkle-1" x="2" y="4" width="0.5" height="0.5"/>
+    <rect class="sparkle-2" x="13" y="8" width="0.5" height="0.5"/>
+    <rect class="sparkle-3" x="1" y="10" width="0.5" height="0.5"/>
+  </g>
+</svg>
