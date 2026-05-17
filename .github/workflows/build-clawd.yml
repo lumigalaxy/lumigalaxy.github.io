@@ -47,27 +47,8 @@ jobs:
             clawd-on-desk-0.6.0/dist/*.dmg
             clawd-on-desk-0.6.0/dist/latest-mac.yml
 
-  build-linux:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: 20
-          cache: npm
-          cache-dependency-path: clawd-on-desk-0.6.0/package-lock.json
-      - run: npm ci
-      - run: npx electron-builder --linux --publish never
-      - uses: actions/upload-artifact@v4
-        with:
-          name: linux-installer
-          path: |
-            clawd-on-desk-0.6.0/dist/*.AppImage
-            clawd-on-desk-0.6.0/dist/*.deb
-            clawd-on-desk-0.6.0/dist/latest-linux.yml
-
   release:
-    needs: [build-windows, build-mac, build-linux]
+    needs: [build-windows, build-mac]
     runs-on: ubuntu-latest
     permissions:
       contents: write
