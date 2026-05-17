@@ -132,6 +132,21 @@ let assetsSoundsDir = null;    // assets/sounds/ for built-in theme
 let userDataDir = null;        // app.getPath("userData") — set by init()
 let userThemesDir = null;      // {userData}/themes/
 let themeCacheDir = null;      // {userData}/theme-cache/
+const DEFAULT_THEME_ID = "alien";
+
+function _isSelectableBuiltinTheme(themeId) {
+  return themeId === DEFAULT_THEME_ID || themeId.startsWith("alien-");
+}
+
+function _shouldFilterBuiltinThemes() {
+  return !!(builtinThemesDir
+    && fs.existsSync(path.join(builtinThemesDir, DEFAULT_THEME_ID, "theme.json"))
+    && fs.existsSync(path.join(builtinThemesDir, "clawd", "theme.json")));
+}
+
+function _getDefaultThemeId() {
+  return _shouldFilterBuiltinThemes() ? DEFAULT_THEME_ID : "clawd";
+}
 
 // ── Public API ──
 
@@ -184,6 +199,7 @@ function _scanThemesDir(dir, builtin, themes, seen) {
         cfg = JSON.parse(fs.readFileSync(jsonPath, "utf8"));
       } catch { continue; }
       if (builtin && cfg && cfg._scaffoldOnly === true) continue;
+      if (builtin && _shouldFilterBuiltinThemes() && !_isSelectableBuiltinTheme(entry.name)) continue;
       themes.push({ id: entry.name, name: cfg.name || entry.name, path: jsonPath, builtin });
       seen.add(entry.name);
     }
@@ -193,7 +209,7 @@ function _scanThemesDir(dir, builtin, themes, seen) {
 /**
  * Load and activate a theme by ID.
  *
- * Strict mode throws on missing/invalid; lenient falls back to "clawd".
+ * Strict mode throws on missing/invalid; lenient falls back to "alien".
  * Callers detect fallback by comparing the requested id against
  * `returnedTheme._id` / `returnedTheme._variantId` — no synthetic flag needed.
  *
@@ -214,8 +230,9 @@ function loadTheme(themeId, opts = {}) {
     const msg = `Theme "${themeId}" not found`;
     if (strict) throw new Error(msg);
     console.error(`[theme-loader] ${msg}`);
-    if (themeId !== "clawd") return loadTheme("clawd");
-    throw new Error("Default theme 'clawd' not found");
+    const fallbackThemeId = _getDefaultThemeId();
+    if (themeId !== fallbackThemeId) return loadTheme(fallbackThemeId);
+    throw new Error(`Default theme '${fallbackThemeId}' not found`);
   }
 
   const errors = validateTheme(raw);
@@ -223,7 +240,8 @@ function loadTheme(themeId, opts = {}) {
     const msg = `Theme "${themeId}" validation errors: ${errors.join("; ")}`;
     if (strict) throw new Error(msg);
     console.error(`[theme-loader] ${msg}`);
-    if (themeId !== "clawd") return loadTheme("clawd");
+    const fallbackThemeId = _getDefaultThemeId();
+    if (themeId !== fallbackThemeId) return loadTheme(fallbackThemeId);
   }
 
   // Resolve variant + apply patch BEFORE mergeDefaults so that geometry
@@ -1222,7 +1240,7 @@ function _buildVariantMetadata(raw, themeDir, isBuiltin) {
   if (!hasExplicitDefault) {
     // i18n object — settings-renderer's localizeField() picks the right key.
     // Don't reuse raw.name here: that would label the synthetic default with
-    // the theme's own name (e.g. "Clawd"), creating a confusing duplicate of
+    // the theme's own name (e.g. "Alien"), creating a confusing duplicate of
     // the theme card's title inside its own variant strip.
     out.push({
       id: "default",
@@ -1511,6 +1529,7 @@ function _scanMetadata(dir, builtin, themes, seen) {
       let raw;
       try { raw = JSON.parse(fs.readFileSync(jsonPath, "utf8")); } catch { continue; }
       if (builtin && raw && raw._scaffoldOnly === true) continue;
+      if (builtin && _shouldFilterBuiltinThemes() && !_isSelectableBuiltinTheme(entry.name)) continue;
       const themeDir = path.join(dir, entry.name);
       themes.push({
         id: entry.name,

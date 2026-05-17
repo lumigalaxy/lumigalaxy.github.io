@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* JS-controlled IDs — transition only */
+  #eyes-doze, #body-js, #shadow-js { transition: transform 0.2s ease-out; }
+  #shadow-js { transform-origin: 7.5px 14px; }
+
+  .doze-tips   { transform-origin: 7.5px -1px; animation: doze-tip  4.0s infinite ease-in-out; }
+  .doze-body   { transform-origin: 7.5px 5px;  animation: doze-brth 4.5s infinite ease-in-out; }
+  .doze-shadow { transform-origin: 7.5px 14px; animation: doze-shad 4.5s infinite ease-in-out; }
+  .arm-l-doze  { transform-origin: 1px 5px;    transform: translate(0px,1px) rotate(-10deg); }
+  .arm-r-doze  { transform-origin: 14px 5px;   transform: translate(0px,1px) rotate( 10deg); }
+  /* eyes-doze: scaleY squash is applied via JS (starts shut); CSS just keeps it static */
+  .eyes-shut {
+    transform: scaleY(0.12);
+    transform-origin: 7.5px 4px;
+    transition: transform 0.3s ease-out;
+  }
+
+  @keyframes doze-tip {
+    0%,100% { transform: rotate(0deg) scaleY(0.85); }
+    50%     { transform: rotate(2deg) scaleY(0.80); }
+  }
+  @keyframes doze-brth {
+    0%,100% { transform: scaleX(1.04) scaleY(0.96) translateY(0.8px); }
+    50%     { transform: scaleX(1.07) scaleY(0.93) translateY(1.4px); }
+  }
+  @keyframes doze-shad {
+    0%,100% { transform: scaleX(1.04); opacity:.50; }
+    50%     { transform: scaleX(1.08); opacity:.58; }
+  }
+</style></defs>
+
+<!-- Shadow — JS stretches this -->
+<g id="shadow-js">
+  <g class="doze-shadow">
+    <rect x="3" y="14" width="10" height="1" fill="#FF5522" opacity=".45"/>
+  </g>
+</g>
+
+<!-- Tips (droopy, not JS-tracked) -->
+<g class="doze-tips">
+  <rect x="7"  y="-6" width="1" height="1" fill="#CC3311"/>
+  <rect x="6"  y="-5" width="3" height="2" fill="#CC3311"/>
+  <rect x="5"  y="-3" width="5" height="2" fill="#DD4422"/>
+  <rect x="3"  y="-4" width="2" height="1" fill="#CC3311"/>
+  <rect x="3"  y="-3" width="3" height="2" fill="#DD4422"/>
+  <rect x="10" y="-4" width="2" height="1" fill="#CC3311"/>
+  <rect x="9"  y="-3" width="3" height="2" fill="#DD4422"/>
+</g>
+
+<!-- Body — JS shifts for counter-motion; breathe is on child -->
+<g id="body-js">
+  <g class="doze-body">
+    <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+    <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+    <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+    <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+    <rect x="5"  y="11" width="1" height="2"  fill="#DD3D1E"/>
+    <rect x="9"  y="11" width="1" height="2"  fill="#DD3D1E"/>
+    <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+    <rect x="4"  y="9"  width="7" height="1"  fill="#FF7744"/>
+    <rect x="5"  y="10" width="5" height="1"  fill="#FF7744"/>
+    <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+    <rect x="5"  y="8"  width="5" height="1"  fill="#FFAA66"/>
+    <rect x="6"  y="9"  width="3" height="1"  fill="#FFAA66"/>
+    <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+    <!-- Drooping eyelid overlay — JS can open via style.transform override -->
+    <g id="eyes-doze" class="eyes-shut" fill="#330000">
+      <rect x="4" y="3" width="2" height="2"/>
+      <rect x="9" y="3" width="2" height="2"/>
+    </g>
+    <!-- Blush -->
+    <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+    <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+    <!-- Arms (relaxed down) -->
+    <g class="arm-l-doze"><rect x="0"  y="5" width="2" height="2" fill="#EE4422"/></g>
+    <g class="arm-r-doze"><rect x="13" y="5" width="2" height="2" fill="#EE4422"/></g>
+  </g>
+</g>
+</svg>

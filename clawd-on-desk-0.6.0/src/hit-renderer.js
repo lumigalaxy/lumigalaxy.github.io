@@ -134,9 +134,10 @@ function _getReaction(name) {
   return _reactions[name] || null;
 }
 
-// Alien theme uses single-click as a chat trigger (no Claude terminal focus).
+// Alien themes use single-click as a chat trigger (no Claude terminal focus).
 function _isAlienTheme() {
-  return (tc && tc.themeId === "alien");
+  const id = tc && tc.themeId;
+  return id === "alien" || (typeof id === "string" && id.startsWith("alien-"));
 }
 
 function _primaryClickAction() {

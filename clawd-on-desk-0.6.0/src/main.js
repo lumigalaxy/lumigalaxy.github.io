@@ -252,14 +252,17 @@ const { isPlainObject: _isPlainObject } = themeLoader;
 themeLoader.init(__dirname, app.getPath("userData"));
 
 // Lenient load so a missing/corrupt user-selected theme can't brick boot.
-// If lenient fell back to "clawd" OR the variant fell back to "default",
+// If lenient fell back to "alien" OR the variant fell back to "default",
 // hydrate prefs to match so the store stays truth.
 //
 // Startup runs BEFORE the window is ready, so we call themeLoader.loadTheme
 // directly — not activateTheme (which requires ready windows) and not the
 // setThemeSelection command (which goes through activateTheme). The runtime
 // switch path via UI goes through setThemeSelection post-window-ready.
-const _requestedThemeId = _settingsController.get("theme") || "clawd";
+const _storedThemeId = _settingsController.get("theme") || "alien";
+const _requestedThemeId = (_storedThemeId === "clawd" || _storedThemeId === "calico" || _storedThemeId === "static-test")
+  ? "alien"
+  : _storedThemeId;
 const _initialVariantMap = _settingsController.get("themeVariant") || {};
 const _requestedVariantId = _initialVariantMap[_requestedThemeId] || "default";
 const _initialThemeOverrides = _settingsController.get("themeOverrides") || {};
@@ -269,12 +272,13 @@ let activeTheme = themeLoader.loadTheme(_requestedThemeId, {
   overrides: _requestedThemeOverrides,
 });
 activeTheme._overrideSignature = JSON.stringify(_requestedThemeOverrides || {});
-if (activeTheme._id !== _requestedThemeId || activeTheme._variantId !== _requestedVariantId) {
+if (activeTheme._id !== _storedThemeId || activeTheme._id !== _requestedThemeId || activeTheme._variantId !== _requestedVariantId) {
   const nextVariantMap = { ...(_settingsController.get("themeVariant") || {}) };
   // Self-heal: store the resolved ids so next boot doesn't fall back again.
   nextVariantMap[activeTheme._id] = activeTheme._variantId;
-  if (activeTheme._id !== _requestedThemeId) {
+  if (activeTheme._id !== _requestedThemeId || activeTheme._id !== _storedThemeId) {
     delete nextVariantMap[_requestedThemeId];
+    delete nextVariantMap[_storedThemeId];
   }
   const result = _settingsController.hydrate({
     theme: activeTheme._id,
@@ -1075,7 +1079,7 @@ const _menuCtx = {
   getNearestWorkArea,
   reapplyMacVisibility,
   discoverThemes: () => themeLoader.discoverThemes(),
-  getActiveThemeId: () => activeTheme ? activeTheme._id : "clawd",
+  getActiveThemeId: () => activeTheme ? activeTheme._id : "alien",
   getActiveThemeCapabilities: () => activeTheme ? activeTheme._capabilities : null,
   ensureUserThemesDir: () => themeLoader.ensureUserThemesDir(),
   openSettingsWindow: () => openSettingsWindow(),
@@ -1921,22 +1925,22 @@ const ANIMATION_OVERRIDES_EXPORT_DIALOG_STRINGS = {
   en: {
     saveTitle: "Export Animation Overrides",
     openTitle: "Import Animation Overrides",
-    defaultName: (ts) => `clawd-animation-overrides-${ts}.json`,
-    jsonFilter: "Clawd Animation Overrides",
+    defaultName: (ts) => `alien-animation-overrides-${ts}.json`,
+    jsonFilter: "Alien Animation Overrides",
     nothingToExport: "No animation overrides to export. Override something first.",
   },
   zh: {
     saveTitle: "导出动画覆盖",
     openTitle: "导入动画覆盖",
-    defaultName: (ts) => `clawd-animation-overrides-${ts}.json`,
-    jsonFilter: "Clawd 动画覆盖",
+    defaultName: (ts) => `alien-animation-overrides-${ts}.json`,
+    jsonFilter: "Alien 动画覆盖",
     nothingToExport: "没有可导出的动画覆盖。先自定义几个动画试试。",
   },
   es: {
     saveTitle: "Exportar overrides de animación",
     openTitle: "Importar overrides de animación",
-    defaultName: (ts) => `clawd-animation-overrides-${ts}.json`,
-    jsonFilter: "Overrides de animación de Clawd",
+    defaultName: (ts) => `alien-animation-overrides-${ts}.json`,
+    jsonFilter: "Overrides de animación de Alien",
     nothingToExport: "No hay overrides de animación para exportar. Personaliza alguna animación primero.",
   },
 };
@@ -2004,11 +2008,11 @@ ipcMain.handle("settings:import-animation-overrides", async (event) => {
   }
 
   if (!parsed || typeof parsed !== "object" || Array.isArray(parsed)) {
-    return { status: "error", message: "file is not a Clawd animation overrides export" };
+    return { status: "error", message: "file is not an Alien animation overrides export" };
   }
   const magic = parsed.clawdAnimationOverrides;
   if (typeof magic !== "number") {
-    return { status: "error", message: "file is not a Clawd animation overrides export" };
+    return { status: "error", message: "file is not an Alien animation overrides export" };
   }
 
   const commandResult = await _settingsController.applyCommand("importAnimationOverrides", {
@@ -2033,7 +2037,7 @@ ipcMain.handle("settings:import-animation-overrides", async (event) => {
 // re-fetch.
 ipcMain.handle("settings:list-themes", () => {
   try {
-    const activeId = activeTheme ? activeTheme._id : "clawd";
+    const activeId = activeTheme ? activeTheme._id : "alien";
     return themeLoader.listThemesWithMetadata().map((t) => ({
       ...t,
       active: t.id === activeId,
@@ -2096,7 +2100,7 @@ const CLAUDE_HOOKS_DIALOG_STRINGS = {
     disableAndRemove: "Disable and remove installed hooks",
     cancel: "Cancel",
     disconnectTitle: "Disconnect Claude hooks?",
-    disconnectDetail: "This removes Clawd-managed Claude hooks from ~/.claude/settings.json and turns off automatic management. Your Start with Claude preference will be kept for later re-enable.",
+    disconnectDetail: "This removes Alien-managed Claude hooks from ~/.claude/settings.json and turns off automatic management. Your Start with Claude preference will be kept for later re-enable.",
     disconnect: "Disconnect hooks",
   },
   zh: {
@@ -2106,7 +2110,7 @@ const CLAUDE_HOOKS_DIALOG_STRINGS = {
     disableAndRemove: "关闭并移除当前 hooks",
     cancel: "取消",
     disconnectTitle: "断开 Claude hooks？",
-    disconnectDetail: "这会从 `~/.claude/settings.json` 移除 Clawd 管理的 Claude hooks，并关闭自动管理。`随 Claude Code 启动` 的偏好会保留，方便以后重新启用。",
+    disconnectDetail: "这会从 `~/.claude/settings.json` 移除 Alien 管理的 Claude hooks，并关闭自动管理。`随 Claude Code 启动` 的偏好会保留，方便以后重新启用。",
     disconnect: "断开 hooks",
   },
   es: {
@@ -2116,7 +2120,7 @@ const CLAUDE_HOOKS_DIALOG_STRINGS = {
     disableAndRemove: "Desactivar y eliminar los hooks instalados",
     cancel: "Cancelar",
     disconnectTitle: "¿Desconectar los hooks de Claude?",
-    disconnectDetail: "Esto elimina de `~/.claude/settings.json` los hooks de Claude gestionados por Clawd y desactiva la gestión automática. La preferencia `Iniciar con Claude Code` se conserva para reactivarla más tarde.",
+    disconnectDetail: "Esto elimina de `~/.claude/settings.json` los hooks de Claude gestionados por Alien y desactiva la gestión automática. La preferencia `Iniciar con Claude Code` se conserva para reactivarla más tarde.",
     disconnect: "Desconectar hooks",
   },
 };
@@ -2200,7 +2204,7 @@ const { setupAutoUpdater, checkForUpdates, getUpdateMenuItem, getUpdateMenuLabel
 // loads are blocked. Inlining keeps CSP strict while letting the renderer
 // access #shake-slot to drive the click reaction.
 ipcMain.handle("settings:get-about-info", () => {
-  const heroSvgAbsPath = path.join(__dirname, "..", "assets", "svg", "clawd-about-hero.svg");
+  const heroSvgAbsPath = path.join(__dirname, "..", "themes", "alien", "assets", "aln-002-about-hero.svg");
   let heroSvgContent = "";
   try {
     heroSvgContent = fs.readFileSync(heroSvgAbsPath, "utf8");
@@ -2371,7 +2375,7 @@ function openSettingsWindow() {
     maximizable: true,
     skipTaskbar: false,
     alwaysOnTop: false,
-    title: "Clawd Settings",
+    title: "Alien Settings",
     // Match settings.html's dark-mode palette to avoid a white flash before
     // CSS media query kicks in. Hex values must stay in sync with the
     // `--bg` CSS variable in settings.html for each theme.

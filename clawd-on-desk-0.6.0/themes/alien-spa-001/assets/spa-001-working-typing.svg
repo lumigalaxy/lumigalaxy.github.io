@@ -1,0 +1,152 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .breathe {
+        transform-origin: 7.5px 15px;
+        animation: breathe 3.2s infinite ease-in-out;
+      }
+      .blink {
+        animation: blinkCursor 0.8s infinite step-end;
+      }
+      .type-left {
+        transform-origin: 0px 7px;
+        animation: typeHit 0.12s infinite ease-in-out;
+      }
+      .type-right {
+        transform-origin: 14px 7px;
+        animation: typeHit 0.12s infinite ease-in-out;
+        animation-delay: 0.06s;
+      }
+      .code-float {
+        opacity: 0;
+        animation: codeFloat 1.2s infinite ease-out;
+      }
+      .c1 { animation-delay: 0.0s; }
+      .c2 { animation-delay: 0.4s; }
+      .c3 { animation-delay: 0.8s; }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1) rotate(0deg); }
+        50%       { transform: scale(1.03, 0.97) translate(0, 0.3px) rotate(6deg); }
+      }
+      @keyframes blinkCursor {
+        0%, 100% { opacity: 1; }
+        50%      { opacity: 0; }
+      }
+      @keyframes typeHit {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(7px); }
+      }
+      @keyframes codeFloat {
+        0%   { transform: translate(0, 0) scale(0.5);   opacity: 0; }
+        20%  { opacity: 1; }
+        100% { transform: translate(0, -14px) scale(1.2); opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground shadow -->
+  <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+
+  <!-- Character -->
+  <g class="breathe">
+
+    <!-- Asymmetric dual antennae (blinking lights while working) -->
+    <rect x="4"  y="-10" width="1" height="8"  fill="#5C3A6E"/>
+    <rect x="3"  y="-14" width="3" height="4"  fill="#5C3A6E"/>
+    <rect x="3"  y="-13" width="2" height="2"  fill="#FF6FB5"/>
+    <rect x="3"  y="-13" width="1" height="1"  fill="#FFFFFF"/>
+
+    <rect x="10" y="-7"  width="1" height="5"  fill="#5C3A6E"/>
+    <rect x="9"  y="-10" width="3" height="3"  fill="#5C3A6E"/>
+    <rect x="9"  y="-9"  width="2" height="2"  fill="#FFE55C"/>
+    <rect x="9"  y="-9"  width="1" height="1"  fill="#FFFFFF"/>
+
+    <!-- Center blink dot -->
+    <rect class="blink" x="7"  y="-12" width="1" height="1"  fill="#00D4FF"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#F4A4FF"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#F4A4FF"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#F4A4FF"/>
+
+    <!-- Highlight -->
+    <rect x="3"  y="0"   width="3"  height="1"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="2"  height="2"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#FFFFFF"/>
+
+    <!-- Focused flat-line eye (very concentrated) -->
+    <rect x="5"  y="4"   width="5"  height="4"  fill="#5C3A6E"/>
+    <rect x="6"  y="5"   width="3"  height="2"  fill="#FFFFFF"/>
+    <rect x="6"  y="6"   width="3"  height="1"  fill="#2A1A33"/>
+
+    <!-- Concentration sweat drop -->
+    <rect x="12" y="2"   width="1"  height="1"  fill="#00D4FF"/>
+    <rect x="13" y="3"   width="1"  height="2"  fill="#00D4FF"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="9"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Small focused mouth -->
+    <rect x="6"  y="11"  width="3"  height="1"  fill="#5C3A6E"/>
+    <rect x="7"  y="11"  width="1"  height="1"  fill="#2A1A33"/>
+
+    <!-- Cheek blush -->
+    <rect x="2"  y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.4"/>
+    <rect x="11" y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.4"/>
+
+    <!-- Left arm typing (very long, slamming keyboard) -->
+    <g class="type-left">
+      <rect x="-1" y="7"   width="3"  height="9"  fill="#5C3A6E"/>
+      <rect x="0"  y="8"   width="2"  height="8"  fill="#F4A4FF"/>
+      <rect x="0"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    </g>
+
+    <!-- Right arm typing -->
+    <g class="type-right">
+      <rect x="13" y="7"   width="3"  height="9"  fill="#5C3A6E"/>
+      <rect x="13" y="8"   width="2"  height="8"  fill="#F4A4FF"/>
+      <rect x="13" y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    </g>
+
+    <!-- Pixel keyboard in front -->
+    <rect x="1"  y="16"  width="13" height="2"  fill="#5C3A6E"/>
+    <rect x="2"  y="16"  width="1"  height="1"  fill="#8B7355"/>
+    <rect x="4"  y="16"  width="1"  height="1"  fill="#8B7355"/>
+    <rect x="6"  y="16"  width="1"  height="1"  fill="#8B7355"/>
+    <rect x="8"  y="16"  width="1"  height="1"  fill="#8B7355"/>
+    <rect x="10" y="16"  width="1"  height="1"  fill="#8B7355"/>
+    <rect x="12" y="16"  width="1"  height="1"  fill="#8B7355"/>
+    <rect x="3"  y="17"  width="9"  height="1"  fill="#8B7355"/>
+
+    <!-- Feet -->
+    <rect x="4"  y="18"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="4"  y="18"  width="1"  height="1"  fill="#E07CD6"/>
+    <rect x="9"  y="18"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="10" y="18"  width="1"  height="1"  fill="#E07CD6"/>
+
+  </g>
+
+  <!-- Floating code symbols from frantic typing -->
+  <g class="code-float c1" transform="translate(0, -5)">
+    <rect x="0"  y="0" width="1" height="3" fill="#00D4FF"/>
+    <rect x="1"  y="0" width="1" height="1" fill="#00D4FF"/>
+    <rect x="1"  y="2" width="1" height="1" fill="#00D4FF"/>
+  </g>
+  <g class="code-float c2" transform="translate(14, -3)">
+    <rect x="0"  y="0" width="1" height="3" fill="#FF6FB5"/>
+    <rect x="-1" y="0" width="1" height="1" fill="#FF6FB5"/>
+    <rect x="-1" y="2" width="1" height="1" fill="#FF6FB5"/>
+  </g>
+  <g class="code-float c3" transform="translate(7, -8)">
+    <rect x="0"  y="0" width="3" height="1" fill="#FFE55C"/>
+    <rect x="1"  y="1" width="1" height="1" fill="#FFE55C"/>
+    <rect x="0"  y="2" width="3" height="1" fill="#FFE55C"/>
+  </g>
+</svg>

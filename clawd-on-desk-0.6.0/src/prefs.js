@@ -74,7 +74,7 @@ const SCHEMA = {
     normalize: normalizeShortcuts,
   },
   // Theme
-  theme: { type: "string", default: "clawd" },
+  theme: { type: "string", default: "alien" },
   // Phase 2/3 placeholders — schema reserves the keys so future migrations don't need v2.
   agents: {
     type: "object",
@@ -95,7 +95,7 @@ const SCHEMA = {
     defaultFactory: () => ({}),
     normalize: normalizeThemeOverrides,
   },
-  // Phase 3b-swap: per-theme variant selection (e.g. {clawd: "chill", calico: "default"}).
+  // Phase 3b-swap: per-theme variant selection (e.g. {alien: "default"}).
   // Missing key for a theme = use that theme's `default` variant. Unknown variantIds
   // get lenient-fallback to default at load time (see theme-loader._resolveVariant).
   themeVariant: {
@@ -104,7 +104,7 @@ const SCHEMA = {
     normalize: normalizeThemeVariant,
   },
   // Water reminder (Pomodoro-style hydration prompt). Only active under the
-  // `alien` theme. First tick fires after `intervalMinutes`; the bubble's
+  // alien themes. First tick fires after `intervalMinutes`; the bubble's
   // "+N min" button calls snooze(snoozeMinutes), and "Done" resets the timer.
   waterReminder: {
     type: "object",

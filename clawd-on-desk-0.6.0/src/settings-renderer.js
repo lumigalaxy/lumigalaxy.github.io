@@ -16,7 +16,7 @@
 const STRINGS = {
   en: {
     settingsTitle: "Settings",
-    settingsSubtitle: "Configure how Clawd behaves on your desktop.",
+    settingsSubtitle: "Configure how Alien behaves on your desktop.",
     sidebarGeneral: "General",
     sidebarAgents: "Agents",
     sidebarTheme: "Theme",
@@ -48,7 +48,7 @@ const STRINGS = {
     sectionBubbles: "Bubbles",
     sectionHydrationTranslator: "Hydration & Translator",
     rowWaterEnabled: "Water reminders",
-    rowWaterEnabledDesc: "Alien pops a hydration bubble on a schedule. Only active under the Alien theme.",
+    rowWaterEnabledDesc: "Alien pops a hydration bubble on a schedule. Active under any alien theme.",
     rowWaterInterval: "Interval",
     rowWaterIntervalDesc: "Minutes between reminders (1–480).",
     rowWaterQuiet: "Quiet hours",
@@ -70,21 +70,21 @@ const STRINGS = {
     eventSourcePlugin: "Plugin",
     badgePermissionBubble: "Permission bubble",
     rowAgentPermissions: "Show pop-up bubbles",
-    rowAgentPermissionsDesc: "Turn off to let this agent handle prompts in its own terminal instead of showing a Clawd bubble.",
+    rowAgentPermissionsDesc: "Turn off to let this agent handle prompts in its own terminal instead of showing an Alien bubble.",
     rowLanguage: "Language",
     rowLanguageDesc: "Interface language for menus and bubbles.",
     rowSound: "Sound effects",
-    rowSoundDesc: "Play a chime when Clawd finishes a task or asks for input.",
+    rowSoundDesc: "Play a chime when Alien finishes a task or asks for input.",
     rowOpenAtLogin: "Open at login",
-    rowOpenAtLoginDesc: "Start Clawd automatically when you log in.",
+    rowOpenAtLoginDesc: "Start Alien automatically when you log in.",
     rowManageClaudeHooks: "Manage Claude hooks automatically",
     rowManageClaudeHooksDesc: "Sync Claude hooks at startup and restore them if ~/.claude/settings.json gets overwritten.",
     rowManageClaudeHooksOffNote: "Turning this off stops future automatic management only. Existing Claude hooks stay installed unless you disconnect them.",
     actionDisconnectClaudeHooks: "Disconnect",
     rowStartWithClaude: "Start with Claude Code",
-    rowStartWithClaudeDesc: "Auto-launch Clawd whenever a Claude Code session starts.",
+    rowStartWithClaudeDesc: "Auto-launch Alien whenever a Claude Code session starts.",
     rowStartWithClaudeDisabledDesc: "Requires automatic Claude hook management. Port changes and overwritten settings will not be reconciled while management is off.",
-    rowBubbleFollow: "Bubbles follow Clawd",
+    rowBubbleFollow: "Bubbles follow Alien",
     rowBubbleFollowDesc: "Place permission and update bubbles next to the pet instead of the screen corner.",
     rowHideBubbles: "Hide all bubbles",
     rowHideBubblesDesc: "Suppress permission, notification, and update bubbles entirely.",
@@ -95,13 +95,13 @@ const STRINGS = {
     rowSize: "Size",
     rowSizeDesc: "Drag to resize the pet.",
     placeholderTitle: "Coming soon",
-    placeholderDesc: "This panel will land in a future Clawd release. The plan lives in docs/plans/plan-settings-panel.md.",
+    placeholderDesc: "This panel will land in a future Alien release. The plan lives in docs/plans/plan-settings-panel.md.",
     toastSaveFailed: "Couldn't save: ",
     langEnglish: "English",
     langChinese: "中文",
     langSpanish: "Español",
     themeTitle: "Theme",
-    themeSubtitle: "Pick a theme for Clawd. Cards show built-in + capability badges so you can see tracked/static/mini differences before switching.",
+    themeSubtitle: "Pick a theme for Alien. Cards show built-in + capability badges so you can see tracked/static/mini differences before switching.",
     themeEmpty: "No themes available.",
     themeBadgeBuiltin: "Built-in",
     themeBadgeActive: "Active",
@@ -118,7 +118,7 @@ const STRINGS = {
     toastThemeDeleted: "Theme deleted.",
     toastThemeDeleteFailed: "Couldn't delete theme: ",
     animMapTitle: "Animation Map",
-    animMapSubtitle: "Silence individual interrupt animations. Events still fire — Clawd just skips the visual and sound for the selected states.",
+    animMapSubtitle: "Silence individual interrupt animations. Events still fire — Alien just skips the visual and sound for the selected states.",
     animMapSemanticsNote: "Disable = no visual + no sound. Permission bubbles, sessions, and terminal focus still work.",
     animMapResetAll: "Reset all",
     animMapAttentionLabel: "Task complete (happy)",
@@ -195,8 +195,8 @@ const STRINGS = {
     animOverridesModalUse: "Use this file",
     animOverridesModalCancel: "Cancel",
     animOverridesRefresh: "Refresh list",
-    aboutTitle: "About Clawd",
-    aboutSubtitle: "The pixel crab that watches your AI coding sessions.",
+    aboutTitle: "About Alien",
+    aboutSubtitle: "The pixel alien that watches your AI coding sessions.",
     aboutTagline: "A desktop companion for your AI coding journey.",
     aboutVersionLabel: "Version",
     aboutCheckForUpdates: "Check for Updates",
@@ -206,13 +206,13 @@ const STRINGS = {
     aboutContributorsLabel: "Contributors",
     aboutContributorsShowAll: "Show all",
     aboutContributorsHide: "Hide",
-    aboutFooter: "Clawd is open source. Built with care by the community.",
+    aboutFooter: "Alien is open source. Built with care by the community.",
     aboutEasterEggToast: "\u{1F980} Coding shouldn't feel lonely. — Ruller_Lulu / \u9e7f\u9e7f",
     aboutOpenExternalFailed: "Couldn't open the link in your browser.",
   },
   zh: {
     settingsTitle: "设置",
-    settingsSubtitle: "配置 Clawd 在桌面上的行为。",
+    settingsSubtitle: "配置 Alien 在桌面上的行为。",
     sidebarGeneral: "通用",
     sidebarAgents: "Agent 管理",
     sidebarTheme: "主题",
@@ -266,21 +266,21 @@ const STRINGS = {
     eventSourcePlugin: "插件",
     badgePermissionBubble: "权限气泡",
     rowAgentPermissions: "显示弹窗",
-    rowAgentPermissionsDesc: "关闭后让该 agent 在自己的终端里处理提示，不再弹 Clawd 气泡。",
+    rowAgentPermissionsDesc: "关闭后让该 agent 在自己的终端里处理提示，不再弹 Alien 气泡。",
     rowLanguage: "语言",
     rowLanguageDesc: "菜单和气泡的界面语言。",
     rowSound: "音效",
-    rowSoundDesc: "Clawd 完成任务或需要输入时播放提示音。",
+    rowSoundDesc: "Alien 完成任务或需要输入时播放提示音。",
     rowOpenAtLogin: "开机自启",
-    rowOpenAtLoginDesc: "登录系统时自动启动 Clawd。",
+    rowOpenAtLoginDesc: "登录系统时自动启动 Alien。",
     rowManageClaudeHooks: "自动管理 Claude hooks",
     rowManageClaudeHooksDesc: "启动时同步 Claude hooks，并在 `~/.claude/settings.json` 被其他工具覆盖后自动补回。",
     rowManageClaudeHooksOffNote: "关闭后只会停止后续自动管理。当前已安装的 Claude hooks 会保留，除非你主动断开。",
     actionDisconnectClaudeHooks: "断开",
     rowStartWithClaude: "随 Claude Code 启动",
-    rowStartWithClaudeDesc: "Claude Code 会话开始时自动拉起 Clawd。",
+    rowStartWithClaudeDesc: "Claude Code 会话开始时自动拉起 Alien。",
     rowStartWithClaudeDisabledDesc: "需要先开启 Claude hooks 自动管理。关闭期间，端口变化和外部覆盖都不会被自动修补。",
-    rowBubbleFollow: "气泡跟随 Clawd",
+    rowBubbleFollow: "气泡跟随 Alien",
     rowBubbleFollowDesc: "把权限气泡和更新气泡放在桌宠旁边，而不是屏幕角落。",
     rowHideBubbles: "隐藏所有气泡",
     rowHideBubblesDesc: "完全屏蔽权限、通知和更新气泡。",
@@ -291,13 +291,13 @@ const STRINGS = {
     rowSize: "大小",
     rowSizeDesc: "拖动调整桌宠大小。",
     placeholderTitle: "即将推出",
-    placeholderDesc: "此面板将在 Clawd 后续版本中加入，规划见 docs/plans/plan-settings-panel.md。",
+    placeholderDesc: "此面板将在 Alien 后续版本中加入，规划见 docs/plans/plan-settings-panel.md。",
     toastSaveFailed: "保存失败：",
     langEnglish: "English",
     langChinese: "中文",
     langSpanish: "Español",
     themeTitle: "主题",
-    themeSubtitle: "为 Clawd 选择一个主题。卡片会显示内建和能力角标，切换前就能看出 tracked / static / mini 等差异。",
+    themeSubtitle: "为 Alien 选择一个主题。卡片会显示内建和能力角标，切换前就能看出 tracked / static / mini 等差异。",
     themeEmpty: "没有可用的主题。",
     themeBadgeBuiltin: "内建",
     themeBadgeActive: "当前",
@@ -314,7 +314,7 @@ const STRINGS = {
     toastThemeDeleted: "主题已删除。",
     toastThemeDeleteFailed: "删除主题失败：",
     animMapTitle: "动画映射",
-    animMapSubtitle: "关掉不想看的打扰动画。事件照样会触发——Clawd 只是不再播放对应的动画和音效。",
+    animMapSubtitle: "关掉不想看的打扰动画。事件照样会触发——Alien 只是不再播放对应的动画和音效。",
     animMapSemanticsNote: "关闭 = 不播动画 + 不响音效。权限气泡、会话记录、终端聚焦照常工作。",
     animMapResetAll: "全部恢复",
     animMapAttentionLabel: "完成提示（happy）",
@@ -389,7 +389,7 @@ const STRINGS = {
     animOverridesModalUse: "使用这个文件",
     animOverridesModalCancel: "取消",
     animOverridesRefresh: "刷新列表",
-    aboutTitle: "关于 Clawd",
+    aboutTitle: "关于 Alien",
     aboutSubtitle: "陪你写代码的像素螃蟹。",
     aboutTagline: "陪你 AI 编码的桌面伙伴。",
     aboutVersionLabel: "版本",
@@ -400,13 +400,13 @@ const STRINGS = {
     aboutContributorsLabel: "贡献者",
     aboutContributorsShowAll: "展开全部",
     aboutContributorsHide: "收起",
-    aboutFooter: "Clawd 是开源项目 · 与社区一起打造。",
+    aboutFooter: "Alien 是开源项目 · 与社区一起打造。",
     aboutEasterEggToast: "\u{1F980} Coding shouldn't feel lonely. — Ruller_Lulu / \u9e7f\u9e7f",
     aboutOpenExternalFailed: "无法在浏览器中打开链接。",
   },
   es: {
     settingsTitle: "Ajustes",
-    settingsSubtitle: "Configura cómo se comporta Clawd en tu escritorio.",
+    settingsSubtitle: "Configura cómo se comporta Alien en tu escritorio.",
     sidebarGeneral: "General",
     sidebarAgents: "Agentes",
     sidebarTheme: "Tema",
@@ -460,21 +460,21 @@ const STRINGS = {
     eventSourcePlugin: "Plugin",
     badgePermissionBubble: "Burbuja de permiso",
     rowAgentPermissions: "Mostrar burbujas emergentes",
-    rowAgentPermissionsDesc: "Si lo desactivas, este agente gestionará los prompts en su propia terminal en lugar de usar las burbujas de Clawd.",
+    rowAgentPermissionsDesc: "Si lo desactivas, este agente gestionará los prompts en su propia terminal en lugar de usar las burbujas de Alien.",
     rowLanguage: "Idioma",
     rowLanguageDesc: "Idioma de la interfaz para los menús y las burbujas.",
     rowSound: "Efectos de sonido",
-    rowSoundDesc: "Reproduce un sonido cuando Clawd termina una tarea o pide entrada.",
+    rowSoundDesc: "Reproduce un sonido cuando Alien termina una tarea o pide entrada.",
     rowOpenAtLogin: "Iniciar al iniciar sesión",
-    rowOpenAtLoginDesc: "Inicia Clawd automáticamente al iniciar sesión.",
+    rowOpenAtLoginDesc: "Inicia Alien automáticamente al iniciar sesión.",
     rowManageClaudeHooks: "Gestión automática de hooks de Claude",
     rowManageClaudeHooksDesc: "Sincroniza los hooks de Claude al arrancar y los reinstala si `~/.claude/settings.json` se sobrescribe.",
     rowManageClaudeHooksOffNote: "Desactivar esto solo detiene la futura gestión automática. Los hooks de Claude existentes permanecen hasta que los desconectes manualmente.",
     actionDisconnectClaudeHooks: "Desconectar",
     rowStartWithClaude: "Iniciar con Claude Code",
-    rowStartWithClaudeDesc: "Lanza Clawd automáticamente cada vez que comienza una sesión de Claude Code.",
+    rowStartWithClaudeDesc: "Lanza Alien automáticamente cada vez que comienza una sesión de Claude Code.",
     rowStartWithClaudeDisabledDesc: "Requiere la gestión automática de hooks de Claude. Mientras esté desactivada, los cambios de puerto o las sobrescrituras de configuración no se restauran automáticamente.",
-    rowBubbleFollow: "Las burbujas siguen a Clawd",
+    rowBubbleFollow: "Las burbujas siguen a Alien",
     rowBubbleFollowDesc: "Muestra las burbujas de permiso y actualización junto a la mascota en lugar de en la esquina de la pantalla.",
     rowHideBubbles: "Ocultar todas las burbujas",
     rowHideBubblesDesc: "Oculta las burbujas de permiso, notificación y actualización.",
@@ -485,13 +485,13 @@ const STRINGS = {
     rowSize: "Tamaño",
     rowSizeDesc: "Arrastra para cambiar el tamaño de la mascota.",
     placeholderTitle: "Próximamente",
-    placeholderDesc: "Este panel llegará en una futura versión de Clawd. El plan está en docs/plans/plan-settings-panel.md.",
+    placeholderDesc: "Este panel llegará en una futura versión de Alien. El plan está en docs/plans/plan-settings-panel.md.",
     toastSaveFailed: "No se pudo guardar: ",
     langEnglish: "English",
     langChinese: "中文",
     langSpanish: "Español",
     themeTitle: "Tema",
-    themeSubtitle: "Elige un tema para Clawd. Las tarjetas muestran insignias de capacidad y de tema integrado para que veas las diferencias tracked/static/mini antes de cambiar.",
+    themeSubtitle: "Elige un tema para Alien. Las tarjetas muestran insignias de capacidad y de tema integrado para que veas las diferencias tracked/static/mini antes de cambiar.",
     themeEmpty: "No hay temas disponibles.",
     themeBadgeBuiltin: "Integrado",
     themeBadgeActive: "Activo",
@@ -508,7 +508,7 @@ const STRINGS = {
     toastThemeDeleted: "Tema eliminado.",
     toastThemeDeleteFailed: "No se pudo eliminar el tema: ",
     animMapTitle: "Mapa de animaciones",
-    animMapSubtitle: "Desactiva animaciones de interrupción concretas. Los eventos siguen ocurriendo, pero Clawd se salta la pantalla y el sonido del estado seleccionado.",
+    animMapSubtitle: "Desactiva animaciones de interrupción concretas. Los eventos siguen ocurriendo, pero Alien se salta la pantalla y el sonido del estado seleccionado.",
     animMapSemanticsNote: "Desactivado = sin pantalla + sin sonido. Las burbujas de permiso, las sesiones y el foco de la terminal siguen funcionando.",
     animMapResetAll: "Restablecer todo",
     animMapAttentionLabel: "Tarea completada (happy)",
@@ -583,8 +583,8 @@ const STRINGS = {
     animOverridesModalUse: "Usar este archivo",
     animOverridesModalCancel: "Cancelar",
     animOverridesRefresh: "Refrescar lista",
-    aboutTitle: "Acerca de Clawd",
-    aboutSubtitle: "El cangrejo de píxeles que vela por tus sesiones de coding con IA.",
+    aboutTitle: "Acerca de Alien",
+    aboutSubtitle: "El alien de píxeles que vela por tus sesiones de coding con IA.",
     aboutTagline: "Un compañero de escritorio para tu camino con IA.",
     aboutVersionLabel: "Versión",
     aboutCheckForUpdates: "Buscar actualizaciones",
@@ -594,7 +594,7 @@ const STRINGS = {
     aboutContributorsLabel: "Colaboradores",
     aboutContributorsShowAll: "Ver todos",
     aboutContributorsHide: "Ocultar",
-    aboutFooter: "Clawd es código abierto · construido con la comunidad.",
+    aboutFooter: "Alien es código abierto · construido con la comunidad.",
     aboutEasterEggToast: "\u{1F980} Coding shouldn't feel lonely. — Ruller_Lulu / \u9e7f\u9e7f",
     aboutOpenExternalFailed: "No se pudo abrir el enlace en el navegador.",
   },
@@ -935,7 +935,7 @@ function renderAnimMapTab(parent) {
   note.textContent = t("animMapSemanticsNote");
   parent.appendChild(note);
 
-  const themeId = (snapshot && snapshot.theme) || "clawd";
+  const themeId = (snapshot && snapshot.theme) || "alien";
   const rows = ANIM_MAP_ROWS.map((spec) => buildAnimMapRow(spec, themeId));
   parent.appendChild(buildSection("", rows));
 
@@ -1402,7 +1402,7 @@ function getAnimOverrideTriggerLabel(card) {
     case "mini-idle": return "Mini idle";
     case "mini-enter": return "Mini enter";
     case "mini-enter-sleep": return "Mini enter sleep";
-    case "mini-crabwalk": return "Mini crabwalk";
+    case "mini-crabwalk": return "Mini walk";
     case "mini-peek": return "Mini peek";
     case "mini-alert": return "Mini alert";
     case "mini-happy": return "Mini happy";
@@ -1516,7 +1516,7 @@ function renderAnimOverridesTab(parent) {
   themeMeta.className = "anim-override-meta";
   const themeLabel = document.createElement("div");
   themeLabel.className = "anim-override-meta-label";
-  themeLabel.textContent = `${t("animOverridesCurrentTheme")}: ${(data.theme && data.theme.name) || "clawd"}`;
+  themeLabel.textContent = `${t("animOverridesCurrentTheme")}: ${(data.theme && data.theme.name) || "alien"}`;
   themeMeta.appendChild(themeLabel);
 
   const themeBtn = document.createElement("button");
@@ -3228,7 +3228,7 @@ function renderShortcutsTab(parent) {
 
 // ── About tab ──
 //
-// Hero: Clawd "Deal with it" intro → freeze at cool pose (4.4s), then breathing.
+// Hero: Alien "Deal with it" intro → freeze at cool pose (4.4s), then breathing.
 // Click counter on the crab (7 reveals the easter-egg toast).
 // Info rows (version / repo / license / author), collapsible contributors grid, footer.
 let aboutInfoCache = null;
@@ -3305,11 +3305,11 @@ function renderAboutTab(parent) {
 
   const crabWrap = document.createElement("div");
   crabWrap.className = "about-crab-wrap";
-  crabWrap.title = "Clawd";
+  crabWrap.title = "Alien";
 
   const title = document.createElement("h2");
   title.className = "about-title";
-  title.textContent = "Clawd on Desk";
+  title.textContent = "Alien on Desk";
 
   const tagline = document.createElement("p");
   tagline.className = "about-tagline";

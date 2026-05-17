@@ -1,0 +1,79 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* Sleeping at screen edge — droopy body, Zzz floating, slow breathe */
+  .doze-body {
+    transform-origin: 7.5px 5px;
+    animation: doze-brth 4.5s infinite ease-in-out;
+  }
+  .doze-tips {
+    transform-origin: 7.5px -1px;
+    animation: doze-tip 4s infinite ease-in-out;
+  }
+  .z-particle { opacity:0; }
+  .z1 { animation: float-z 5s 0s infinite ease-in-out; }
+  .z2 { animation: float-z 5s -2s infinite ease-in-out; }
+
+  @keyframes doze-brth {
+    0%,100% { transform: scaleX(1.04) scaleY(0.96) translateY(0.8px); }
+    50%     { transform: scaleX(1.07) scaleY(0.93) translateY(1.4px); }
+  }
+  @keyframes doze-tip {
+    0%,100% { transform: rotate(0deg) scaleY(0.80); }
+    50%     { transform: rotate(2deg) scaleY(0.76); }
+  }
+  @keyframes float-z {
+    0%   { opacity:0; transform:translate(12px,4px) scale(0.4); }
+    10%  { opacity:1; }
+    50%  { transform:translate(16px,-2px) scale(0.7); }
+    90%  { opacity:0.6; }
+    100% { opacity:0; transform:translate(13px,-8px) scale(1.0); }
+  }
+</style>
+<g id="pixel-z-small">
+  <rect x="0" y="0" width="3" height="1"/>
+  <rect x="1" y="1" width="1" height="1"/>
+  <rect x="0" y="2" width="3" height="1"/>
+</g>
+</defs>
+
+<!-- Zzz floating -->
+<g fill="#FF8844">
+  <use href="#pixel-z-small" class="z-particle z1"/>
+  <use href="#pixel-z-small" class="z-particle z2"/>
+</g>
+
+<g transform="rotate(-12, 7.5, 15)">
+  <!-- Droopy tips (barely there) -->
+  <g class="doze-tips">
+    <rect x="7"  y="-6" width="1" height="1" fill="#CC3311" opacity=".6"/>
+    <rect x="6"  y="-5" width="3" height="2" fill="#CC3311" opacity=".7"/>
+    <rect x="5"  y="-3" width="5" height="2" fill="#DD4422" opacity=".8"/>
+    <rect x="3"  y="-4" width="2" height="1" fill="#CC3311" opacity=".6"/>
+    <rect x="3"  y="-3" width="3" height="2" fill="#DD4422" opacity=".7"/>
+    <rect x="10" y="-4" width="2" height="1" fill="#CC3311" opacity=".6"/>
+    <rect x="9"  y="-3" width="3" height="2" fill="#DD4422" opacity=".7"/>
+  </g>
+
+  <rect x="5" y="11" width="1" height="2" fill="#DD3D1E" opacity=".7"/>
+  <rect x="9" y="11" width="1" height="2" fill="#DD3D1E" opacity=".7"/>
+
+  <!-- Sleeping body (squashed, eyes shut) -->
+  <g class="doze-body">
+    <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+    <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+    <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+    <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+    <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+    <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+    <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+    <!-- Shut eyes (dashes) -->
+    <rect x="4"  y="4"  width="2" height="0.6" fill="#220000"/>
+    <rect x="9"  y="4"  width="2" height="0.6" fill="#220000"/>
+    <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".60"/>
+    <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".60"/>
+    <!-- Arms hanging -->
+    <rect x="-1" y="6"  width="3" height="2" fill="#EE4422" opacity=".7"/>
+    <rect x="13" y="6"  width="2" height="2" fill="#EE4422" opacity=".7"/>
+  </g>
+</g>
+</svg>

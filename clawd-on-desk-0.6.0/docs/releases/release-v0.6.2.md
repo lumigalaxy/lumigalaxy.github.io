@@ -1,6 +1,6 @@
 ## v0.6.2
 
-This release publishes installable AI Desktop Companion packages for Windows and macOS.
+This release publishes installable Alien on Desk packages for Windows and macOS.
 
 ### Downloads
 
@@ -9,5 +9,6 @@ This release publishes installable AI Desktop Companion packages for Windows and
 
 ### Notes
 
-- The public release workflow now focuses on Windows and macOS installers.
+- The app is now branded around Alien instead of Clawd.
+- The built-in theme picker now offers five alien companions and hides the crab theme.
 - The GitHub Release includes real installer assets, not only source code archives.

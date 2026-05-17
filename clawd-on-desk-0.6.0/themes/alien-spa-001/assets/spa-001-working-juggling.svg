@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .juggle-body {
+        transform-origin: 7.5px 15px;
+        animation: juggleBody 0.6s infinite ease-in-out;
+      }
+      .ball-a {
+        animation: ballA 0.6s infinite ease-in-out;
+      }
+      .ball-b {
+        animation: ballB 0.6s infinite ease-in-out;
+      }
+      .ball-c {
+        animation: ballC 0.6s infinite ease-in-out;
+      }
+      @keyframes juggleBody {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(-2px); }
+      }
+      @keyframes ballA {
+        0%   { transform: translate(-3px, -8px); }
+        50%  { transform: translate(0px, -16px); }
+        100% { transform: translate(3px, -8px); }
+      }
+      @keyframes ballB {
+        0%   { transform: translate(3px, -8px); }
+        50%  { transform: translate(0px, -4px); }
+        100% { transform: translate(-3px, -8px); }
+      }
+      @keyframes ballC {
+        0%   { transform: translate(0px, -16px); }
+        50%  { transform: translate(-3px, -8px); }
+        100% { transform: translate(3px, -8px); }
+      }
+    </style>
+  </defs>
+
+  <!-- Shadow -->
+  <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+
+  <!-- Juggling balls -->
+  <rect class="ball-a" x="2"  y="-2"  width="2"  height="2"  fill="#FF6FB5"/>
+  <rect class="ball-b" x="11" y="-2"  width="2"  height="2"  fill="#FFE55C"/>
+  <rect class="ball-c" x="6"  y="-8"  width="2"  height="2"  fill="#00D4FF"/>
+
+  <!-- Character juggling -->
+  <g class="juggle-body">
+
+    <!-- Antennae -->
+    <rect x="4"  y="-10" width="1" height="8"  fill="#5C3A6E"/>
+    <rect x="3"  y="-14" width="3" height="4"  fill="#5C3A6E"/>
+    <rect x="3"  y="-13" width="2" height="2"  fill="#FF6FB5"/>
+
+    <rect x="10" y="-7"  width="1" height="5"  fill="#5C3A6E"/>
+    <rect x="9"  y="-10" width="3" height="3"  fill="#5C3A6E"/>
+    <rect x="9"  y="-9"  width="2" height="2"  fill="#FFE55C"/>
+
+    <rect x="7"  y="-12" width="1" height="1"  fill="#00D4FF"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#F4A4FF"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#F4A4FF"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#F4A4FF"/>
+
+    <!-- Highlight -->
+    <rect x="3"  y="0"   width="3"  height="1"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="2"  height="2"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#FFFFFF"/>
+
+    <!-- Concentrated eye (small) -->
+    <rect x="5"  y="4"   width="5"  height="4"  fill="#5C3A6E"/>
+    <rect x="6"  y="5"   width="3"  height="2"  fill="#FFFFFF"/>
+    <rect x="7"  y="5"   width="1"  height="1"  fill="#2A1A33"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="9"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Focused mouth -->
+    <rect x="6"  y="11"  width="3"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Cheek blush -->
+    <rect x="2"  y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.4"/>
+    <rect x="11" y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.4"/>
+
+    <!-- Arms up (juggling pose) -->
+    <rect x="-2" y="4"   width="3"  height="5"  fill="#5C3A6E"/>
+    <rect x="-1" y="5"   width="2"  height="4"  fill="#F4A4FF"/>
+
+    <rect x="14" y="4"   width="3"  height="5"  fill="#5C3A6E"/>
+    <rect x="14" y="5"   width="2"  height="4"  fill="#F4A4FF"/>
+
+    <!-- Feet -->
+    <rect x="4"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="4"  y="15"  width="1"  height="1"  fill="#E07CD6"/>
+    <rect x="9"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="10" y="15"  width="1"  height="1"  fill="#E07CD6"/>
+
+  </g>
+</svg>

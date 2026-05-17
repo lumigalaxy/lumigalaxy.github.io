@@ -1,0 +1,119 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .breathe-slow {
+        transform-origin: 7.5px 15px;
+        animation: breatheSlow 5s infinite ease-in-out;
+      }
+      .shadow-slow {
+        transform-origin: 7.5px 16px;
+        animation: shadowSlow 5s infinite ease-in-out;
+      }
+      .z-float { opacity: 0; }
+      .z1 { animation: floatZ1 6s 0.0s infinite ease-in-out; }
+      .z2 { animation: floatZ2 6s 2.0s infinite ease-in-out; }
+      .z3 { animation: floatZ3 6s 4.0s infinite ease-in-out; }
+      @keyframes breatheSlow {
+        0%, 80%, 100% { transform: scale(1, 1); }
+        30%, 50%      { transform: scale(1.02, 1.18); }
+      }
+      @keyframes shadowSlow {
+        0%, 80%, 100% { transform: scaleX(1);    opacity: 0.35; }
+        30%, 50%      { transform: scaleX(1.05); opacity: 0.45; }
+      }
+      @keyframes floatZ1 {
+        0%   { transform: translate(14px, 0px) scale(0.4); opacity: 0; }
+        12%  { opacity: 1; }
+        85%  { opacity: 0.7; }
+        100% { transform: translate(17px, -16px) scale(1.1); opacity: 0; }
+      }
+      @keyframes floatZ2 {
+        0%   { transform: translate(16px, 1px) scale(0.3); opacity: 0; }
+        12%  { opacity: 1; }
+        85%  { opacity: 0.7; }
+        100% { transform: translate(13px, -14px) scale(1.0); opacity: 0; }
+      }
+      @keyframes floatZ3 {
+        0%   { transform: translate(15px, -1px) scale(0.5); opacity: 0; }
+        12%  { opacity: 1; }
+        85%  { opacity: 0.7; }
+        100% { transform: translate(18px, -18px) scale(1.2); opacity: 0; }
+      }
+    </style>
+    <g id="pixel-z">
+      <rect x="0" y="0" width="4" height="1"/>
+      <rect x="2" y="1" width="1" height="1"/>
+      <rect x="1" y="2" width="1" height="1"/>
+      <rect x="0" y="3" width="4" height="1"/>
+    </g>
+    <g id="pixel-z-small">
+      <rect x="0" y="0" width="3" height="1"/>
+      <rect x="1" y="1" width="1" height="1"/>
+      <rect x="0" y="2" width="3" height="1"/>
+    </g>
+  </defs>
+
+  <!-- Ground shadow -->
+  <rect class="shadow-slow" x="3" y="16" width="9" height="1" fill="#000000"/>
+
+  <!-- Floating ZZZ bubbles -->
+  <use href="#pixel-z"       class="z-float z1" fill="#FF6FB5"/>
+  <use href="#pixel-z-small" class="z-float z2" fill="#FFE55C"/>
+  <use href="#pixel-z"       class="z-float z3" fill="#00D4FF"/>
+
+  <!-- Character (slow breathe, slightly dimmed) -->
+  <g class="breathe-slow">
+
+    <!-- Asymmetric dual antennae (drooping while sleeping) -->
+    <rect x="4"  y="-8"  width="1" height="6"  fill="#5C3A6E" transform="rotate(-20, 4, -2)"/>
+    <rect x="3"  y="-12" width="3" height="4"  fill="#5C3A6E" transform="rotate(-20, 4, -2)"/>
+    <rect x="3"  y="-11" width="2" height="2"  fill="#D488B0" transform="rotate(-20, 4, -2)"/>
+
+    <rect x="10" y="-6"  width="1" height="4"  fill="#5C3A6E" transform="rotate(15, 10, -2)"/>
+    <rect x="9"  y="-9"  width="3" height="3"  fill="#5C3A6E" transform="rotate(15, 10, -2)"/>
+    <rect x="9"  y="-8"  width="2" height="2"  fill="#D4C488" transform="rotate(15, 10, -2)"/>
+
+    <!-- Center dot dimmed -->
+    <rect x="7"  y="-11" width="1" height="1"  fill="#88D4E0"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill: dimmer lavender (sleeping) -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#D488E0"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#D488E0"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#D488E0"/>
+
+    <!-- Subtle highlight -->
+    <rect x="3"  y="0"   width="2"  height="1"  fill="#E8B8F0"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#E8B8F0"/>
+
+    <!-- Closed eye (sleeping = horizontal line) -->
+    <rect x="5"  y="5"   width="5"  height="1"  fill="#5C3A6E"/>
+    <rect x="5"  y="6"   width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="9"  y="6"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="9"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Relaxed mouth (flat line) -->
+    <rect x="6"  y="11"  width="3"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Arms drooped down -->
+    <rect x="-1" y="10"  width="3"  height="3"  fill="#5C3A6E"/>
+    <rect x="0"  y="11"  width="2"  height="2"  fill="#D488E0"/>
+    <rect x="13" y="10"  width="3"  height="3"  fill="#5C3A6E"/>
+    <rect x="13" y="11"  width="2"  height="2"  fill="#D488E0"/>
+
+    <!-- Feet tucked -->
+    <rect x="4"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="4"  y="15"  width="1"  height="1"  fill="#C070CC"/>
+    <rect x="9"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="10" y="15"  width="1"  height="1"  fill="#C070CC"/>
+
+  </g>
+</svg>

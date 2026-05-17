@@ -1,0 +1,97 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" shape-rendering="crispEdges">
+<defs><style>
+  /* 1.5s one-shot: melted flat → stretch up → settle */
+  .once { animation-duration:1.5s; animation-fill-mode:forwards; animation-iteration-count:1; }
+
+  .shadow { transform-origin:7.5px 14px; animation-name:shadow-wake; animation-timing-function:linear; }
+  .body-motion { transform-origin:7.5px 14px; animation-name:body-wake; animation-timing-function:cubic-bezier(0.24,0.8,0.24,1); }
+  .tips-spring { animation:tips-wake 1.5s ease-out forwards; }
+  .arm-l-wake { animation:arm-l 1.5s linear forwards; transform-origin:1px 5px; }
+  .arm-r-wake { animation:arm-r 1.5s linear forwards; transform-origin:14px 5px; }
+  .eyes-wake { animation:eyes-open 1.5s linear forwards; transform-origin:7.5px 4px; }
+
+  @keyframes shadow-wake {
+    0%   { transform:scaleX(1.0); opacity:.42; }
+    20%  { transform:scaleX(0.50); opacity:.46; }
+    40%  { transform:scaleX(0.40); opacity:.50; }
+    70%  { transform:scaleX(0.52); opacity:.48; }
+    100% { transform:scaleX(0.53); opacity:.45; }
+  }
+  @keyframes body-wake {
+    0%   { transform:translate(0,0) scale(1.18,0.65); }
+    8%   { transform:translate(0,0.3px) scale(1.16,0.67); }
+    20%  { transform:translate(0,-2.5px) scale(0.98,1.05); }
+    35%  { transform:translate(0,-4.0px) scale(0.90,1.22); }
+    50%  { transform:translate(0,-2.0px) scale(0.95,1.10); }
+    60%  { transform:translate(0,-0.5px) scale(1.02,0.98); }
+    70%,100% { transform:translate(0,0) scale(1,1); }
+  }
+  @keyframes tips-wake {
+    0%   { transform:rotate(0deg) scaleY(0.1); }
+    20%  { transform:rotate(0deg) scaleY(0.3); }
+    40%  { transform:rotate(-6deg) scaleY(1.3); }
+    60%  { transform:rotate(4deg) scaleY(1.1); }
+    80%  { transform:rotate(-2deg) scaleY(1.05); }
+    100% { transform:rotate(0deg) scaleY(1.0); }
+  }
+  @keyframes arm-l {
+    0%   { transform:translate(-1px,4px); }
+    12%  { transform:translate(-0.8px,3.5px); }
+    25%,100% { transform:translate(0,0); }
+  }
+  @keyframes arm-r {
+    0%   { transform:translate(1px,4px); }
+    12%  { transform:translate(0.8px,3.5px); }
+    25%,100% { transform:translate(0,0); }
+  }
+  @keyframes eyes-open {
+    0%,8%  { transform:scaleY(0.1); }
+    12%    { transform:scaleY(0.12); }
+    20%    { transform:scaleY(1.8); }
+    28%    { transform:scaleY(0.9); }
+    35%,55%{ transform:scaleY(1.0); }
+    60%    { transform:scaleY(0.1); }
+    66%,100%{ transform:scaleY(1.0); }
+  }
+</style></defs>
+
+<rect class="once shadow" x="-1" y="14" width="17" height="1" fill="#CC3300" opacity=".40"/>
+
+<!-- Tips spring up -->
+<g class="tips-spring" style="transform-origin:7.5px 0px;">
+  <rect x="7"  y="-6" width="1" height="1" fill="#CC3311"/>
+  <rect x="6"  y="-5" width="3" height="2" fill="#CC3311"/>
+  <rect x="5"  y="-3" width="5" height="2" fill="#DD4422"/>
+  <rect x="3"  y="-4" width="2" height="1" fill="#CC3311"/>
+  <rect x="3"  y="-3" width="3" height="2" fill="#DD4422"/>
+  <rect x="10" y="-4" width="2" height="1" fill="#CC3311"/>
+  <rect x="9"  y="-3" width="3" height="2" fill="#DD4422"/>
+</g>
+
+<!-- Body rising from flat -->
+<g class="once body-motion">
+  <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+  <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+  <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+  <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+  <rect x="5"  y="11" width="1" height="2"  fill="#DD3D1E"/>
+  <rect x="9"  y="11" width="1" height="2"  fill="#DD3D1E"/>
+  <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+  <rect x="4"  y="9"  width="7" height="1"  fill="#FF7744"/>
+  <rect x="5"  y="10" width="5" height="1"  fill="#FF7744"/>
+  <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+  <rect x="5"  y="8"  width="5" height="1"  fill="#FFAA66"/>
+  <rect x="6"  y="9"  width="3" height="1"  fill="#FFAA66"/>
+  <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+  <g class="once arm-l-wake" fill="#EE4422"><rect x="0"  y="5" width="2" height="2"/></g>
+  <g class="once arm-r-wake" fill="#EE4422"><rect x="13" y="5" width="2" height="2"/></g>
+  <g class="once eyes-wake" fill="#330000">
+    <rect x="4" y="3" width="2" height="2"/>
+    <rect x="9" y="3" width="2" height="2"/>
+    <rect x="4" y="3" width="1" height="1" fill="#ffffff" opacity=".70"/>
+    <rect x="9" y="3" width="1" height="1" fill="#ffffff" opacity=".70"/>
+  </g>
+  <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+  <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+</g>
+</svg>

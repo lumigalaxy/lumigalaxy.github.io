@@ -1,0 +1,122 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .breathe {
+        transform-origin: 7.5px 7px;
+        animation: breathe 3.2s infinite ease-in-out;
+      }
+      #eyes-js, #body-js, #shadow-js {
+        transition: transform 0.2s ease-out;
+      }
+      #shadow-js { transform-origin: 7.5px 15px; }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%       { transform: scale(1.03, 0.97) translate(0, 0.3px); }
+      }
+      /* Look around: peek left, center, peek right, center */
+      .look-left  { animation: lookL 1.2s ease-in-out 0.3s both; }
+      .look-right { animation: lookR 1.2s ease-in-out 2.2s both; }
+      @keyframes lookL {
+        0%   { transform: translate(0, 0); }
+        40%  { transform: translate(-1.5px, 0); }
+        100% { transform: translate(0, 0); }
+      }
+      @keyframes lookR {
+        0%   { transform: translate(0, 0); }
+        40%  { transform: translate(1.5px, 0); }
+        100% { transform: translate(0, 0); }
+      }
+      .antenna-wiggle {
+        animation: antWiggle 0.4s ease-in-out 1.8s 2;
+        transform-origin: 7.5px -6px;
+      }
+      @keyframes antWiggle {
+        0%, 100% { transform: rotate(0); }
+        50%      { transform: rotate(8deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground shadow -->
+  <g id="shadow-js">
+    <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+  </g>
+
+  <!-- Body group -->
+  <g id="body-js">
+    <g class="breathe">
+      <!-- Asymmetric dual antennae -->
+      <g class="antenna-wiggle">
+        <rect x="4"  y="-10" width="1" height="8"  fill="#5C3A6E"/>
+        <rect x="3"  y="-14" width="3" height="4"  fill="#5C3A6E"/>
+        <rect x="3"  y="-13" width="2" height="2"  fill="#FF6FB5"/>
+        <rect x="3"  y="-13" width="1" height="1"  fill="#FFFFFF"/>
+
+        <rect x="10" y="-7"  width="1" height="5"  fill="#5C3A6E"/>
+        <rect x="9"  y="-10" width="3" height="3"  fill="#5C3A6E"/>
+        <rect x="9"  y="-9"  width="2" height="2"  fill="#FFE55C"/>
+        <rect x="9"  y="-9"  width="1" height="1"  fill="#FFFFFF"/>
+      </g>
+
+      <rect x="7"  y="-12" width="1" height="1"  fill="#00D4FF"/>
+
+      <!-- Body outline -->
+      <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+      <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+      <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+      <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+      <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+      <!-- Body fill -->
+      <rect x="3"  y="-1"  width="9"  height="1"  fill="#F4A4FF"/>
+      <rect x="2"  y="0"   width="11" height="13" fill="#F4A4FF"/>
+      <rect x="3"  y="13"  width="9"  height="1"  fill="#F4A4FF"/>
+
+      <!-- Highlight sheen -->
+      <rect x="3"  y="0"   width="3"  height="1"  fill="#FFD6FF"/>
+      <rect x="3"  y="1"   width="2"  height="2"  fill="#FFD6FF"/>
+      <rect x="3"  y="1"   width="1"  height="1"  fill="#FFFFFF"/>
+
+      <!-- Eye socket (pupil is in eyes-js) -->
+      <rect x="3"  y="2"   width="9"  height="9"  fill="#5C3A6E"/>
+      <rect x="4"  y="3"   width="7"  height="7"  fill="#FFFFFF"/>
+
+      <!-- Nose -->
+      <rect x="7"  y="10"  width="1"  height="1"  fill="#5C3A6E"/>
+
+      <!-- Smile -->
+      <rect x="5"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+      <rect x="6"  y="12"  width="3"  height="1"  fill="#5C3A6E"/>
+      <rect x="9"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+
+      <!-- Cheeks -->
+      <rect x="2"  y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.5"/>
+      <rect x="11" y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.5"/>
+
+      <!-- Arms -->
+      <rect x="-1" y="8"   width="3"  height="3"  fill="#5C3A6E"/>
+      <rect x="0"  y="9"   width="2"  height="2"  fill="#F4A4FF"/>
+      <rect x="0"  y="9"   width="1"  height="1"  fill="#FFD6FF"/>
+
+      <rect x="14" y="8"   width="3"  height="3"  fill="#5C3A6E"/>
+      <rect x="14" y="9"   width="2"  height="2"  fill="#F4A4FF"/>
+      <rect x="15" y="9"   width="1"  height="1"  fill="#FFD6FF"/>
+
+      <!-- Feet -->
+      <rect x="4"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+      <rect x="4"  y="15"  width="1"  height="1"  fill="#E07CD6"/>
+      <rect x="9"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+      <rect x="10" y="15"  width="1"  height="1"  fill="#E07CD6"/>
+    </g>
+  </g>
+
+  <!-- Pupil: looks left then right via CSS -->
+  <g id="eyes-js">
+    <g class="look-left">
+      <g class="look-right">
+        <rect x="6"  y="5"   width="3"  height="3"  fill="#2A1A33"/>
+        <rect x="7"  y="4"   width="2"  height="1"  fill="#FFFFFF"/>
+      </g>
+    </g>
+  </g>
+</svg>

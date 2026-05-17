@@ -1,0 +1,89 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .yawn {
+        transform-origin: 7.5px 7px;
+        animation: yawnOpen 2s infinite ease-in-out;
+      }
+      @keyframes yawnOpen {
+        0%, 100% { transform: scaleY(1) rotate(0deg); }
+        15%      { transform: scaleY(1.02) rotate(-1deg); }
+        40%      { transform: scaleY(1.14) rotate(-3deg) translate(0, -1px); }
+        60%      { transform: scaleY(1.14) rotate(-3deg) translate(0, -1px); }
+        85%      { transform: scaleY(1.02) rotate(-1deg); }
+      }
+    </style>
+  </defs>
+
+  <!-- Shadow -->
+  <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+
+  <!-- Character yawning -->
+  <g class="yawn">
+
+    <!-- Antennae drooping -->
+    <rect x="4"  y="-10" width="1" height="8"  fill="#5C3A6E" transform="rotate(-15, 4, -2)"/>
+    <rect x="3"  y="-14" width="3" height="4"  fill="#5C3A6E" transform="rotate(-15, 4, -2)"/>
+    <rect x="3"  y="-13" width="2" height="2"  fill="#FF6FB5" transform="rotate(-15, 4, -2)"/>
+
+    <rect x="10" y="-7"  width="1" height="5"  fill="#5C3A6E" transform="rotate(10, 10, -2)"/>
+    <rect x="9"  y="-10" width="3" height="3"  fill="#5C3A6E" transform="rotate(10, 10, -2)"/>
+    <rect x="9"  y="-9"  width="2" height="2"  fill="#FFE55C" transform="rotate(10, 10, -2)"/>
+
+    <rect x="7"  y="-12" width="1" height="1"  fill="#00D4FF" opacity="0.5"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill (tired dim) -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#D488E0"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#D488E0"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#D488E0"/>
+
+    <!-- Highlight -->
+    <rect x="3"  y="0"   width="2"  height="1"  fill="#E8B8F0"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#E8B8F0"/>
+
+    <!-- Eye half closed (tired) -->
+    <rect x="5"  y="5"   width="5"  height="1"  fill="#5C3A6E"/>
+    <rect x="5"  y="6"   width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="9"  y="6"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="9"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- HUGE yawning mouth (very obvious) -->
+    <rect x="4"  y="9"   width="7"  height="1"  fill="#5C3A6E"/>  <!-- top lip -->
+    <rect x="4"  y="10"  width="1"  height="4"  fill="#5C3A6E"/>  <!-- left -->
+    <rect x="10" y="10"  width="1"  height="4"  fill="#5C3A6E"/>  <!-- right -->
+    <rect x="5"  y="10"  width="5"  height="4"  fill="#2A1A33"/>  <!-- inside mouth -->
+    <rect x="5"  y="14"  width="5"  height="1"  fill="#5C3A6E"/>  <!-- bottom lip -->
+    <!-- Tiny tongue -->
+    <rect x="6"  y="12"  width="3"  height="1"  fill="#FF6FB5"/>
+
+    <!-- Tears from yawning -->
+    <rect x="11" y="5"   width="1"  height="2"  fill="#00D4FF" opacity="0.7"/>
+
+    <!-- Cheek blush -->
+    <rect x="2"  y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.3"/>
+    <rect x="11" y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.3"/>
+
+    <!-- Arms drooping -->
+    <rect x="-1" y="9"   width="3"  height="3"  fill="#5C3A6E"/>
+    <rect x="0"  y="10"  width="2"  height="2"  fill="#D488E0"/>
+
+    <rect x="13" y="9"   width="3"  height="3"  fill="#5C3A6E"/>
+    <rect x="13" y="10"  width="2"  height="2"  fill="#D488E0"/>
+
+    <!-- Feet -->
+    <rect x="4"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="4"  y="15"  width="1"  height="1"  fill="#C070CC"/>
+    <rect x="9"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="10" y="15"  width="1"  height="1"  fill="#C070CC"/>
+
+  </g>
+</svg>

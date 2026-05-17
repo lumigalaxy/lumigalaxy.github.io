@@ -1,0 +1,103 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* Idle look-around: same as idle but eyes drift and look around */
+  .ft { transform-origin: 7.5px -1px; animation: ftwave 1.6s infinite ease-in-out; }
+  .fb { transform-origin: 7.5px 5px;  animation: fbrth  3.0s infinite ease-in-out; }
+  .fsh { transform-origin: 7.5px 14px; animation: fsglow 3.0s infinite ease-in-out; }
+  /* Eyes drift around then blink */
+  .fe-look {
+    transform-origin: 7.5px 4px;
+    animation: look-around 6s infinite ease-in-out;
+  }
+  /* Embers */
+  .em { opacity:0; }
+  .em1 { animation: ferise 2.6s 0.0s infinite linear; }
+  .em2 { animation: ferise 3.1s -1.3s infinite linear; }
+  .em3 { animation: ferise 2.2s -1.9s infinite linear; }
+
+  @keyframes ftwave {
+    0%,100% { transform: rotate(0deg) scaleY(1.0); }
+    35%     { transform: rotate(-3deg) scaleY(1.06); }
+    70%     { transform: rotate(2deg) scaleY(0.96); }
+  }
+  @keyframes fbrth {
+    0%,100% { transform: scaleX(1) scaleY(1) translateY(0); }
+    50%     { transform: scaleX(1.02) scaleY(0.98) translateY(0.3px); }
+  }
+  @keyframes fsglow {
+    0%,100% { transform: scaleX(1.0); opacity:.40; }
+    50%     { transform: scaleX(1.08); opacity:.52; }
+  }
+  @keyframes look-around {
+    0%,8%   { transform: translate(0,0) scaleY(1); }
+    10%     { transform: translate(0,0) scaleY(0.1); }
+    12%     { transform: translate(0,0) scaleY(1); }
+    20%,34% { transform: translate(-2px,-0.3px) scaleY(1); }
+    38%     { transform: translate(-2px,-0.3px) scaleY(0.1); }
+    40%     { transform: translate(0,0) scaleY(1); }
+    48%,60% { transform: translate(2px,-0.3px) scaleY(1); }
+    64%     { transform: translate(2px,-0.3px) scaleY(0.1); }
+    66%     { transform: translate(0,0) scaleY(1); }
+    76%,88% { transform: translate(0,-1px) scaleY(1); }
+    90%     { transform: translate(0,-1px) scaleY(0.1); }
+    92%,100%{ transform: translate(0,0) scaleY(1); }
+  }
+  @keyframes ferise {
+    0%   { opacity:0; transform:translate(0,0); }
+    12%  { opacity:.70; }
+    86%  { opacity:.22; }
+    100% { opacity:0; transform:translate(1px,-15px); }
+  }
+</style></defs>
+
+<!-- Shadow -->
+<g class="fsh">
+  <rect x="3"  y="14" width="10" height="1" fill="#FF5522" opacity=".45"/>
+</g>
+
+<!-- Embers -->
+<g fill="#FFD080">
+  <rect class="em em1" x="5"  y="2"  width="1" height="1"/>
+  <rect class="em em2" x="9"  y="3"  width="1" height="1"/>
+  <rect class="em em3" x="7"  y="1"  width="1" height="1"/>
+</g>
+
+<!-- Tips -->
+<g class="ft">
+  <rect x="7"  y="-6" width="1" height="1" fill="#CC3311"/>
+  <rect x="6"  y="-5" width="3" height="2" fill="#CC3311"/>
+  <rect x="5"  y="-3" width="5" height="2" fill="#DD4422"/>
+  <rect x="3"  y="-4" width="2" height="1" fill="#CC3311"/>
+  <rect x="3"  y="-3" width="3" height="2" fill="#DD4422"/>
+  <rect x="10" y="-4" width="2" height="1" fill="#CC3311"/>
+  <rect x="9"  y="-3" width="3" height="2" fill="#DD4422"/>
+</g>
+
+<!-- Body -->
+<g class="fb">
+  <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+  <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+  <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+  <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+  <rect x="5"  y="11" width="1" height="2"  fill="#DD3D1E"/>
+  <rect x="9"  y="11" width="1" height="2"  fill="#DD3D1E"/>
+  <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+  <rect x="4"  y="9"  width="7" height="1"  fill="#FF7744"/>
+  <rect x="5"  y="10" width="5" height="1"  fill="#FF7744"/>
+  <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+  <rect x="5"  y="8"  width="5" height="1"  fill="#FFAA66"/>
+  <rect x="6"  y="9"  width="3" height="1"  fill="#FFAA66"/>
+  <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+  <!-- Looking-around eyes -->
+  <g class="fe-look" fill="#330000">
+    <rect x="4" y="3" width="2" height="2"/>
+    <rect x="9" y="3" width="2" height="2"/>
+    <rect x="4" y="3" width="1" height="1" fill="#ffffff" opacity=".70"/>
+    <rect x="9" y="3" width="1" height="1" fill="#ffffff" opacity=".70"/>
+  </g>
+  <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+  <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".80"/>
+  <rect x="0"  y="5"  width="2" height="2" fill="#EE4422"/>
+  <rect x="13" y="5"  width="2" height="2" fill="#EE4422"/>
+</g>
+</svg>

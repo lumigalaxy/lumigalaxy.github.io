@@ -294,7 +294,8 @@ function _clampToWorkArea(x, y, pet) {
 function _isAlienTheme() {
   try {
     if (ctxRef && typeof ctxRef.getActiveThemeId === "function") {
-      return ctxRef.getActiveThemeId() === "alien";
+      const id = ctxRef.getActiveThemeId();
+      return id === "alien" || (typeof id === "string" && id.startsWith("alien-"));
     }
   } catch {}
   return false;

@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* Slide in while already drowsy — slow, heavy entry */
+  .enter-body {
+    animation: enter-droop 1.2s ease-out forwards, doze-brth 4.5s 1.2s infinite ease-in-out;
+  }
+  .enter-tips {
+    transform-origin: 7.5px -1px;
+    animation: tips-droopy 1.2s ease-out forwards, doze-tip 4s 1.2s infinite ease-in-out;
+  }
+  .eyes-droop {
+    transform-origin: 7.5px 4px;
+    animation: eyes-droop 1.2s ease-out forwards;
+  }
+
+  @keyframes enter-droop {
+    0%   { transform: translateX(18px); opacity:0; }
+    60%  { transform: translateX(-0.5px) scaleX(1.04) scaleY(0.96) translateY(0.6px); opacity:1; }
+    100% { transform: translateX(0) scaleX(1.04) scaleY(0.96) translateY(0.8px); opacity:1; }
+  }
+  @keyframes doze-brth {
+    0%,100% { transform: scaleX(1.04) scaleY(0.96) translateY(0.8px); }
+    50%     { transform: scaleX(1.07) scaleY(0.93) translateY(1.4px); }
+  }
+  @keyframes tips-droopy {
+    0%   { transform: rotate(15deg) scaleY(0.6); }
+    100% { transform: rotate(0deg) scaleY(0.82); }
+  }
+  @keyframes doze-tip {
+    0%,100% { transform: rotate(0deg) scaleY(0.82); }
+    50%     { transform: rotate(2deg) scaleY(0.78); }
+  }
+  @keyframes eyes-droop {
+    0%   { transform: scaleY(1); }
+    100% { transform: scaleY(0.12); }
+  }
+</style></defs>
+
+<g transform="rotate(-12, 7.5, 15)">
+  <g class="enter-tips">
+    <rect x="7"  y="-6" width="1" height="1" fill="#CC3311"/>
+    <rect x="6"  y="-5" width="3" height="2" fill="#CC3311"/>
+    <rect x="5"  y="-3" width="5" height="2" fill="#DD4422"/>
+    <rect x="3"  y="-4" width="2" height="1" fill="#CC3311"/>
+    <rect x="3"  y="-3" width="3" height="2" fill="#DD4422"/>
+    <rect x="10" y="-4" width="2" height="1" fill="#CC3311"/>
+    <rect x="9"  y="-3" width="3" height="2" fill="#DD4422"/>
+  </g>
+
+  <rect x="5" y="11" width="1" height="2" fill="#DD3D1E"/>
+  <rect x="9" y="11" width="1" height="2" fill="#DD3D1E"/>
+
+  <g class="enter-body">
+    <rect x="3"  y="-1" width="9" height="1"  fill="#DD4422"/>
+    <rect x="2"  y="0"  width="11" height="9" fill="#EE4422"/>
+    <rect x="3"  y="9"  width="9" height="1"  fill="#EE4422"/>
+    <rect x="4"  y="10" width="7" height="1"  fill="#EE4422"/>
+    <rect x="3"  y="1"  width="9" height="8"  fill="#FF7744"/>
+    <rect x="4"  y="2"  width="7" height="6"  fill="#FFAA66"/>
+    <rect x="5"  y="3"  width="5" height="4"  fill="#FFD4A0"/>
+    <!-- Drooping shut eyes -->
+    <g class="eyes-droop" fill="#330000">
+      <rect x="4" y="3" width="2" height="2"/>
+      <rect x="9" y="3" width="2" height="2"/>
+    </g>
+    <rect x="3"  y="5"  width="2" height="1" fill="#FF9999" opacity=".70"/>
+    <rect x="10" y="5"  width="2" height="1" fill="#FF9999" opacity=".70"/>
+    <!-- Arms hanging low -->
+    <rect x="-1" y="6"  width="3" height="2" fill="#EE4422" opacity=".8"/>
+    <rect x="13" y="6"  width="2" height="2" fill="#EE4422" opacity=".8"/>
+  </g>
+</g>
+</svg>

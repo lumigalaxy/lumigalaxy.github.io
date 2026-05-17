@@ -1,0 +1,105 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .breathe {
+        transform-origin: 7.5px 7px;
+        animation: breathe 3.2s infinite ease-in-out;
+      }
+      #eyes-js, #body-js, #shadow-js {
+        transition: transform 0.2s ease-out;
+      }
+      #shadow-js { transform-origin: 7.5px 15px; }
+      @keyframes breathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%       { transform: scale(1.03, 0.97) translate(0, 0.3px); }
+      }
+    </style>
+  </defs>
+
+  <!-- Ground shadow -->
+  <g id="shadow-js">
+    <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+  </g>
+
+  <!-- Body group (JS cursor tracking) -->
+  <g id="body-js">
+    <g class="breathe">
+
+      <!-- Asymmetric dual antennae with glowing orbs -->
+      <!-- Left tall antenna -->
+      <rect x="4"  y="-10" width="1" height="8"  fill="#5C3A6E"/>
+      <rect x="3"  y="-14" width="3" height="4"  fill="#5C3A6E"/>
+      <rect x="3"  y="-13" width="2" height="2"  fill="#FF6FB5"/>
+      <rect x="3"  y="-13" width="1" height="1"  fill="#FFFFFF"/>
+
+      <!-- Right short antenna -->
+      <rect x="10" y="-7"  width="1" height="5"  fill="#5C3A6E"/>
+      <rect x="9"  y="-10" width="3" height="3"  fill="#5C3A6E"/>
+      <rect x="9"  y="-9"  width="2" height="2"  fill="#FFE55C"/>
+      <rect x="9"  y="-9"  width="1" height="1"  fill="#FFFFFF"/>
+
+      <!-- Center micro cyan glow dot -->
+      <rect x="7"  y="-12" width="1" height="1"  fill="#00D4FF"/>
+
+      <!-- Body outline: round pink blob -->
+      <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+      <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+      <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+      <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+      <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+      <!-- Body fill: soft lavender-pink -->
+      <rect x="3"  y="-1"  width="9"  height="1"  fill="#F4A4FF"/>
+      <rect x="2"  y="0"   width="11" height="13" fill="#F4A4FF"/>
+      <rect x="3"  y="13"  width="9"  height="1"  fill="#F4A4FF"/>
+
+      <!-- Highlight sheen -->
+      <rect x="3"  y="0"   width="3"  height="1"  fill="#FFD6FF"/>
+      <rect x="3"  y="1"   width="2"  height="2"  fill="#FFD6FF"/>
+      <rect x="3"  y="1"   width="1"  height="1"  fill="#FFFFFF"/>
+
+      <!-- Cyclops eye socket (pupil is in eyes-js for tracking) -->
+      <rect x="3"  y="2"   width="9"  height="9"  fill="#5C3A6E"/>
+      <rect x="4"  y="3"   width="7"  height="7"  fill="#FFFFFF"/>
+
+      <!-- Tiny cute nose (beak-like) -->
+      <rect x="7"  y="10"  width="1"  height="1"  fill="#5C3A6E"/>
+
+      <!-- Happy little smile -->
+      <rect x="5"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+      <rect x="6"  y="12"  width="3"  height="1"  fill="#5C3A6E"/>
+      <rect x="9"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+
+      <!-- Left cheek blush -->
+      <rect x="2"  y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.5"/>
+
+      <!-- Right cheek blush -->
+      <rect x="11" y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.5"/>
+
+      <!-- Left stubby arm -->
+      <rect x="-1" y="8"   width="3"  height="3"  fill="#5C3A6E"/>
+      <rect x="0"  y="9"   width="2"  height="2"  fill="#F4A4FF"/>
+      <rect x="0"  y="9"   width="1"  height="1"  fill="#FFD6FF"/>
+
+      <!-- Right stubby arm -->
+      <rect x="14" y="8"   width="3"  height="3"  fill="#5C3A6E"/>
+      <rect x="14" y="9"   width="2"  height="2"  fill="#F4A4FF"/>
+      <rect x="15" y="9"   width="1"  height="1"  fill="#FFD6FF"/>
+
+      <!-- Left tiny foot -->
+      <rect x="4"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+      <rect x="4"  y="15"  width="1"  height="1"  fill="#E07CD6"/>
+
+      <!-- Right tiny foot -->
+      <rect x="9"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+      <rect x="10" y="15"  width="1"  height="1"  fill="#E07CD6"/>
+
+    </g>
+  </g>
+
+  <!-- Pupil in eyes-js so it moves independently inside the eye socket -->
+  <g id="eyes-js">
+    <rect x="6"  y="5"   width="3"  height="3"  fill="#2A1A33"/>
+    <rect x="7"  y="4"   width="2"  height="1"  fill="#FFFFFF"/>
+  </g>
+</svg>

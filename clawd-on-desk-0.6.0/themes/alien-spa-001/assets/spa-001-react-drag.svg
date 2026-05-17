@@ -1,0 +1,137 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .stiff-body {
+        transform-origin: 7.5px 7px;
+        animation: stiffShake 0.08s infinite step-end;
+      }
+      .stiff-arm-l {
+        transform-origin: 0px 7px;
+        animation: stiffArm 0.12s infinite step-end;
+      }
+      .stiff-arm-r {
+        transform-origin: 14px 7px;
+        animation: stiffArm 0.12s infinite step-end;
+        animation-delay: 0.06s;
+      }
+      .stiff-leg {
+        animation: stiffLeg 0.15s infinite step-end;
+      }
+      .sweat-pop {
+        opacity: 0;
+        animation: sweatPop 0.6s infinite step-end;
+      }
+      @keyframes stiffShake {
+        0%   { transform: translateX(0) rotate(0deg); }
+        25%  { transform: translateX(1px) rotate(1deg); }
+        50%  { transform: translateX(-1px) rotate(-1deg); }
+        75%  { transform: translateX(0) rotate(0deg); }
+      }
+      @keyframes stiffArm {
+        0%, 100% { transform: rotate(0deg); }
+        50%      { transform: rotate(-6deg); }
+      }
+      @keyframes stiffLeg {
+        0%, 100% { transform: translateY(0); }
+        50%      { transform: translateY(2px); }
+      }
+      @keyframes sweatPop {
+        0%   { transform: scale(0.5); opacity: 0; }
+        30%  { transform: scale(1);   opacity: 1; }
+        100% { transform: scale(1.2); opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Shadow -->
+  <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+
+  <!-- Drag motion lines (straight, rigid) -->
+  <rect x="-10" y="4"  width="6" height="1" fill="#5C3A6E" opacity="0.12"/>
+  <rect x="-9"  y="7"  width="5" height="1" fill="#5C3A6E" opacity="0.12"/>
+  <rect x="-11" y="10" width="6" height="1" fill="#5C3A6E" opacity="0.12"/>
+
+  <!-- Character: stiff as a board while being dragged -->
+  <g class="stiff-body">
+
+    <!-- Antennae: perfectly straight up (stiff) -->
+    <rect x="4"  y="-10" width="1" height="8"  fill="#5C3A6E"/>
+    <rect x="3"  y="-14" width="3" height="4"  fill="#5C3A6E"/>
+    <rect x="3"  y="-13" width="2" height="2"  fill="#FF6FB5"/>
+
+    <rect x="10" y="-7"  width="1" height="5"  fill="#5C3A6E"/>
+    <rect x="9"  y="-10" width="3" height="3"  fill="#5C3A6E"/>
+    <rect x="9"  y="-9"  width="2" height="2"  fill="#FFE55C"/>
+
+    <!-- Rigid blink dot (frozen on) -->
+    <rect x="7"  y="-12" width="1" height="1"  fill="#00D4FF"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#F4A4FF"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#F4A4FF"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#F4A4FF"/>
+
+    <!-- Highlight -->
+    <rect x="3"  y="0"   width="3"  height="1"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="2"  height="2"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#FFFFFF"/>
+
+    <!-- Stiff dead-fish eye: flat line -->
+    <rect x="5"  y="5"   width="5"  height="2"  fill="#5C3A6E"/>
+    <rect x="6"  y="6"   width="3"  height="1"  fill="#2A1A33"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="9"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Stiff flat mouth (frozen) -->
+    <rect x="5"  y="11"  width="5"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Sweat drops (tension from being dragged stiffly) -->
+    <g class="sweat-pop" transform="translate(1, 2)">
+      <rect x="0" y="0" width="1" height="1" fill="#00D4FF"/>
+      <rect x="0" y="1" width="1" height="1" fill="#00D4FF" opacity="0.7"/>
+    </g>
+    <g class="sweat-pop" transform="translate(12, 4)" style="animation-delay:0.3s">
+      <rect x="0" y="0" width="1" height="1" fill="#00D4FF"/>
+      <rect x="0" y="1" width="1" height="1" fill="#00D4FF" opacity="0.7"/>
+    </g>
+
+    <!-- Arms: stiff straight down -->
+    <g class="stiff-arm-l">
+      <rect x="-1" y="6"   width="2"  height="6"  fill="#5C3A6E"/>
+      <rect x="-1" y="7"   width="1"  height="5"  fill="#F4A4FF"/>
+    </g>
+    <g class="stiff-arm-r">
+      <rect x="15" y="6"   width="2"  height="6"  fill="#5C3A6E"/>
+      <rect x="15" y="7"   width="1"  height="5"  fill="#F4A4FF"/>
+    </g>
+
+    <!-- Legs: stiff straight down, slightly trembling -->
+    <g class="stiff-leg">
+      <rect x="4"  y="14"  width="2"  height="4"  fill="#5C3A6E"/>
+      <rect x="4"  y="15"  width="1"  height="3"  fill="#E07CD6"/>
+    </g>
+    <g class="stiff-leg">
+      <rect x="9"  y="14"  width="2"  height="4"  fill="#5C3A6E"/>
+      <rect x="10" y="15"  width="1"  height="3"  fill="#E07CD6"/>
+    </g>
+
+  </g>
+
+  <!-- "!!!" marks of shock above stiff alien -->
+  <g class="sweat-pop" transform="translate(5, -16)">
+    <rect x="0" y="0" width="1" height="3" fill="#FF0000"/>
+    <rect x="2" y="0" width="1" height="3" fill="#FF0000"/>
+    <rect x="4" y="0" width="1" height="3" fill="#FF0000"/>
+    <rect x="0" y="4" width="1" height="1" fill="#FF0000"/>
+    <rect x="2" y="4" width="1" height="1" fill="#FF0000"/>
+    <rect x="4" y="4" width="1" height="1" fill="#FF0000"/>
+  </g>
+</svg>

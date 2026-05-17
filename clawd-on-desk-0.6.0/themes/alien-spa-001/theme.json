@@ -1,0 +1,277 @@
+{
+  "schemaVersion": 1,
+  "name": "SPA-001 Pixelkin",
+  "author": "Lumi Galaxy",
+  "version": "1.0.0",
+  "description": "Purple Pixelkin from Pixelia, curious and cursor-aware.",
+  "license": "MIT",
+  "viewBox": {
+    "x": -15,
+    "y": -25,
+    "width": 45,
+    "height": 45
+  },
+  "layout": {
+    "contentBox": {
+      "x": -4,
+      "y": -3,
+      "width": 23,
+      "height": 20
+    },
+    "marginBox": {
+      "x": -8,
+      "y": -7,
+      "width": 30,
+      "height": 24
+    },
+    "centerX": 7.5,
+    "baselineY": 17,
+    "visibleHeightRatio": 0.58,
+    "baselineBottomRatio": 0.05
+  },
+  "eyeTracking": {
+    "enabled": true,
+    "states": [
+      "idle",
+      "mini-idle"
+    ],
+    "eyeRatioX": 0.489,
+    "eyeRatioY": 0.756,
+    "maxOffset": 1.25,
+    "bodyScale": 0.2,
+    "shadowStretch": 0.1,
+    "shadowShift": 0.25,
+    "ids": {
+      "eyes": "eyes-js",
+      "body": "body-js",
+      "shadow": "shadow-js",
+      "dozeEyes": "eyes-doze"
+    },
+    "shadowOrigin": "7.5px 15px"
+  },
+  "states": {
+    "idle": [
+      "spa-001-idle-follow.svg"
+    ],
+    "yawning": [
+      "spa-001-idle-yawn.svg"
+    ],
+    "dozing": [
+      "spa-001-idle-doze.svg"
+    ],
+    "collapsing": [
+      "spa-001-collapse-sleep.svg"
+    ],
+    "thinking": [
+      "spa-001-working-thinking.svg"
+    ],
+    "working": [
+      "spa-001-working-typing.svg"
+    ],
+    "juggling": [
+      "spa-001-working-juggling.svg"
+    ],
+    "sweeping": [
+      "spa-001-working-sweeping.svg"
+    ],
+    "error": [
+      "spa-001-error.svg"
+    ],
+    "attention": [
+      "spa-001-happy.svg"
+    ],
+    "notification": [
+      "spa-001-notification.svg"
+    ],
+    "carrying": [
+      "spa-001-working-carrying.svg"
+    ],
+    "sleeping": [
+      "spa-001-sleeping.svg"
+    ],
+    "waking": [
+      "spa-001-wake.svg"
+    ]
+  },
+  "workingTiers": [
+    {
+      "minSessions": 3,
+      "file": "spa-001-working-building.svg"
+    },
+    {
+      "minSessions": 2,
+      "file": "spa-001-working-juggling.svg"
+    },
+    {
+      "minSessions": 1,
+      "file": "spa-001-working-typing.svg"
+    }
+  ],
+  "jugglingTiers": [
+    {
+      "minSessions": 2,
+      "file": "spa-001-working-conducting.svg"
+    },
+    {
+      "minSessions": 1,
+      "file": "spa-001-working-juggling.svg"
+    }
+  ],
+  "idleAnimations": [
+    {
+      "file": "spa-001-idle-look.svg",
+      "duration": 6500
+    },
+    {
+      "file": "spa-001-working-debugger.svg",
+      "duration": 14000
+    },
+    {
+      "file": "spa-001-idle-reading.svg",
+      "duration": 14000
+    }
+  ],
+  "displayHintMap": {
+    "clawd-working-building.svg": "spa-001-working-building.svg",
+    "clawd-working-typing.svg": "spa-001-working-typing.svg",
+    "clawd-working-juggling.svg": "spa-001-working-juggling.svg",
+    "clawd-working-conducting.svg": "spa-001-working-conducting.svg",
+    "clawd-idle-reading.svg": "spa-001-idle-reading.svg",
+    "clawd-working-debugger.svg": "spa-001-working-debugger.svg",
+    "clawd-working-thinking.svg": "spa-001-working-thinking.svg"
+  },
+  "timings": {
+    "minDisplay": {
+      "attention": 4000,
+      "error": 5000,
+      "sweeping": 5500,
+      "notification": 2500,
+      "carrying": 3000,
+      "working": 1000,
+      "thinking": 1000
+    },
+    "autoReturn": {
+      "attention": 4000,
+      "error": 5000,
+      "sweeping": 300000,
+      "notification": 2500,
+      "carrying": 3000
+    },
+    "yawnDuration": 3000,
+    "wakeDuration": 1500,
+    "deepSleepTimeout": 600000,
+    "mouseIdleTimeout": 20000,
+    "mouseSleepTimeout": 60000
+  },
+  "hitBoxes": {
+    "default": {
+      "x": -1,
+      "y": 5,
+      "w": 17,
+      "h": 12
+    },
+    "sleeping": {
+      "x": -2,
+      "y": 9,
+      "w": 19,
+      "h": 7
+    },
+    "wide": {
+      "x": -3,
+      "y": 3,
+      "w": 21,
+      "h": 14
+    }
+  },
+  "wideHitboxFiles": [
+    "spa-001-error.svg",
+    "spa-001-notification.svg",
+    "spa-001-working-conducting.svg"
+  ],
+  "sleepingHitboxFiles": [
+    "spa-001-sleeping.svg",
+    "spa-001-collapse-sleep.svg"
+  ],
+  "reactions": {
+    "drag": {
+      "file": "spa-001-react-drag.svg"
+    },
+    "clickLeft": {
+      "file": "spa-001-react-left.svg",
+      "duration": 2500
+    },
+    "clickRight": {
+      "file": "spa-001-react-right.svg",
+      "duration": 2500
+    },
+    "annoyed": {
+      "file": "spa-001-react-annoyed.svg",
+      "duration": 3500
+    },
+    "double": {
+      "files": [
+        "spa-001-react-double.svg",
+        "spa-001-react-double-jump.svg"
+      ],
+      "duration": 3500
+    }
+  },
+  "miniMode": {
+    "supported": true,
+    "offsetRatio": 0.486,
+    "states": {
+      "mini-idle": [
+        "spa-001-mini-idle.svg"
+      ],
+      "mini-alert": [
+        "spa-001-mini-alert.svg"
+      ],
+      "mini-happy": [
+        "spa-001-mini-happy.svg"
+      ],
+      "mini-enter": [
+        "spa-001-mini-enter.svg"
+      ],
+      "mini-peek": [
+        "spa-001-mini-peek.svg"
+      ],
+      "mini-working": [
+        "spa-001-mini-typing.svg"
+      ],
+      "mini-crabwalk": [
+        "spa-001-mini-crabwalk.svg"
+      ],
+      "mini-enter-sleep": [
+        "spa-001-mini-enter-sleep.svg"
+      ],
+      "mini-sleep": [
+        "spa-001-mini-sleep.svg"
+      ]
+    },
+    "timings": {
+      "minDisplay": {
+        "mini-alert": 4000,
+        "mini-happy": 4000
+      },
+      "autoReturn": {
+        "mini-alert": 4000,
+        "mini-happy": 4000
+      }
+    },
+    "glyphFlips": {
+      "pixel-z": 4,
+      "pixel-z-small": 3
+    }
+  },
+  "sounds": {
+    "complete": "complete.mp3",
+    "confirm": "confirm.mp3"
+  },
+  "objectScale": {
+    "widthRatio": 1.9,
+    "heightRatio": 1.3,
+    "offsetX": -0.45,
+    "offsetY": -0.25
+  },
+  "preview": "spa-001-idle-follow.svg"
+}

@@ -1,0 +1,96 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .heavy-breathe {
+        transform-origin: 7.5px 7px;
+        animation: heavyBreathe 2s infinite ease-in-out;
+      }
+      .sweat {
+        opacity: 0;
+        animation: sweatBlink 1.5s infinite ease-in-out;
+      }
+      @keyframes heavyBreathe {
+        0%, 100% { transform: scale(1, 1); }
+        50%       { transform: scale(1.04, 0.96) translate(0, 0.5px); }
+      }
+      @keyframes sweatBlink {
+        0%, 40% { opacity: 0; }
+        50%     { opacity: 1; }
+        60%, 100% { opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Shadow (wider because of box) -->
+  <rect x="2" y="16" width="11" height="1" fill="#000000" opacity="0.35"/>
+
+  <!-- Sweat drops -->
+  <rect class="sweat" x="0" y="2" width="1" height="1" fill="#00D4FF"/>
+  <rect class="sweat" x="14" y="4" width="1" height="2" fill="#00D4FF" style="animation-delay:0.7s"/>
+
+  <!-- Character carrying a box -->
+  <g class="heavy-breathe">
+
+    <!-- Box being carried -->
+    <rect x="3"  y="-6"  width="9"  height="6"  fill="#8B5A3A"/>
+    <rect x="4"  y="-5"  width="7"  height="4"  fill="#C4865E"/>
+    <rect x="7"  y="-4"  width="1"  height="2"  fill="#5C3A6E"/>
+
+    <!-- Antennae (tilted from weight) -->
+    <rect x="4"  y="-10" width="1" height="5"  fill="#5C3A6E" transform="rotate(10, 4, -5)"/>
+    <rect x="3"  y="-13" width="3" height="3"  fill="#5C3A6E" transform="rotate(10, 4, -5)"/>
+    <rect x="3"  y="-12" width="2" height="2"  fill="#FF6FB5" transform="rotate(10, 4, -5)"/>
+
+    <rect x="10" y="-8"  width="1" height="4"  fill="#5C3A6E" transform="rotate(-5, 10, -4)"/>
+    <rect x="9"  y="-11" width="3" height="3"  fill="#5C3A6E" transform="rotate(-5, 10, -4)"/>
+    <rect x="9"  y="-10" width="2" height="2"  fill="#FFE55C" transform="rotate(-5, 10, -4)"/>
+
+    <rect x="7"  y="-13" width="1" height="1"  fill="#00D4FF"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#F4A4FF"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#F4A4FF"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#F4A4FF"/>
+
+    <!-- Highlight -->
+    <rect x="3"  y="0"   width="3"  height="1"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="2"  height="2"  fill="#FFD6FF"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#FFFFFF"/>
+
+    <!-- Strained eye (squinting) -->
+    <rect x="5"  y="4"   width="5"  height="1"  fill="#5C3A6E"/>
+    <rect x="5"  y="5"   width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="9"  y="5"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="8"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Strained mouth (flat line) -->
+    <rect x="6"  y="11"  width="3"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Cheek blush -->
+    <rect x="2"  y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.4"/>
+    <rect x="11" y="7"   width="2"  height="2"  fill="#FF6FB5" opacity="0.4"/>
+
+    <!-- Arms holding box up -->
+    <rect x="1"  y="0"   width="3"  height="3"  fill="#5C3A6E"/>
+    <rect x="2"  y="1"   width="2"  height="2"  fill="#F4A4FF"/>
+
+    <rect x="11" y="0"   width="3"  height="3"  fill="#5C3A6E"/>
+    <rect x="11" y="1"   width="2"  height="2"  fill="#F4A4FF"/>
+
+    <!-- Feet (wide stance) -->
+    <rect x="3"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="15"  width="1"  height="1"  fill="#E07CD6"/>
+    <rect x="10" y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="11" y="15"  width="1"  height="1"  fill="#E07CD6"/>
+
+  </g>
+</svg>

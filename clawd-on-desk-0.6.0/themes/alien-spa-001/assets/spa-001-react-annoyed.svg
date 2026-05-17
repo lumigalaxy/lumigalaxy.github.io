@@ -1,0 +1,110 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45" width="300" height="300">
+  <defs>
+    <style>
+      .angry-stomp {
+        transform-origin: 7.5px 15px;
+        animation: angryStomp 0.3s infinite ease-in-out;
+      }
+      .steam {
+        opacity: 0;
+        animation: steamUp 0.8s infinite ease-in-out;
+      }
+      .s1 { animation-delay: 0.0s; }
+      .s2 { animation-delay: 0.25s; }
+      @keyframes angryStomp {
+        0%, 100% { transform: translateY(0) rotate(0deg); }
+        25%      { transform: translateY(-3px) rotate(-4deg); }
+        50%      { transform: translateY(0) rotate(0deg); }
+        75%      { transform: translateY(-2px) rotate(4deg); }
+      }
+      @keyframes steamUp {
+        0%   { transform: translate(0, 0) scale(0.6);   opacity: 0; }
+        20%  { opacity: 1; }
+        100% { transform: translate(0, -8px) scale(1.2); opacity: 0; }
+      }
+    </style>
+  </defs>
+
+  <!-- Shadow -->
+  <rect x="3" y="16" width="9" height="1" fill="#000000" opacity="0.35"/>
+
+  <!-- Angry red exclamation marks above head -->
+  <g class="steam s1">
+    <rect x="3"  y="-18" width="2" height="6" fill="#FF0000"/>
+    <rect x="3"  y="-10" width="2" height="2" fill="#FF0000"/>
+  </g>
+  <g class="steam s2">
+    <rect x="10" y="-16" width="1" height="5" fill="#FF4444"/>
+    <rect x="10" y="-9"  width="1" height="1" fill="#FF4444"/>
+  </g>
+
+  <!-- Character angry (stomping) -->
+  <g class="angry-stomp">
+
+    <!-- Antennae (spiky/straight up in anger) -->
+    <rect x="4"  y="-13" width="1" height="11" fill="#5C3A6E"/>
+    <rect x="3"  y="-17" width="3" height="4"  fill="#5C3A6E"/>
+    <rect x="3"  y="-16" width="2" height="2"  fill="#FF4444"/>
+
+    <rect x="10" y="-10" width="1" height="8"  fill="#5C3A6E"/>
+    <rect x="9"  y="-13" width="3" height="3"  fill="#5C3A6E"/>
+    <rect x="9"  y="-12" width="2" height="2"  fill="#FF4444"/>
+
+    <rect x="7"  y="-15" width="1" height="1"  fill="#FF4444"/>
+
+    <!-- Body outline -->
+    <rect x="3"  y="-2"  width="9"  height="1"  fill="#5C3A6E"/>
+    <rect x="2"  y="-1"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="1"  y="0"   width="13" height="13" fill="#5C3A6E"/>
+    <rect x="2"  y="13"  width="11" height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="14"  width="9"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Body fill (very red when angry) -->
+    <rect x="3"  y="-1"  width="9"  height="1"  fill="#D04070"/>
+    <rect x="2"  y="0"   width="11" height="13" fill="#D04070"/>
+    <rect x="3"  y="13"  width="9"  height="1"  fill="#D04070"/>
+
+    <!-- Highlight (muted when angry) -->
+    <rect x="3"  y="0"   width="2"  height="1"  fill="#E880A8"/>
+    <rect x="3"  y="1"   width="1"  height="1"  fill="#E880A8"/>
+
+    <!-- ANGRY eye (slanted / narrowed) -->
+    <rect x="5"  y="4"   width="5"  height="2"  fill="#5C3A6E"/>
+    <rect x="6"  y="5"   width="3"  height="1"  fill="#FFFFFF"/>
+    <rect x="7"  y="5"   width="1"  height="1"  fill="#2A1A33"/>
+
+    <!-- Angry eyebrow (angled down) -->
+    <rect x="4"  y="3"   width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="8"  y="3"   width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="4"  y="2"   width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="9"  y="2"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Nose -->
+    <rect x="7"  y="8"   width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Angry mouth (grrr / zigzag) -->
+    <rect x="5"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="6"  y="12"  width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="7"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="8"  y="12"  width="1"  height="1"  fill="#5C3A6E"/>
+    <rect x="9"  y="11"  width="1"  height="1"  fill="#5C3A6E"/>
+
+    <!-- Red angry blush -->
+    <rect x="2"  y="7"   width="2"  height="2"  fill="#FF4444" opacity="0.5"/>
+    <rect x="11" y="7"   width="2"  height="2"  fill="#FF4444" opacity="0.5"/>
+
+    <!-- Arms (fists raised) -->
+    <rect x="-2" y="6"   width="3"  height="5"  fill="#5C3A6E"/>
+    <rect x="-1" y="7"   width="2"  height="4"  fill="#D04070"/>
+
+    <rect x="14" y="6"   width="3"  height="5"  fill="#5C3A6E"/>
+    <rect x="14" y="7"   width="2"  height="4"  fill="#D04070"/>
+
+    <!-- Feet (stomping) -->
+    <rect x="3"  y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="3"  y="15"  width="1"  height="1"  fill="#C050A8"/>
+    <rect x="10" y="15"  width="2"  height="1"  fill="#5C3A6E"/>
+    <rect x="11" y="15"  width="1"  height="1"  fill="#C050A8"/>
+
+  </g>
+</svg>

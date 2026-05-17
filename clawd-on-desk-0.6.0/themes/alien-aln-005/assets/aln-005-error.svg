@@ -1,0 +1,117 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="-15 -25 45 45">
+<defs><style>
+  /* Shake + darkened flames + X eyes */
+  .body-shake {
+    transform-origin: 7.5px 5px;
+    animation: shake 0.5s infinite ease-in-out;
+  }
+  .shadow-shake {
+    transform-origin: 7.5px 14px;
+    animation: shadow-shake 0.5s infinite ease-in-out;
+  }
+  .ft-error {
+    transform-origin: 7.5px -1px;
+    animation: ft-error 0.5s infinite ease-in-out;
+  }
+  /* X eyes: two diagonal bars formed from rotated rects */
+  .eye-x-l {
+    transform-origin: 5px 4px;
+    transform: rotate(45deg);
+  }
+  .eye-x-r {
+    transform-origin: 10px 4px;
+    transform: rotate(45deg);
+  }
+  /* Exclamation mark flash */
+  .exclaim {
+    transform-origin: 14px -2px;
+    animation: exclaim-flash 0.8s infinite step-end;
+  }
+  /* Smoke puffs */
+  .puff { opacity:0; }
+  .pf1 { animation: puff 1.4s 0.0s infinite ease-out; }
+  .pf2 { animation: puff 1.4s -0.6s infinite ease-out; }
+
+  @keyframes shake {
+    0%,100% { transform: translate(-1.5px,0) rotate(-2deg); }
+    25%     { transform: translate( 1.5px,0) rotate( 2deg); }
+    50%     { transform: translate(-1.0px,0) rotate(-1deg); }
+    75%     { transform: translate( 1.0px,0) rotate( 1deg); }
+  }
+  @keyframes shadow-shake {
+    0%,100% { transform: translate(-1.5px,0) scaleX(1); opacity:.45; }
+    25%     { transform: translate( 1.5px,0) scaleX(1); opacity:.45; }
+    50%     { transform: translate(-1.0px,0) scaleX(1); opacity:.45; }
+    75%     { transform: translate( 1.0px,0) scaleX(1); opacity:.45; }
+  }
+  @keyframes ft-error {
+    0%,100% { transform: rotate(-5deg) scaleY(0.80); }
+    50%     { transform: rotate( 5deg) scaleY(0.75); }
+  }
+  @keyframes exclaim-flash {
+    0%,60%  { opacity:1; }
+    61%,100%{ opacity:0; }
+  }
+  @keyframes puff {
+    0%   { opacity:0; transform:translate(0,0) scale(0.5); }
+    15%  { opacity:0.6; }
+    100% { opacity:0; transform:translate(3px,-8px) scale(1.4); }
+  }
+</style></defs>
+
+<!-- Shadow -->
+<rect class="shadow-shake" x="3" y="14" width="10" height="1" fill="#882200" opacity=".45"/>
+
+<!-- Smoke puffs (error smoke) -->
+<g fill="#554433">
+  <rect class="puff pf1" x="10" y="0" width="2" height="2"/>
+  <rect class="puff pf2" x="8"  y="-1" width="2" height="2"/>
+</g>
+
+<!-- Exclamation mark -->
+<g class="exclaim" fill="#FF3300">
+  <rect x="13" y="-8" width="2" height="5"/>
+  <rect x="13" y="-2" width="2" height="2"/>
+</g>
+
+<!-- Tips (darkened, droopy) -->
+<g class="ft-error">
+  <rect x="7"  y="-6" width="1" height="1" fill="#880000"/>
+  <rect x="6"  y="-5" width="3" height="2" fill="#881100"/>
+  <rect x="5"  y="-3" width="5" height="2" fill="#992211"/>
+  <rect x="3"  y="-4" width="2" height="1" fill="#880000"/>
+  <rect x="3"  y="-3" width="3" height="2" fill="#992211"/>
+  <rect x="10" y="-4" width="2" height="1" fill="#880000"/>
+  <rect x="9"  y="-3" width="3" height="2" fill="#992211"/>
+</g>
+
+<!-- Body (shaking, darkened) -->
+<g class="body-shake">
+  <rect x="3"  y="-1" width="9" height="1"  fill="#882211"/>
+  <rect x="2"  y="0"  width="11" height="9" fill="#993322"/>
+  <rect x="3"  y="9"  width="9" height="1"  fill="#993322"/>
+  <rect x="4"  y="10" width="7" height="1"  fill="#993322"/>
+  <rect x="5"  y="11" width="1" height="2"  fill="#882211"/>
+  <rect x="9"  y="11" width="1" height="2"  fill="#882211"/>
+  <rect x="3"  y="1"  width="9" height="8"  fill="#CC4422"/>
+  <rect x="4"  y="9"  width="7" height="1"  fill="#CC4422"/>
+  <rect x="5"  y="10" width="5" height="1"  fill="#CC4422"/>
+  <rect x="4"  y="2"  width="7" height="6"  fill="#DD7744"/>
+  <rect x="5"  y="8"  width="5" height="1"  fill="#DD7744"/>
+  <rect x="6"  y="9"  width="3" height="1"  fill="#DD7744"/>
+  <rect x="5"  y="3"  width="5" height="4"  fill="#EE9966"/>
+  <!-- X eyes (left) -->
+  <g class="eye-x-l" fill="#110000">
+    <rect x="3.5" y="3.5" width="3" height="1"/>
+    <rect x="4.5" y="2.5" width="1" height="3"/>
+  </g>
+  <!-- X eyes (right) -->
+  <g class="eye-x-r" fill="#110000">
+    <rect x="8.5" y="3.5" width="3" height="1"/>
+    <rect x="9.5" y="2.5" width="1" height="3"/>
+  </g>
+  <!-- Arms (raised in panic) -->
+  <rect x="-1" y="3"  width="2" height="2" fill="#993322"/>
+  <rect x="14" y="3"  width="2" height="2" fill="#993322"/>
+</g>
+</svg>

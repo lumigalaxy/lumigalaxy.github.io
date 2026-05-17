@@ -1,7 +1,7 @@
 {
-  "name": "clawd-on-desk",
+  "name": "alien-on-desk",
   "version": "0.6.2",
-  "description": "A desktop pet that reacts to your Claude Code sessions in real-time.",
+  "description": "An alien desktop pet that reacts to your AI coding sessions in real-time.",
   "main": "src/main.js",
   "scripts": {
     "start": "node launch.js",
@@ -18,7 +18,7 @@
     "install:kiro-hooks": "node hooks/kiro-install.js"
   },
   "keywords": [
-    "clawd",
+    "alien",
     "desktop-pet",
     "electron",
     "claude-code"
@@ -27,8 +27,8 @@
   "license": "MIT",
   "type": "commonjs",
   "build": {
-    "appId": "com.clawd.on-desk",
-    "productName": "Clawd on Desk",
+    "appId": "com.alien.on-desk",
+    "productName": "Alien on Desk",
     "mac": {
       "icon": "assets/icon.png",
       "target": [
@@ -48,7 +48,7 @@
     "win": {
       "icon": "assets/icon.ico",
       "signAndEditExecutable": false,
-      "artifactName": "Clawd-on-Desk-Setup-${version}.${ext}",
+      "artifactName": "Alien-on-Desk-Setup-${version}.${ext}",
       "target": [
         {
           "target": "nsis",
