@@ -600,13 +600,10 @@ const STRINGS = {
   },
 };
 
-// Contributors list (README order, hardcoded — update when new contributors land).
+// Contributors list (hardcoded — update when new contributors land).
 // GitHub usernames don't translate, so this is shared across all locales.
 const CONTRIBUTORS = [
-  "PixelCookie-zyf", "yujiachen-y", "AooooooZzzz", "purefkh", "Tobeabellwether", "Jasonhonghh", "crashchen",
-  "hongbigtou", "InTimmyDate", "NeizhiTouhu", "xu3stones-cmd", "androidZzT", "Ye-0413", "WanfengzzZ",
-  "TaoXieSZ", "ssly", "stickycandy", "Rladmsrl", "YOIMIYA66", "Kevin7Qi", "sefuzhou770801-hub",
-  "Tonic-Jin", "seoki180", "PeterShanxin", "rullerzhou-afk", "CHIANGANGSTER",
+  "ccchenma-cc", "lozpastor",
 ];
 
 const SHORTCUT_API = globalThis.ClawdShortcutActions || {};

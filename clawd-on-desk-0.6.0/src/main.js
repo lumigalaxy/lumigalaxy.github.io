@@ -2215,9 +2215,9 @@ ipcMain.handle("settings:get-about-info", () => {
     version: app.getVersion(),
     repoUrl: "https://github.com/lumigalaxy/lumigalaxy.github.io",
     license: "MIT",
-    copyright: "\u00a9 2026 Ruller_Lulu",
-    authorName: "Ruller_Lulu / \u9e7f\u9e7f",
-    authorUrl: "https://github.com/rullerzhou-afk",
+    copyright: "\u00a9 2026 ccchenma-cc",
+    authorName: "ccchenma-cc",
+    authorUrl: "https://github.com/ccchenma-cc",
     heroSvgContent,
   };
 });

@@ -4,6 +4,7 @@
 
 const OLLAMA_HOST = "http://localhost:11434";
 const DEFAULT_CHAT_MODEL = "llama3.2";
+const OFFLINE_CHAT_MODEL = "Alien offline";
 const STORAGE_KEY_MODEL = "alien.chat.model";
 const STORAGE_KEY_HISTORY = "alien.chat.history";
 const MAX_HISTORY = 40; // turns (user+assistant pairs trimmed together)
@@ -28,6 +29,7 @@ const els = {
 let messages = [];      // [{ role: "user" | "assistant", content: string }]
 let abortController = null;
 let currentModel = localStorage.getItem(STORAGE_KEY_MODEL) || "";
+let offlineMode = false;
 
 // ── Status helpers ──
 function setStatus(state, text) {
@@ -112,10 +114,21 @@ async function refreshModels() {
     setStatus("ok", `Connected · ${currentModel}`);
     els.send.disabled = false;
   } catch (e) {
-    setStatus("err", `Ollama not reachable at ${OLLAMA_HOST} — start it with: ollama serve`);
-    els.send.disabled = true;
-    els.modelSelect.innerHTML = '<option disabled>Not connected</option>';
+    enableOfflineMode();
   }
+}
+
+function enableOfflineMode() {
+  offlineMode = true;
+  currentModel = OFFLINE_CHAT_MODEL;
+  els.modelSelect.innerHTML = "";
+  const opt = document.createElement("option");
+  opt.value = OFFLINE_CHAT_MODEL;
+  opt.textContent = OFFLINE_CHAT_MODEL;
+  els.modelSelect.appendChild(opt);
+  els.modelSelect.value = OFFLINE_CHAT_MODEL;
+  els.send.disabled = false;
+  setStatus("ok", "Offline mode · Alien can chat without Ollama");
 }
 
 async function fetchModels() {
@@ -136,8 +149,9 @@ async function pullDefaultModel() {
 
 els.modelSelect.addEventListener("change", () => {
   currentModel = els.modelSelect.value;
+  offlineMode = currentModel === OFFLINE_CHAT_MODEL;
   localStorage.setItem(STORAGE_KEY_MODEL, currentModel);
-  setStatus("ok", `Connected · ${currentModel}`);
+  setStatus("ok", offlineMode ? "Offline mode · Alien can chat without Ollama" : `Connected · ${currentModel}`);
 });
 
 // ── Clear ──
@@ -194,7 +208,7 @@ function setSendingState(sending) {
 
 // ── Streaming chat ──
 async function sendMessage(userText) {
-  if (!currentModel) {
+  if (!currentModel && !offlineMode) {
     setStatus("err", "Select a model first.");
     return;
   }
@@ -216,6 +230,15 @@ async function sendMessage(userText) {
 
   let accumulated = "";
   try {
+    if (offlineMode || currentModel === OFFLINE_CHAT_MODEL) {
+      accumulated = buildOfflineReply(userText);
+      await typeOfflineReply(contentEl, accumulated);
+      messages.push({ role: "assistant", content: accumulated });
+      saveHistory();
+      setStatus("ok", "Offline mode · Alien can chat without Ollama");
+      return;
+    }
+
     const res = await fetch(`${OLLAMA_HOST}/api/chat`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -273,16 +296,52 @@ async function sendMessage(userText) {
       saveHistory();
       setStatus("ok", `Connected · ${currentModel}`);
     } else {
-      contentEl.textContent = accumulated || `⚠️ Error: ${err.message}`;
-      if (accumulated) messages.push({ role: "assistant", content: accumulated });
+      offlineMode = true;
+      currentModel = OFFLINE_CHAT_MODEL;
+      accumulated = buildOfflineReply(userText);
+      contentEl.textContent = accumulated;
+      messages.push({ role: "assistant", content: accumulated });
       saveHistory();
-      setStatus("err", `Error: ${err.message}`);
+      enableOfflineMode();
     }
   } finally {
     wrapper.classList.remove("streaming");
     abortController = null;
     setSendingState(false);
   }
+}
+
+function buildOfflineReply(userText) {
+  const text = String(userText || "").trim();
+  const lower = text.toLowerCase();
+  const spanish = /[¿¡ñáéíóú]|\b(hola|gracias|quiero|puedes|alien|chat|error|funciona|ollama)\b/i.test(text);
+  if (lower.includes("ollama") || lower.includes("modelo") || lower.includes("model") || lower.includes("error")) {
+    return spanish
+      ? "Estoy en modo offline porque Ollama no esta disponible. Aun asi puedo responderte aqui; si quieres IA local completa, abre Ollama mas tarde y volvere a usar el modelo automaticamente al reiniciar el chat."
+      : "I am in offline mode because Ollama is not available. I can still chat here; for full local AI, start Ollama later and I will use the model again when the chat restarts.";
+  }
+  if (/[?¿]$/.test(text)) {
+    return spanish
+      ? "Mi antena offline dice que si. Puedo ayudarte con respuestas cortas, ideas y acompanarte mientras arreglamos lo que haga falta."
+      : "My offline antenna says yes. I can help with short answers, ideas, and keeping you company while we fix what needs fixing.";
+  }
+  return spanish
+    ? "Recibido. Estoy aqui en modo offline, pero sigo conversando contigo. Cuéntame un poco mas y seguimos."
+    : "Received. I am here in offline mode, but still chatting with you. Tell me a little more and we will keep going.";
+}
+
+function typeOfflineReply(contentEl, text) {
+  return new Promise((resolve) => {
+    let i = 0;
+    const tick = () => {
+      i = Math.min(text.length, i + 3);
+      contentEl.textContent = text.slice(0, i);
+      scrollToBottom();
+      if (i >= text.length) return resolve();
+      setTimeout(tick, 18);
+    };
+    tick();
+  });
 }
 
 // ── Boot ──

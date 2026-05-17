@@ -18,6 +18,7 @@ const isWin = process.platform === "win32";
 const OLLAMA_HOST = "127.0.0.1";
 const OLLAMA_PORT = 11434;
 const DEFAULT_CHAT_MODEL = "llama3.2";
+const OFFLINE_CHAT_MODEL = "Alien offline";
 const SYSTEM_PROMPT = [
   "You are Alien, a friendly pixel-art alien desktop pet companion.",
   "Replies must be SHORT (1-3 sentences) — they appear inside a small chat bubble next to the user's pet.",
@@ -227,7 +228,9 @@ function _wireIpc() {
       await _ensureModelsLoaded();
       return { ok: true, models: availableModels, model: preferredModel };
     } catch (e) {
-      return { ok: false, error: e.message || String(e) };
+      availableModels = [OFFLINE_CHAT_MODEL];
+      preferredModel = OFFLINE_CHAT_MODEL;
+      return { ok: true, models: availableModels, model: preferredModel, offline: true };
     }
   });
 
@@ -237,8 +240,12 @@ function _wireIpc() {
 
   ipcMain.on("chat-bubble-send", (_e, payload) => {
     const text = payload && payload.text;
-    const model = (payload && payload.model) || preferredModel;
+    const model = (payload && payload.model) || preferredModel || OFFLINE_CHAT_MODEL;
     if (!text || !model) return;
+    if (model === OFFLINE_CHAT_MODEL) {
+      _streamOfflineReply(text, model);
+      return;
+    }
     _streamReply(text, model);
   });
 }
@@ -256,10 +263,15 @@ async function _ensureModelsLoaded() {
   if (availableModels.length > 0) return;
   await _loadAvailableModels();
   if (availableModels.length > 0) return;
-  await _fetchOllama("POST", "/api/pull", { name: DEFAULT_CHAT_MODEL, stream: false }, 10 * 60 * 1000);
-  await _loadAvailableModels();
-  if (!availableModels.includes(DEFAULT_CHAT_MODEL)) availableModels.unshift(DEFAULT_CHAT_MODEL);
-  preferredModel = DEFAULT_CHAT_MODEL;
+  try {
+    await _fetchOllama("POST", "/api/pull", { name: DEFAULT_CHAT_MODEL, stream: false }, 10 * 60 * 1000);
+    await _loadAvailableModels();
+    if (!availableModels.includes(DEFAULT_CHAT_MODEL)) availableModels.unshift(DEFAULT_CHAT_MODEL);
+    preferredModel = DEFAULT_CHAT_MODEL;
+  } catch (err) {
+    availableModels = [OFFLINE_CHAT_MODEL];
+    preferredModel = OFFLINE_CHAT_MODEL;
+  }
 }
 
 async function _loadAvailableModels() {
@@ -348,6 +360,47 @@ function _streamReply(userText, model) {
   req.write(body);
   req.end();
   activeRequest = { req, abort: () => req.destroy() };
+}
+
+function _streamOfflineReply(userText, model) {
+  _abortActiveRequest();
+  history.push({ role: "user", content: userText });
+  if (history.length > MAX_HISTORY * 2) history = history.slice(-MAX_HISTORY * 2);
+
+  _send("chat-bubble-reply-start", { user: userText, model });
+  const reply = _buildOfflineReply(userText);
+  let idx = 0;
+  const timer = setInterval(() => {
+    const prev = idx;
+    idx = Math.min(reply.length, idx + 3);
+    _send("chat-bubble-reply-chunk", reply.slice(prev, idx));
+    if (idx >= reply.length) {
+      clearInterval(timer);
+      history.push({ role: "assistant", content: reply });
+      _send("chat-bubble-reply-end", null);
+      activeRequest = null;
+    }
+  }, 18);
+  activeRequest = { req: { destroy: () => clearInterval(timer) } };
+}
+
+function _buildOfflineReply(userText) {
+  const text = String(userText || "").trim();
+  const lower = text.toLowerCase();
+  const spanish = /[¿¡ñáéíóú]|\b(hola|gracias|quiero|puedes|alien|chat|error|funciona|ollama)\b/i.test(text);
+  if (lower.includes("ollama") || lower.includes("modelo") || lower.includes("model") || lower.includes("error")) {
+    return spanish
+      ? "Estoy en modo offline porque Ollama no esta disponible. Aun asi puedo responderte aqui; si quieres IA local completa, abre Ollama mas tarde."
+      : "I am in offline mode because Ollama is not available. I can still chat here; for full local AI, start Ollama later.";
+  }
+  if (/[?¿]$/.test(text)) {
+    return spanish
+      ? "Mi antena offline dice que si. Puedo ayudarte con respuestas cortas, ideas y compania mientras arreglamos lo que haga falta."
+      : "My offline antenna says yes. I can help with short answers, ideas, and company while we fix what needs fixing.";
+  }
+  return spanish
+    ? "Recibido. Estoy aqui en modo offline, pero sigo conversando contigo. Cuentame un poco mas y seguimos."
+    : "Received. I am here in offline mode, but still chatting with you. Tell me a little more and we will keep going.";
 }
 
 function _fetchOllama(method, pathStr, body, timeoutMs = 4000) {
