@@ -21,7 +21,7 @@ https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
 
 2. Download the Windows installer.
    Look for a file ending in `.exe`, for example:
-   `Clawd-on-Desk-Setup-0.6.0.exe`
+   `Clawd-on-Desk-Setup-x.y.z.exe`
 
 3. Double-click the `.exe` file.
 
@@ -115,7 +115,7 @@ https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
 
 2. 下载 Windows 安装包。
    找到以 `.exe` 结尾的文件，例如：
-   `Clawd-on-Desk-Setup-0.6.0.exe`
+   `Clawd-on-Desk-Setup-x.y.z.exe`
 
 3. 双击 `.exe` 文件。
 
