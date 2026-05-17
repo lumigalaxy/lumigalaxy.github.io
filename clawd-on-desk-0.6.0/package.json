@@ -1,6 +1,6 @@
 {
   "name": "alien-on-desk",
-  "version": "0.6.2",
+  "version": "0.6.3",
   "description": "An alien desktop pet that reacts to your AI coding sessions in real-time.",
   "main": "src/main.js",
   "scripts": {
