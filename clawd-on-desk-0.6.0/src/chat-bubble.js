@@ -17,6 +17,7 @@ const isWin = process.platform === "win32";
 
 const OLLAMA_HOST = "127.0.0.1";
 const OLLAMA_PORT = 11434;
+const DEFAULT_CHAT_MODEL = "llama3.2";
 const SYSTEM_PROMPT = [
   "You are Alien, a friendly pixel-art alien desktop pet companion.",
   "Replies must be SHORT (1-3 sentences) — they appear inside a small chat bubble next to the user's pet.",
@@ -68,7 +69,7 @@ function openChatBubble() {
   const pet = _getPetBounds();
   if (!pet) return;
   isOpen = true;
-  _ensureModelsLoaded();
+  _ensureModelsLoaded().catch(() => {});
   _createWindow(pet);
 }
 
@@ -223,9 +224,7 @@ function _wireIpc() {
 
   ipcMain.handle("chat-bubble-list-models", async () => {
     try {
-      const res = await _fetchOllama("GET", "/api/tags");
-      availableModels = (res && Array.isArray(res.models)) ? res.models.map(m => m.name) : [];
-      if (!preferredModel && availableModels.length > 0) preferredModel = availableModels[0];
+      await _ensureModelsLoaded();
       return { ok: true, models: availableModels, model: preferredModel };
     } catch (e) {
       return { ok: false, error: e.message || String(e) };
@@ -255,11 +254,23 @@ function _abortActiveRequest() {
 
 async function _ensureModelsLoaded() {
   if (availableModels.length > 0) return;
+  await _loadAvailableModels();
+  if (availableModels.length > 0) return;
+  await _fetchOllama("POST", "/api/pull", { name: DEFAULT_CHAT_MODEL, stream: false }, 10 * 60 * 1000);
+  await _loadAvailableModels();
+  if (!availableModels.includes(DEFAULT_CHAT_MODEL)) availableModels.unshift(DEFAULT_CHAT_MODEL);
+  preferredModel = DEFAULT_CHAT_MODEL;
+}
+
+async function _loadAvailableModels() {
   try {
     const res = await _fetchOllama("GET", "/api/tags");
     availableModels = (res && Array.isArray(res.models)) ? res.models.map(m => m.name) : [];
     if (!preferredModel && availableModels.length > 0) preferredModel = availableModels[0];
-  } catch { /* surfaced when user sends */ }
+  } catch (err) {
+    availableModels = [];
+    throw err;
+  }
 }
 
 function _streamReply(userText, model) {
@@ -339,7 +350,7 @@ function _streamReply(userText, model) {
   activeRequest = { req, abort: () => req.destroy() };
 }
 
-function _fetchOllama(method, pathStr, body) {
+function _fetchOllama(method, pathStr, body, timeoutMs = 4000) {
   return new Promise((resolve, reject) => {
     const data = body ? JSON.stringify(body) : null;
     const req = http.request({
@@ -351,7 +362,7 @@ function _fetchOllama(method, pathStr, body) {
         "Content-Type": "application/json",
         "Content-Length": Buffer.byteLength(data),
       } : {},
-      timeout: 4000,
+      timeout: timeoutMs,
     }, (res) => {
       let buf = "";
       res.setEncoding("utf8");

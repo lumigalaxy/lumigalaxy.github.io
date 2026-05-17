@@ -2125,7 +2125,13 @@ export default {
 
   <footer class="footer fade-in">
     <p>像素族大家庭还有更多成员等待发现</p>
-    <a href="#" class="cta-btn">下载桌面端体验完整互动</a>
+    <a
+      href="https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest"
+      class="cta-btn"
+      id="latest-release-download"
+      data-release-api="https://api.github.com/repos/lumigalaxy/lumigalaxy.github.io/releases/latest"
+      data-fallback-url="https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest"
+    >下载桌面端体验完整互动</a>
   </footer>
 
 </div>
@@ -3980,6 +3986,46 @@ function applyStaticI18n() {
   });
   applySelectorI18n();
 }
+
+function preferredReleaseAsset(assets) {
+  const list = Array.isArray(assets) ? assets : [];
+  const platform = (navigator.platform || '').toLowerCase();
+  const ua = (navigator.userAgent || '').toLowerCase();
+  const isMac = platform.includes('mac') || ua.includes('mac os');
+  const isWindows = platform.includes('win') || ua.includes('windows');
+  if (isWindows) return list.find(asset => /\.exe$/i.test(asset.name));
+  if (isMac && /arm|aarch64/.test(platform + ' ' + ua)) {
+    return list.find(asset => /arm64\.dmg$/i.test(asset.name)) || list.find(asset => /\.dmg$/i.test(asset.name));
+  }
+  if (isMac) {
+    return list.find(asset => /\.dmg$/i.test(asset.name) && !/arm64\.dmg$/i.test(asset.name)) || list.find(asset => /\.dmg$/i.test(asset.name));
+  }
+  return list.find(asset => /\.(exe|dmg|appimage|deb|zip)$/i.test(asset.name));
+}
+
+function setupLatestReleaseDownload() {
+  const btn = document.getElementById('latest-release-download');
+  if (!btn) return;
+  btn.addEventListener('click', async (event) => {
+    event.preventDefault();
+    const originalText = btn.textContent;
+    const fallbackUrl = btn.dataset.fallbackUrl || btn.href;
+    btn.textContent = currentLang() === 'en' ? 'Preparing download...' : '正在准备下载...';
+    try {
+      const res = await fetch(btn.dataset.releaseApi, { headers: { Accept: 'application/vnd.github+json' } });
+      if (!res.ok) throw new Error('release lookup failed');
+      const release = await res.json();
+      const asset = preferredReleaseAsset(release.assets);
+      window.location.href = asset && asset.browser_download_url ? asset.browser_download_url : fallbackUrl;
+    } catch (err) {
+      window.location.href = fallbackUrl;
+    } finally {
+      setTimeout(() => { btn.textContent = originalText; }, 900);
+    }
+  });
+}
+
+setupLatestReleaseDownload();
 
 document.querySelectorAll('.lang-toggle button').forEach(btn => {
   btn.addEventListener('click', () => {

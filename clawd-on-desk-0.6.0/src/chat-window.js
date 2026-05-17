@@ -22,7 +22,7 @@ function openChatWindow() {
     minWidth: 360,
     minHeight: 420,
     title: "Alien Chat",
-    backgroundColor: "#1e2530",
+    backgroundColor: "#0d130b",
     show: false,
     frame: true,
     resizable: true,

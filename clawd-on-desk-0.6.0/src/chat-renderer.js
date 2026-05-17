@@ -3,6 +3,7 @@
 "use strict";
 
 const OLLAMA_HOST = "http://localhost:11434";
+const DEFAULT_CHAT_MODEL = "llama3.2";
 const STORAGE_KEY_MODEL = "alien.chat.model";
 const STORAGE_KEY_HISTORY = "alien.chat.history";
 const MAX_HISTORY = 40; // turns (user+assistant pairs trimmed together)
@@ -86,19 +87,14 @@ function loadHistory() {
 async function refreshModels() {
   try {
     setStatus("", "Fetching available models…");
-    const res = await fetch(`${OLLAMA_HOST}/api/tags`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
-    const data = await res.json();
-    const models = Array.isArray(data.models) ? data.models : [];
+    let models = await fetchModels();
     els.modelSelect.innerHTML = "";
     if (models.length === 0) {
-      const opt = document.createElement("option");
-      opt.textContent = "No models — run: ollama pull llama3.2";
-      opt.disabled = true;
-      els.modelSelect.appendChild(opt);
-      setStatus("err", "No models installed. Run: ollama pull llama3.2");
       els.send.disabled = true;
-      return;
+      setStatus("thinking", `Installing local model ${DEFAULT_CHAT_MODEL}. This can take a few minutes once.`);
+      await pullDefaultModel();
+      models = await fetchModels();
+      if (models.length === 0) models = [{ name: DEFAULT_CHAT_MODEL }];
     }
     for (const m of models) {
       const opt = document.createElement("option");
@@ -120,6 +116,22 @@ async function refreshModels() {
     els.send.disabled = true;
     els.modelSelect.innerHTML = '<option disabled>Not connected</option>';
   }
+}
+
+async function fetchModels() {
+  const res = await fetch(`${OLLAMA_HOST}/api/tags`);
+  if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  const data = await res.json();
+  return Array.isArray(data.models) ? data.models : [];
+}
+
+async function pullDefaultModel() {
+  const res = await fetch(`${OLLAMA_HOST}/api/pull`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ name: DEFAULT_CHAT_MODEL, stream: false }),
+  });
+  if (!res.ok) throw new Error(`Could not install ${DEFAULT_CHAT_MODEL} (HTTP ${res.status})`);
 }
 
 els.modelSelect.addEventListener("change", () => {

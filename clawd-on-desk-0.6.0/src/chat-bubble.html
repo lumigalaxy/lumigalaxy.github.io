@@ -232,6 +232,7 @@
     .footer .meta .status { font-size: 9px; }
     .footer .meta .status.ok { color: var(--alien); }
     .footer .meta .status.err { color: var(--danger); }
+    .footer .meta .status.busy { color: var(--alien-glow); }
 
     .input-row {
       display: flex;
@@ -430,7 +431,7 @@
       opt.disabled = true;
       modelSel.appendChild(opt);
       sendBtn.disabled = true;
-      setStatus("ollama unreachable", "err");
+      setStatus("start ollama", "err");
       return;
     }
     for (const name of models) {
@@ -444,6 +445,8 @@
     setStatus("ready", "ok");
   }
 
+  setStatus("checking models", "busy");
+  sendBtn.disabled = true;
   api.listModels().then((res) => {
     if (res && res.ok) refreshModels(res.models, res.model);
     else refreshModels([], "");
@@ -514,7 +517,7 @@
 
   function setStatus(text, kind) {
     statusEl.textContent = text;
-    statusEl.classList.remove("ok", "err");
+    statusEl.classList.remove("ok", "err", "busy");
     if (kind) statusEl.classList.add(kind);
   }
 
