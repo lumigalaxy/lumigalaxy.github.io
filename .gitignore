@@ -1,0 +1,13 @@
+node_modules/
+dist/
+.env
+.DS_Store
+Thumbs.db
+
+apps/*/node_modules/
+apps/*/dist/
+apps/*/src-tauri/target/
+
+clawd-on-desk-0.6.0/node_modules/
+clawd-on-desk-0.6.0/dist/
+clawd-on-desk-0.6.0/.npm-cache/

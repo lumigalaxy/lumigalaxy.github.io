@@ -236,7 +236,7 @@ function initUpdater(ctx, deps = {}) {
     return new Promise((resolve, reject) => {
       const req = httpsGet({
         hostname: "api.github.com",
-        path: "/repos/rullerzhou-afk/clawd-on-desk/releases/latest",
+        path: "/repos/lumigalaxy/lumigalaxy.github.io/releases/latest",
         headers: { "User-Agent": "Clawd-on-Desk" },
       }, (res) => {
         let data = "";
@@ -488,7 +488,7 @@ function initUpdater(ctx, deps = {}) {
         version: info.version,
         onPrimary: async () => {
           if (isMac) {
-            shell.openExternal("https://github.com/rullerzhou-afk/clawd-on-desk/releases/latest");
+            shell.openExternal("https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest");
             updateStatus = "idle";
             manualUpdateCheck = false;
             rebuildMenus();

@@ -1,10 +1,14 @@
-name: Build & Release
+name: Build Clawd installers
 
 on:
   push:
     tags:
       - "v*"
   workflow_dispatch:
+
+defaults:
+  run:
+    working-directory: clawd-on-desk-0.6.0
 
 jobs:
   build-windows:
@@ -14,14 +18,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
+          cache: npm
+          cache-dependency-path: clawd-on-desk-0.6.0/package-lock.json
+      - run: npm ci
       - run: npx electron-builder --win --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: windows-installer
           path: |
-            dist/*.exe
-            dist/latest.yml
+            clawd-on-desk-0.6.0/dist/*.exe
+            clawd-on-desk-0.6.0/dist/latest.yml
 
   build-mac:
     runs-on: macos-latest
@@ -30,14 +36,16 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
+          cache: npm
+          cache-dependency-path: clawd-on-desk-0.6.0/package-lock.json
+      - run: npm ci
       - run: npx electron-builder --mac --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: mac-installer
           path: |
-            dist/*.dmg
-            dist/latest-mac.yml
+            clawd-on-desk-0.6.0/dist/*.dmg
+            clawd-on-desk-0.6.0/dist/latest-mac.yml
 
   build-linux:
     runs-on: ubuntu-latest
@@ -46,15 +54,17 @@ jobs:
       - uses: actions/setup-node@v4
         with:
           node-version: 20
-      - run: npm install
+          cache: npm
+          cache-dependency-path: clawd-on-desk-0.6.0/package-lock.json
+      - run: npm ci
       - run: npx electron-builder --linux --publish never
       - uses: actions/upload-artifact@v4
         with:
           name: linux-installer
           path: |
-            dist/*.AppImage
-            dist/*.deb
-            dist/latest-linux.yml
+            clawd-on-desk-0.6.0/dist/*.AppImage
+            clawd-on-desk-0.6.0/dist/*.deb
+            clawd-on-desk-0.6.0/dist/latest-linux.yml
 
   release:
     needs: [build-windows, build-mac, build-linux]
@@ -70,4 +80,4 @@ jobs:
       - uses: softprops/action-gh-release@v2
         with:
           files: artifacts/*
-          body_path: docs/releases/release-${{ github.ref_name }}.md
+          body_path: clawd-on-desk-0.6.0/docs/releases/release-${{ github.ref_name }}.md
