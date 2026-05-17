@@ -1,86 +1,187 @@
-# 像素星球 · Pixel Planet
+# AI Desktop Companions
 
-> 一个由 5 个像素风外星人组成的 AI 原生桌宠产品。每个角色拥有独立世界观、知识库与对话风格，通过 RAG 实现角色化讲述与互动，最终汇聚为可视化"星球"门户。
+AI Desktop Companions are small animated aliens that live on your desktop. They can stay on screen while you work, react to your activity, and give your device a more playful companion experience.
 
-🛸 在线体验（Web 版）：_待部署_  
-🖥️ 桌面端下载：_开发中_  
-📄 [产品需求文档 (PRD)](./docs/PRD.md) · [角色 Bible](./docs/character-bibles/) · [迭代日志](./docs/CHANGELOG.md)
+Download the latest version here:
+
+https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
+
+## English
+
+### What You Need
+
+- A Windows or macOS computer.
+- Internet access to download the installer.
+- No coding knowledge is required.
+
+### Install on Windows
+
+1. Open the latest release page:
+   https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
+
+2. Download the Windows installer.
+   Look for a file ending in `.exe`, for example:
+   `Clawd-on-Desk-Setup-0.6.0.exe`
+
+3. Double-click the `.exe` file.
+
+4. Follow the installer steps.
+   You can keep the default installation folder.
+
+5. Open the app from the Start Menu.
+
+6. Your desktop companion should appear on your screen.
+
+### Install on macOS
+
+1. Open the latest release page:
+   https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
+
+2. Download the macOS installer.
+   Look for a file ending in `.dmg`.
+
+3. Open the `.dmg` file.
+
+4. Drag the app into the `Applications` folder.
+
+5. Open `Applications` and launch the app.
+
+6. If macOS says the app cannot be opened because it is from an unidentified developer:
+   - Open `System Settings`.
+   - Go to `Privacy & Security`.
+   - Find the app warning.
+   - Click `Open Anyway`.
+   - Confirm that you want to open it.
+
+7. Your desktop companion should appear on your screen.
+
+### How to Use the Companion
+
+- Move the companion by dragging it.
+- Right-click the companion to open its menu.
+- Use the menu to change settings, switch modes, or quit the app.
+- If the companion supports themes, use the settings menu to select a different alien style.
+- Keep the app running in the background if you want the alien to stay on your desktop.
+
+### Updating
+
+1. Open the companion menu.
+2. Choose `Check for Updates` if available.
+3. You can also download the newest installer from:
+   https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
+
+### Uninstall
+
+Windows:
+
+1. Open `Settings`.
+2. Go to `Apps`.
+3. Find the desktop companion app.
+4. Click `Uninstall`.
+
+macOS:
+
+1. Open `Applications`.
+2. Drag the app to the Trash.
+3. Empty the Trash if you want to remove it completely.
+
+### Troubleshooting
+
+- If the app does not open, try restarting your computer.
+- If Windows warns you about an unknown app, choose `More info`, then `Run anyway` only if you downloaded it from this repository.
+- If macOS blocks the app, use `System Settings` > `Privacy & Security` > `Open Anyway`.
+- If the companion does not appear, check the system tray or menu bar and open it from there.
 
 ---
 
-## 5 位居民
+## 中文
 
-| 编号 | 中文名 | 物种 | 母星 | 一句话定位 |
-| ---- | ----- | ---- | ---- | --------- |
-| SPA-001 | 像素人 | Pixelkin | Pixelia | 桌面边界守护者，以光标为食 |
-| ALN-002 | 雏菊 | Teardropian | Daisya | 安静的屏幕邻居，47 分钟提醒喝水 |
-| ALN-003 | Lumi | Cyclopsian | Tera-IX | 单眼穿透代码，结对编程伙伴 |
-| ALN-004 | 柯基 | Corgian | Earth / Sofa Belt | 8 秒循环温暖，回头确认你还在 |
-| ALN-005 | 赤炎精灵 | Flame Spirit | Pyros-3 | 火焰随情绪变色，数据库里最温热的邻居 |
+AI Desktop Companions 是一组可以出现在桌面上的动态外星人桌宠。它们可以陪伴你工作，在屏幕上移动，并让电脑使用体验更有趣。
 
----
+最新版下载地址：
 
-## 仓库结构
+https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
 
-```
-.
-├── apps/
-│   ├── web/                # 星球门户网页（v3.2 单文件 → 模块化）
-│   └── desktop/            # Tauri 桌面端（5 角色 + 系统托盘 + 透明窗）
-├── packages/
-│   ├── characters/         # 5 角色定义（单一来源，web & desktop 共享）
-│   └── rag/                # RAG 检索 + LLM 调用 + Prompt 拼装
-├── docs/
-│   ├── PRD.md              # 产品需求文档
-│   ├── character-bibles/   # 5 份角色设定 Bible
-│   ├── competitive-analysis/
-│   ├── architecture.md     # 技术架构图
-│   ├── CHANGELOG.md
-│   └── ROADMAP.md
-├── archive/                # 早期实验（Clawd 调研、旧版形象）
-└── assets/                 # 共享原图、Logo
-```
+### 你需要准备什么
 
----
+- 一台 Windows 或 macOS 电脑。
+- 网络连接，用来下载安装包。
+- 不需要会编程。
 
-## 技术栈
+### Windows 安装步骤
 
-- **前端**：HTML/CSS/JS（v3.2 单文件） · React 19 + Vite + TypeScript（桌面端）
-- **桌面端**：Tauri 2 (Rust)
-- **AI**：LLM API（Claude / GPT-4o / DeepSeek）+ 边缘函数代理
-- **RAG**：`@xenova/transformers`（bge-small-zh）+ 内存向量库
-- **状态**：PAD 情绪模型（Pleasure/Arousal/Dominance）+ localStorage 持久化
+1. 打开最新版下载页面：
+   https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
 
----
+2. 下载 Windows 安装包。
+   找到以 `.exe` 结尾的文件，例如：
+   `Clawd-on-Desk-Setup-0.6.0.exe`
 
-## 本地启动
+3. 双击 `.exe` 文件。
 
-### Web（v3.2 静态页）
-```bash
-cd apps/web
-python3 -m http.server 8080  # 或任意静态服务
-```
+4. 按照安装器提示完成安装。
+   一般保持默认安装位置即可。
 
-### 桌面端
-```bash
-cd apps/desktop
-npm install
-npm run tauri dev
-```
+5. 从开始菜单打开应用。
 
----
+6. 桌面外星人会出现在你的屏幕上。
 
-## 项目里程碑
+### macOS 安装步骤
 
-- ✅ **v1.0 ~ v3.2**：5 角色形象 + 世界观 + 网页星球门户
-- 🚧 **v0.4**：RAG + LLM 接入（角色化对话）
-- 🚧 **v0.5**：故事讲述 + 小游戏集成
-- 📋 **v1.0**：桌面端 MVP（Tauri，1 角色起步）
+1. 打开最新版下载页面：
+   https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
 
-详见 [`docs/ROADMAP.md`](./docs/ROADMAP.md)。
+2. 下载 macOS 安装包。
+   找到以 `.dmg` 结尾的文件。
 
----
+3. 打开 `.dmg` 文件。
 
-## License
+4. 将应用拖入 `Applications` 文件夹。
 
-MIT
+5. 打开 `Applications` 文件夹并启动应用。
+
+6. 如果 macOS 提示应用来自身份不明的开发者，无法打开：
+   - 打开 `System Settings`。
+   - 进入 `Privacy & Security`。
+   - 找到该应用的安全提示。
+   - 点击 `Open Anyway`。
+   - 确认打开应用。
+
+7. 桌面外星人会出现在你的屏幕上。
+
+### 如何使用桌宠
+
+- 拖动桌宠可以移动它的位置。
+- 右键点击桌宠可以打开菜单。
+- 通过菜单可以修改设置、切换模式或退出应用。
+- 如果应用支持主题，可以在设置里选择不同的外星人外观。
+- 如果希望桌宠一直陪伴你，请让应用保持运行。
+
+### 如何更新
+
+1. 打开桌宠菜单。
+2. 如果有 `Check for Updates`，点击检查更新。
+3. 也可以直接从这里下载最新安装包：
+   https://github.com/lumigalaxy/lumigalaxy.github.io/releases/latest
+
+### 如何卸载
+
+Windows：
+
+1. 打开 `Settings`。
+2. 进入 `Apps`。
+3. 找到桌宠应用。
+4. 点击 `Uninstall`。
+
+macOS：
+
+1. 打开 `Applications`。
+2. 将应用拖入废纸篓。
+3. 如果想彻底删除，可以清空废纸篓。
+
+### 常见问题
+
+- 如果应用打不开，可以先重启电脑再试一次。
+- 如果 Windows 提示未知应用，请确认安装包来自本仓库，再点击 `More info` 和 `Run anyway`。
+- 如果 macOS 阻止打开应用，请进入 `System Settings` > `Privacy & Security` > `Open Anyway`。
+- 如果桌宠没有出现，请检查系统托盘或菜单栏，然后从那里重新打开应用。
