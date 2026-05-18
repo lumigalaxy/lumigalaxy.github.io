@@ -87,7 +87,7 @@ describe("prefs.validate", () => {
 
   it("keeps valid fields verbatim", () => {
     const v = prefs.validate({
-      lang: "ko",
+      lang: "es",
       soundMuted: true,
       bubbleFollowPet: true,
       allowEdgePinning: true,
@@ -97,7 +97,7 @@ describe("prefs.validate", () => {
       miniEdge: "left",
       theme: "calico",
     });
-    assert.strictEqual(v.lang, "ko");
+    assert.strictEqual(v.lang, "es");
     assert.strictEqual(v.soundMuted, true);
     assert.strictEqual(v.bubbleFollowPet, true);
     assert.strictEqual(v.allowEdgePinning, true);

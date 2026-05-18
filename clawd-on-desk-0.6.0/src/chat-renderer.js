@@ -7,9 +7,10 @@ const DEFAULT_CHAT_MODEL = "llama3.2";
 const OFFLINE_CHAT_MODEL = "Alien offline";
 const STORAGE_KEY_MODEL = "alien.chat.model";
 const STORAGE_KEY_HISTORY = "alien.chat.history";
+const STORAGE_KEY_MEMORY = "alien.chat.memory";
 const MAX_HISTORY = 40; // turns (user+assistant pairs trimmed together)
 
-const SYSTEM_PROMPT = [
+const BASE_SYSTEM_PROMPT = [
   "You are Alien, a friendly pixel-art alien desktop pet companion.",
   "Keep answers concise (1-4 short paragraphs unless the user asks for depth).",
   "Be warm, a little playful, and helpful. Reply in the user's language.",
@@ -28,13 +29,60 @@ const els = {
 
 let messages = [];      // [{ role: "user" | "assistant", content: string }]
 let abortController = null;
-let currentModel = localStorage.getItem(STORAGE_KEY_MODEL) || "";
+let currentModel = loadStoredModel();
 let offlineMode = false;
+const alienMemory = loadMemory();
 
 // ── Status helpers ──
 function setStatus(state, text) {
   els.status.className = state || "";
   els.statusText.textContent = text;
+}
+
+// Lightweight memory inspired by archive/001's visit counter. It gives the
+// alien continuity without sending personal data anywhere.
+function loadStoredModel() {
+  const stored = localStorage.getItem(STORAGE_KEY_MODEL) || "";
+  if (stored === OFFLINE_CHAT_MODEL) {
+    localStorage.removeItem(STORAGE_KEY_MODEL);
+    return "";
+  }
+  return stored;
+}
+
+function loadMemory() {
+  const now = new Date().toISOString();
+  try {
+    const raw = localStorage.getItem(STORAGE_KEY_MEMORY);
+    const parsed = raw ? JSON.parse(raw) : {};
+    const memory = {
+      encounters: Number.isFinite(parsed.encounters) ? parsed.encounters + 1 : 1,
+      firstSeen: typeof parsed.firstSeen === "string" ? parsed.firstSeen : now,
+      lastSeen: now,
+    };
+    localStorage.setItem(STORAGE_KEY_MEMORY, JSON.stringify(memory));
+    return memory;
+  } catch {
+    return { encounters: 1, firstSeen: now, lastSeen: now };
+  }
+}
+
+function buildSystemPrompt() {
+  return [
+    BASE_SYSTEM_PROMPT,
+    `You have opened this chat with the user ${alienMemory.encounters} time(s).`,
+    "Use that as quiet relationship memory only when it helps the reply feel natural.",
+  ].join(" ");
+}
+
+function hasRealModel() {
+  return !!currentModel && currentModel !== OFFLINE_CHAT_MODEL && !offlineMode;
+}
+
+function persistCurrentModel() {
+  if (currentModel && currentModel !== OFFLINE_CHAT_MODEL) {
+    localStorage.setItem(STORAGE_KEY_MODEL, currentModel);
+  }
 }
 
 // ── Rendering ──
@@ -89,6 +137,7 @@ function loadHistory() {
 async function refreshModels() {
   try {
     setStatus("", "Fetching available models…");
+    offlineMode = false;
     let models = await fetchModels();
     els.modelSelect.innerHTML = "";
     if (models.length === 0) {
@@ -109,7 +158,7 @@ async function refreshModels() {
       els.modelSelect.value = currentModel;
     } else {
       currentModel = els.modelSelect.value;
-      localStorage.setItem(STORAGE_KEY_MODEL, currentModel);
+      persistCurrentModel();
     }
     setStatus("ok", `Connected · ${currentModel}`);
     els.send.disabled = false;
@@ -121,6 +170,7 @@ async function refreshModels() {
 function enableOfflineMode() {
   offlineMode = true;
   currentModel = OFFLINE_CHAT_MODEL;
+  localStorage.removeItem(STORAGE_KEY_MODEL);
   els.modelSelect.innerHTML = "";
   const opt = document.createElement("option");
   opt.value = OFFLINE_CHAT_MODEL;
@@ -150,7 +200,8 @@ async function pullDefaultModel() {
 els.modelSelect.addEventListener("change", () => {
   currentModel = els.modelSelect.value;
   offlineMode = currentModel === OFFLINE_CHAT_MODEL;
-  localStorage.setItem(STORAGE_KEY_MODEL, currentModel);
+  if (offlineMode) localStorage.removeItem(STORAGE_KEY_MODEL);
+  else persistCurrentModel();
   setStatus("ok", offlineMode ? "Offline mode · Alien can chat without Ollama" : `Connected · ${currentModel}`);
 });
 
@@ -224,13 +275,17 @@ async function sendMessage(userText) {
   const { wrapper, contentEl } = appendMessage("assistant", "");
   wrapper.classList.add("streaming");
 
+  if (offlineMode || currentModel === OFFLINE_CHAT_MODEL) {
+    await tryReconnectToOllama();
+  }
+
   setStatus("thinking", `Thinking… (${currentModel})`);
   setSendingState(true);
   abortController = new AbortController();
 
   let accumulated = "";
   try {
-    if (offlineMode || currentModel === OFFLINE_CHAT_MODEL) {
+    if (!hasRealModel()) {
       accumulated = buildOfflineReply(userText);
       await typeOfflineReply(contentEl, accumulated);
       messages.push({ role: "assistant", content: accumulated });
@@ -247,7 +302,7 @@ async function sendMessage(userText) {
         model: currentModel,
         stream: true,
         messages: [
-          { role: "system", content: SYSTEM_PROMPT },
+          { role: "system", content: buildSystemPrompt() },
           ...messages.slice(-MAX_HISTORY),
         ],
       }),
@@ -296,13 +351,11 @@ async function sendMessage(userText) {
       saveHistory();
       setStatus("ok", `Connected · ${currentModel}`);
     } else {
-      offlineMode = true;
-      currentModel = OFFLINE_CHAT_MODEL;
+      enableOfflineMode();
       accumulated = buildOfflineReply(userText);
       contentEl.textContent = accumulated;
       messages.push({ role: "assistant", content: accumulated });
       saveHistory();
-      enableOfflineMode();
     }
   } finally {
     wrapper.classList.remove("streaming");
@@ -328,6 +381,31 @@ function buildOfflineReply(userText) {
   return spanish
     ? "Recibido. Estoy aqui en modo offline, pero sigo conversando contigo. Cuéntame un poco mas y seguimos."
     : "Received. I am here in offline mode, but still chatting with you. Tell me a little more and we will keep going.";
+}
+
+async function tryReconnectToOllama() {
+  try {
+    const models = await fetchModels();
+    if (!models.length) return false;
+    els.modelSelect.innerHTML = "";
+    for (const m of models) {
+      const opt = document.createElement("option");
+      opt.value = m.name;
+      opt.textContent = m.name;
+      els.modelSelect.appendChild(opt);
+    }
+    const stored = loadStoredModel();
+    currentModel = models.some(m => m.name === stored)
+      ? stored
+      : (models.some(m => m.name === DEFAULT_CHAT_MODEL) ? DEFAULT_CHAT_MODEL : models[0].name);
+    els.modelSelect.value = currentModel;
+    offlineMode = false;
+    persistCurrentModel();
+    setStatus("ok", `Connected · ${currentModel}`);
+    return true;
+  } catch {
+    return false;
+  }
 }
 
 function typeOfflineReply(contentEl, text) {

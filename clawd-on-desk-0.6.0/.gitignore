@@ -28,10 +28,7 @@ docs/**
 !docs/investigations/
 !docs/investigations/permission-hook-fail-deny-investigation.md
 !docs/releases/
-!docs/releases/release-v0.5.5.md
-!docs/releases/release-v0.6.0.md
-!docs/releases/release-v0.6.1.md
-!docs/releases/release-v0.6.2.md
+!docs/releases/*.md
 
 # Temp files from testing
 .tmp_*

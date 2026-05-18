@@ -1,6 +1,6 @@
 {
   "name": "alien-on-desk",
-  "version": "0.6.4",
+  "version": "0.6.5",
   "description": "An alien desktop pet that reacts to your AI coding sessions in real-time.",
   "main": "src/main.js",
   "scripts": {
@@ -23,7 +23,7 @@
     "electron",
     "claude-code"
   ],
-  "author": "rullerzhou-afk",
+  "author": "ccchenma-cc",
   "license": "MIT",
   "type": "commonjs",
   "build": {

@@ -11,3 +11,18 @@ apps/*/src-tauri/target/
 clawd-on-desk-0.6.0/node_modules/
 clawd-on-desk-0.6.0/dist/
 clawd-on-desk-0.6.0/.npm-cache/
+clawd-on-desk-0.6.0/.github/
+
+# Local archived prototypes and obsolete workspace scaffolding.
+/002/
+/003-main/
+/005/
+/alien_planet_page/
+/archive/
+/apps/
+/assets/
+/docs/
+/packages/
+/启动桌宠.app/
+/形象初图/
+/桌宠相关文档/

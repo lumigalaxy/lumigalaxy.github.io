@@ -40,6 +40,7 @@ const MAX_HISTORY = 24;
 let availableModels = [];
 let preferredModel = "";
 let ipcWired = false;
+let chatOpenCount = 0;
 
 // ── Public API ──
 
@@ -70,6 +71,7 @@ function openChatBubble() {
   const pet = _getPetBounds();
   if (!pet) return;
   isOpen = true;
+  chatOpenCount += 1;
   _ensureModelsLoaded().catch(() => {});
   _createWindow(pet);
 }
@@ -194,10 +196,11 @@ function _clampToWorkArea(x, y, pet) {
 
 function _sendBootstrap() {
   if (!chatWin || chatWin.isDestroyed()) return;
+  const hasReal = _hasRealModels();
   chatWin.webContents.send("chat-bubble-bootstrap", {
     lang: ctxRef && ctxRef.lang ? ctxRef.lang : "en",
-    models: availableModels,
-    model: preferredModel,
+    models: hasReal ? availableModels : [OFFLINE_CHAT_MODEL],
+    model: hasReal ? preferredModel : OFFLINE_CHAT_MODEL,
     history: history.slice(-MAX_HISTORY * 2),
   });
 }
@@ -226,25 +229,34 @@ function _wireIpc() {
   ipcMain.handle("chat-bubble-list-models", async () => {
     try {
       await _ensureModelsLoaded();
-      return { ok: true, models: availableModels, model: preferredModel };
+      const hasReal = _hasRealModels();
+      return {
+        ok: true,
+        models: hasReal ? availableModels : [OFFLINE_CHAT_MODEL],
+        model: hasReal ? preferredModel : OFFLINE_CHAT_MODEL,
+        offline: !hasReal,
+      };
     } catch (e) {
-      availableModels = [OFFLINE_CHAT_MODEL];
-      preferredModel = OFFLINE_CHAT_MODEL;
-      return { ok: true, models: availableModels, model: preferredModel, offline: true };
+      return { ok: true, models: [OFFLINE_CHAT_MODEL], model: OFFLINE_CHAT_MODEL, offline: true };
     }
   });
 
   ipcMain.on("chat-bubble-set-model", (_e, model) => {
-    if (typeof model === "string" && model) preferredModel = model;
+    if (typeof model === "string" && model && model !== OFFLINE_CHAT_MODEL) preferredModel = model;
   });
 
-  ipcMain.on("chat-bubble-send", (_e, payload) => {
+  ipcMain.on("chat-bubble-send", async (_e, payload) => {
     const text = payload && payload.text;
-    const model = (payload && payload.model) || preferredModel || OFFLINE_CHAT_MODEL;
+    let model = (payload && payload.model) || preferredModel || OFFLINE_CHAT_MODEL;
     if (!text || !model) return;
     if (model === OFFLINE_CHAT_MODEL) {
-      _streamOfflineReply(text, model);
-      return;
+      await _ensureModelsLoaded().catch(() => {});
+      if (_hasRealModels()) {
+        model = preferredModel || availableModels[0];
+      } else {
+        _streamOfflineReply(text, model);
+        return;
+      }
     }
     _streamReply(text, model);
   });
@@ -260,17 +272,17 @@ function _abortActiveRequest() {
 }
 
 async function _ensureModelsLoaded() {
-  if (availableModels.length > 0) return;
+  if (_hasRealModels()) return;
+  availableModels = [];
   await _loadAvailableModels();
-  if (availableModels.length > 0) return;
+  if (_hasRealModels()) return;
   try {
     await _fetchOllama("POST", "/api/pull", { name: DEFAULT_CHAT_MODEL, stream: false }, 10 * 60 * 1000);
     await _loadAvailableModels();
     if (!availableModels.includes(DEFAULT_CHAT_MODEL)) availableModels.unshift(DEFAULT_CHAT_MODEL);
     preferredModel = DEFAULT_CHAT_MODEL;
   } catch (err) {
-    availableModels = [OFFLINE_CHAT_MODEL];
-    preferredModel = OFFLINE_CHAT_MODEL;
+    availableModels = [];
   }
 }
 
@@ -278,11 +290,25 @@ async function _loadAvailableModels() {
   try {
     const res = await _fetchOllama("GET", "/api/tags");
     availableModels = (res && Array.isArray(res.models)) ? res.models.map(m => m.name) : [];
-    if (!preferredModel && availableModels.length > 0) preferredModel = availableModels[0];
+    if (!availableModels.includes(preferredModel)) {
+      preferredModel = availableModels.includes(DEFAULT_CHAT_MODEL) ? DEFAULT_CHAT_MODEL : (availableModels[0] || "");
+    }
   } catch (err) {
     availableModels = [];
     throw err;
   }
+}
+
+function _hasRealModels() {
+  return availableModels.some(m => m && m !== OFFLINE_CHAT_MODEL);
+}
+
+function _buildSystemPrompt() {
+  return [
+    SYSTEM_PROMPT,
+    `This small chat bubble has been opened ${chatOpenCount} time(s) in this app session.`,
+    "Use that as quiet relationship memory only when it helps the reply feel natural.",
+  ].join(" ");
 }
 
 function _streamReply(userText, model) {
@@ -293,7 +319,7 @@ function _streamReply(userText, model) {
   _send("chat-bubble-reply-start", { user: userText, model });
 
   const messages = [
-    { role: "system", content: SYSTEM_PROMPT },
+    { role: "system", content: _buildSystemPrompt() },
     ...history.slice(-MAX_HISTORY * 2),
   ];
   const body = JSON.stringify({ model, stream: true, messages });

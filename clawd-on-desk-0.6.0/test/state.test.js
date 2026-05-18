@@ -957,10 +957,10 @@ describe("buildSessionSubmenu badge + i18n", () => {
     assert.match(menuLabel(), /运行中/);
   });
 
-  it("shows Korean '실행 중' when lang=ko", () => {
+  it("shows Spanish 'En curso' when lang=es", () => {
     update(api, { id: "s1", state: "working", event: "PreToolUse", sourcePid: pid });
-    ctx.lang = "ko";
-    assert.match(menuLabel(), /실행 중/);
+    ctx.lang = "es";
+    assert.match(menuLabel(), /En curso/);
   });
 
   it("shows 'Done' after Stop event (en)", () => {
@@ -1003,13 +1003,13 @@ describe("buildSessionSubmenu badge + i18n", () => {
     const enLabel = menuLabel();
     ctx.lang = "zh";
     const zhLabel = menuLabel();
-    ctx.lang = "ko";
-    const koLabel = menuLabel();
+    ctx.lang = "es";
+    const esLabel = menuLabel();
     assert.notStrictEqual(enLabel, zhLabel, "en vs zh should differ");
-    assert.notStrictEqual(zhLabel, koLabel, "zh vs ko should differ");
+    assert.notStrictEqual(zhLabel, esLabel, "zh vs es should differ");
     assert.match(enLabel, /Running/);
     assert.match(zhLabel, /运行中/);
-    assert.match(koLabel, /실행 중/);
+    assert.match(esLabel, /En curso/);
   });
 
   it("badge label falls back for idle sessions with only SessionStart", () => {

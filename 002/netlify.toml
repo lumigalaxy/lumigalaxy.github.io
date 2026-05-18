@@ -1,9 +1,0 @@
-[build]
-  publish = "."
-
-# 访问根路径时直接显示 index-standalone.html（URL 保持为 /）
-[[redirects]]
-  from = "/"
-  to = "/index-standalone.html"
-  status = 200
-  force = true
