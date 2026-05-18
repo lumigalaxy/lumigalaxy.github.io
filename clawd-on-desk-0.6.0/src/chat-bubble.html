@@ -234,6 +234,76 @@
     .footer .meta .status.err { color: var(--danger); }
     .footer .meta .status.busy { color: var(--alien-glow); }
 
+    .tool-row {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 6px;
+    }
+    .tool-row button,
+    .mini-panel button {
+      background: var(--bg-deep);
+      border: 1px solid var(--border-soft);
+      color: var(--alien);
+      font-family: inherit;
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      padding: 5px 6px;
+      cursor: pointer;
+      border-radius: 0;
+    }
+    .tool-row button:hover,
+    .mini-panel button:hover {
+      background: var(--alien);
+      color: var(--bg-deep);
+    }
+    .mini-panel {
+      display: none;
+      border: 1px solid var(--border-soft);
+      background: rgba(184,217,48,0.06);
+      padding: 6px;
+      gap: 6px;
+      grid-template-columns: 1fr;
+    }
+    .mini-panel.open { display: grid; }
+    .mini-line {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      min-width: 0;
+    }
+    .mini-line input {
+      min-width: 0;
+      flex: 1;
+      background: var(--bg-deep);
+      border: 1px solid var(--border-soft);
+      color: var(--text);
+      padding: 5px 6px;
+      font-family: inherit;
+      font-size: 10px;
+      outline: none;
+      border-radius: 0;
+      user-select: text;
+      -webkit-user-select: text;
+    }
+    .mini-line input[type="number"] { flex: 0 0 58px; }
+    .game-pad {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 6px;
+    }
+    .game-pad button {
+      min-height: 28px;
+      font-size: 13px;
+      padding: 0;
+    }
+    .mini-status {
+      color: var(--text-dim);
+      font-size: 10px;
+      line-height: 1.35;
+      min-height: 14px;
+    }
+
     .input-row {
       display: flex;
       gap: 6px;
@@ -318,6 +388,32 @@
           <select id="model" title="Model"></select>
           <span class="status" id="status"></span>
         </div>
+        <div class="tool-row">
+          <button id="tool-game" title="Open minigames">GAME</button>
+          <button id="tool-reminder" title="Create reminder">REM</button>
+          <button id="tool-ping" title="Ask Alien for a quick signal">PING</button>
+        </div>
+        <div class="mini-panel" id="game-panel">
+          <div class="mini-status" id="game-status">Choose a tiny mission.</div>
+          <div class="game-pad">
+            <button data-game="0">A</button>
+            <button data-game="1">B</button>
+            <button data-game="2">C</button>
+            <button data-game="3">D</button>
+          </div>
+          <div class="mini-line">
+            <button id="game-signal">SIGNAL</button>
+            <button id="game-comet">COMET</button>
+          </div>
+        </div>
+        <div class="mini-panel" id="reminder-panel">
+          <div class="mini-line">
+            <input id="reminder-min" type="number" min="1" max="1440" value="25" title="Minutes" />
+            <input id="reminder-text" maxlength="140" placeholder="Reminder text" />
+            <button id="reminder-save">SET</button>
+          </div>
+          <div class="mini-status" id="reminder-status"></div>
+        </div>
         <div class="input-row">
           <input id="text" placeholder="Type a message…" autocomplete="off" />
           <button id="send">SEND</button>
@@ -347,10 +443,24 @@
   const btnClear = document.getElementById("btn-clear");
   const btnClose = document.getElementById("btn-close");
   const tailEl = document.getElementById("tail");
+  const toolGame = document.getElementById("tool-game");
+  const toolReminder = document.getElementById("tool-reminder");
+  const toolPing = document.getElementById("tool-ping");
+  const gamePanel = document.getElementById("game-panel");
+  const reminderPanel = document.getElementById("reminder-panel");
+  const gameStatus = document.getElementById("game-status");
+  const reminderMin = document.getElementById("reminder-min");
+  const reminderText = document.getElementById("reminder-text");
+  const reminderSave = document.getElementById("reminder-save");
+  const reminderStatus = document.getElementById("reminder-status");
 
   let chosenModel = "";
   let currentAssistantMsg = null; // DOM node for streaming reply
   let assembled = "";
+  let signalSequence = [];
+  let signalCursor = 0;
+  let cometScore = 0;
+  let cometTimer = null;
 
   // ── Boot ──
   api.onBootstrap(({ models, model, lang, history }) => {
@@ -422,6 +532,13 @@
     txt.focus();
   });
 
+  api.onReminderFired((reminder) => {
+    hideEmpty();
+    appendMessage("assistant", "REMINDER: " + reminder.text);
+    setStatus("reminder", "ok");
+    scrollToBottom();
+  });
+
   // ── Model list refresh ──
   function refreshModels(models, current) {
     modelSel.innerHTML = "";
@@ -457,6 +574,31 @@
     api.setModel(chosenModel);
   });
 
+  toolGame.addEventListener("click", () => {
+    gamePanel.classList.toggle("open");
+    reminderPanel.classList.remove("open");
+  });
+  toolReminder.addEventListener("click", () => {
+    reminderPanel.classList.toggle("open");
+    gamePanel.classList.remove("open");
+    reminderText.focus();
+  });
+  toolPing.addEventListener("click", () => {
+    const prompts = [
+      "Alien, dame una senal rapida para seguir.",
+      "Alien, inventa una mini mision de 1 minuto.",
+      "Alien, sugiere un descanso pequeno."
+    ];
+    txt.value = prompts[Math.floor(Math.random() * prompts.length)];
+    doSend();
+  });
+  document.querySelectorAll("[data-game]").forEach((btn) => {
+    btn.addEventListener("click", () => pressGame(Number(btn.dataset.game), btn));
+  });
+  document.getElementById("game-signal").addEventListener("click", startSignalGame);
+  document.getElementById("game-comet").addEventListener("click", startCometGame);
+  reminderSave.addEventListener("click", scheduleReminder);
+
   // ── Send ──
   function doSend() {
     const text = txt.value.trim();
@@ -487,6 +629,74 @@
   });
 
   // ── Helpers ──
+  function startSignalGame() {
+    signalSequence = Array.from({ length: 4 }, () => Math.floor(Math.random() * 4));
+    signalCursor = 0;
+    gameStatus.textContent = "Repeat: " + signalSequence.map((n) => "ABCD"[n]).join(" ");
+    setTimeout(() => { gameStatus.textContent = "Your turn."; }, 1600);
+  }
+
+  function pressGame(index, btn) {
+    if (cometTimer) {
+      cometScore += 1;
+      gameStatus.textContent = "Comets: " + cometScore;
+      btn.style.transform = "translateY(-2px)";
+      setTimeout(() => { btn.style.transform = ""; }, 90);
+      return;
+    }
+    if (!signalSequence.length) {
+      gameStatus.textContent = "Start SIGNAL or COMET first.";
+      return;
+    }
+    if (index !== signalSequence[signalCursor]) {
+      signalSequence = [];
+      signalCursor = 0;
+      gameStatus.textContent = "Signal lost. Try again.";
+      return;
+    }
+    signalCursor += 1;
+    if (signalCursor >= signalSequence.length) {
+      signalSequence = [];
+      signalCursor = 0;
+      gameStatus.textContent = "Signal locked. Alien is pleased.";
+      appendMessage("assistant", "SIGNAL LOCKED: antenas sincronizadas.");
+    } else {
+      gameStatus.textContent = "Good. Next.";
+    }
+  }
+
+  function startCometGame() {
+    if (cometTimer) clearTimeout(cometTimer);
+    cometScore = 0;
+    gameStatus.textContent = "Tap A/B/C/D as much as you can.";
+    cometTimer = setTimeout(() => {
+      const score = cometScore;
+      cometTimer = null;
+      gameStatus.textContent = "Comet score: " + score;
+      appendMessage("assistant", "COMET SCORE: " + score + ". Nice reflexes.");
+    }, 10000);
+  }
+
+  function scheduleReminder() {
+    const minutes = Number(reminderMin.value);
+    const text = reminderText.value.trim();
+    if (!minutes || !text) {
+      reminderStatus.textContent = "Add minutes and text.";
+      return;
+    }
+    api.scheduleReminder({ minutes, text }).then((res) => {
+      if (!res || !res.ok) {
+        reminderStatus.textContent = "Could not set reminder.";
+        return;
+      }
+      reminderStatus.textContent = "Set for " + res.minutes + " min.";
+      appendMessage("assistant", "REM set: " + res.text + " in " + res.minutes + " min.");
+      reminderText.value = "";
+    }).catch(() => {
+      reminderStatus.textContent = "Could not set reminder.";
+    });
+  }
+
   function appendMessage(role, content, opts) {
     const node = document.createElement("div");
     node.className = "msg " + role;

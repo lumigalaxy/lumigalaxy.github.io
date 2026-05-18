@@ -17,8 +17,9 @@ const isWin = process.platform === "win32";
 
 const OLLAMA_HOST = "127.0.0.1";
 const OLLAMA_PORT = 11434;
-const DEFAULT_CHAT_MODEL = "llama3.2";
-const OFFLINE_CHAT_MODEL = "Alien offline";
+const DEFAULT_CHAT_MODEL = "qwen2.5:0.5b";
+const LOCAL_CHAT_MODEL = "Alien local";
+const LEGACY_OFFLINE_CHAT_MODEL = "Alien offline";
 const SYSTEM_PROMPT = [
   "You are Alien, a friendly pixel-art alien desktop pet companion.",
   "Replies must be SHORT (1-3 sentences) — they appear inside a small chat bubble next to the user's pet.",
@@ -41,6 +42,8 @@ let availableModels = [];
 let preferredModel = "";
 let ipcWired = false;
 let chatOpenCount = 0;
+let reminderSeq = 0;
+const reminderTimers = new Map();
 
 // ── Public API ──
 
@@ -199,8 +202,8 @@ function _sendBootstrap() {
   const hasReal = _hasRealModels();
   chatWin.webContents.send("chat-bubble-bootstrap", {
     lang: ctxRef && ctxRef.lang ? ctxRef.lang : "en",
-    models: hasReal ? availableModels : [OFFLINE_CHAT_MODEL],
-    model: hasReal ? preferredModel : OFFLINE_CHAT_MODEL,
+    models: hasReal ? availableModels : [LOCAL_CHAT_MODEL],
+    model: hasReal ? preferredModel : LOCAL_CHAT_MODEL,
     history: history.slice(-MAX_HISTORY * 2),
   });
 }
@@ -232,29 +235,44 @@ function _wireIpc() {
       const hasReal = _hasRealModels();
       return {
         ok: true,
-        models: hasReal ? availableModels : [OFFLINE_CHAT_MODEL],
-        model: hasReal ? preferredModel : OFFLINE_CHAT_MODEL,
-        offline: !hasReal,
+        models: hasReal ? availableModels : [LOCAL_CHAT_MODEL],
+        model: hasReal ? preferredModel : LOCAL_CHAT_MODEL,
+        local: !hasReal,
       };
     } catch (e) {
-      return { ok: true, models: [OFFLINE_CHAT_MODEL], model: OFFLINE_CHAT_MODEL, offline: true };
+      return { ok: true, models: [LOCAL_CHAT_MODEL], model: LOCAL_CHAT_MODEL, local: true };
     }
   });
 
   ipcMain.on("chat-bubble-set-model", (_e, model) => {
-    if (typeof model === "string" && model && model !== OFFLINE_CHAT_MODEL) preferredModel = model;
+    if (typeof model === "string" && model && model !== LEGACY_OFFLINE_CHAT_MODEL) {
+      preferredModel = model === LOCAL_CHAT_MODEL ? "" : model;
+    }
+  });
+
+  ipcMain.handle("chat-bubble-schedule-reminder", async (_e, payload) => {
+    const minutes = Math.max(1, Math.min(1440, Number(payload && payload.minutes) || 0));
+    const text = String((payload && payload.text) || "").trim().slice(0, 140);
+    if (!minutes || !text) return { ok: false, error: "invalid reminder" };
+    const id = ++reminderSeq;
+    const timer = setTimeout(() => {
+      reminderTimers.delete(id);
+      _fireReminder({ id, text, minutes });
+    }, minutes * 60 * 1000);
+    reminderTimers.set(id, timer);
+    return { ok: true, id, minutes, text };
   });
 
   ipcMain.on("chat-bubble-send", async (_e, payload) => {
     const text = payload && payload.text;
-    let model = (payload && payload.model) || preferredModel || OFFLINE_CHAT_MODEL;
+    let model = (payload && payload.model) || preferredModel || LOCAL_CHAT_MODEL;
     if (!text || !model) return;
-    if (model === OFFLINE_CHAT_MODEL) {
+    if (_isLocalModel(model)) {
       await _ensureModelsLoaded().catch(() => {});
       if (_hasRealModels()) {
         model = preferredModel || availableModels[0];
       } else {
-        _streamOfflineReply(text, model);
+        _streamLocalReply(text, LOCAL_CHAT_MODEL);
         return;
       }
     }
@@ -300,7 +318,11 @@ async function _loadAvailableModels() {
 }
 
 function _hasRealModels() {
-  return availableModels.some(m => m && m !== OFFLINE_CHAT_MODEL);
+  return availableModels.some(m => m && !_isLocalModel(m));
+}
+
+function _isLocalModel(model) {
+  return model === LOCAL_CHAT_MODEL || model === LEGACY_OFFLINE_CHAT_MODEL;
 }
 
 function _buildSystemPrompt() {
@@ -370,17 +392,19 @@ function _streamReply(userText, model) {
       }
     });
     res.on("end", () => { activeRequest = null; });
-    res.on("error", (err) => {
-      _send("chat-bubble-reply-error", err.message || String(err));
-      activeRequest = null;
+    res.on("error", () => {
+      const note = "Cambio al motor Alien local por un fallo del modelo.\n\n";
+      _send("chat-bubble-reply-chunk", note);
+      _streamLocalReply(userText, LOCAL_CHAT_MODEL, { start: false, trackUser: false, prefix: note });
     });
   });
 
   req.on("error", (err) => {
-    let msg = err.message || String(err);
-    if (err.code === "ECONNREFUSED") msg = "Ollama not running on localhost:11434 — start it with `ollama serve`.";
-    _send("chat-bubble-reply-error", msg);
-    activeRequest = null;
+    const note = err && err.code === "ECONNREFUSED"
+      ? "El motor Alien local toma el relevo. Cuando abras Ollama, intentare usar qwen2.5:0.5b automaticamente.\n\n"
+      : "Cambio al motor Alien local por un fallo del modelo.\n\n";
+    _send("chat-bubble-reply-chunk", note);
+    _streamLocalReply(userText, LOCAL_CHAT_MODEL, { start: false, trackUser: false, prefix: note });
   });
 
   req.write(body);
@@ -388,13 +412,13 @@ function _streamReply(userText, model) {
   activeRequest = { req, abort: () => req.destroy() };
 }
 
-function _streamOfflineReply(userText, model) {
+function _streamLocalReply(userText, model, options = {}) {
   _abortActiveRequest();
-  history.push({ role: "user", content: userText });
+  if (options.trackUser !== false) history.push({ role: "user", content: userText });
   if (history.length > MAX_HISTORY * 2) history = history.slice(-MAX_HISTORY * 2);
 
-  _send("chat-bubble-reply-start", { user: userText, model });
-  const reply = _buildOfflineReply(userText);
+  if (options.start !== false) _send("chat-bubble-reply-start", { user: userText, model });
+  const reply = _buildLocalReply(userText);
   let idx = 0;
   const timer = setInterval(() => {
     const prev = idx;
@@ -402,7 +426,7 @@ function _streamOfflineReply(userText, model) {
     _send("chat-bubble-reply-chunk", reply.slice(prev, idx));
     if (idx >= reply.length) {
       clearInterval(timer);
-      history.push({ role: "assistant", content: reply });
+      history.push({ role: "assistant", content: (options.prefix || "") + reply });
       _send("chat-bubble-reply-end", null);
       activeRequest = null;
     }
@@ -410,23 +434,68 @@ function _streamOfflineReply(userText, model) {
   activeRequest = { req: { destroy: () => clearInterval(timer) } };
 }
 
-function _buildOfflineReply(userText) {
+function _buildLocalReply(userText) {
+  const text = String(userText || "").trim();
+  const lower = text.toLowerCase();
+  return _buildLocalBrain(text, lower);
+}
+
+function _buildLocalBrain(text, lower) {
+  const spanish = /[¿¡ñáéíóú]|\b(hola|gracias|quiero|puedes|alien|chat|error|funciona|ollama|modelo|recordatorio|juego)\b/i.test(text);
+  if (lower.includes("ollama") || lower.includes("modelo") || lower.includes("model") || lower.includes("error")) {
+    return spanish
+      ? `Estoy usando Alien local ahora. Para IA local completa, abre Ollama y dejare listo ${DEFAULT_CHAT_MODEL}; mientras tanto puedo conversar, proponer ideas y crear recordatorios.`
+      : `I am using Alien local right now. For full local AI, start Ollama and I will prepare ${DEFAULT_CHAT_MODEL}; meanwhile I can chat, suggest ideas, and set reminders.`;
+  }
+  if (lower.includes("recordatorio") || lower.includes("reminder") || lower.includes("alarma") || lower.includes("alarm")) {
+    return spanish
+      ? "Puedo ayudarte con eso: usa el panel REM para crear un recordatorio con minutos y texto. Cuando llegue la hora, vuelvo a avisarte aqui."
+      : "I can help with that: use the REM panel to create a reminder with minutes and text. When it is time, I will pop back here.";
+  }
+  if (lower.includes("juego") || lower.includes("game") || lower.includes("play")) {
+    return spanish
+      ? "Tengo dos minijuegos en el panel GAME: repetir senales y tocar cometas. Son pequenos, pero buenos para despertar antenas."
+      : "I have two minigames in the GAME panel: signal repeat and comet tap. Tiny, but good for waking up antennas.";
+  }
+  if (/[?¿]$/.test(text)) {
+    return spanish
+      ? "Mi antena local dice que si. Dame un poco mas de contexto y te respondo con calma, sin depender de internet."
+      : "My local antenna says yes. Give me a little more context and I will answer calmly without needing the internet.";
+  }
+  return spanish
+    ? "Recibido. Estoy en modo Alien local y sigo contigo. Cuentame un poco mas y lo convertimos en plan, idea o recordatorio."
+    : "Received. I am in Alien local mode and still with you. Tell me a little more and we can turn it into a plan, idea, or reminder.";
+}
+
+function _buildLegacyOfflineReply(userText) {
   const text = String(userText || "").trim();
   const lower = text.toLowerCase();
   const spanish = /[¿¡ñáéíóú]|\b(hola|gracias|quiero|puedes|alien|chat|error|funciona|ollama)\b/i.test(text);
   if (lower.includes("ollama") || lower.includes("modelo") || lower.includes("model") || lower.includes("error")) {
     return spanish
-      ? "Estoy en modo offline porque Ollama no esta disponible. Aun asi puedo responderte aqui; si quieres IA local completa, abre Ollama mas tarde."
-      : "I am in offline mode because Ollama is not available. I can still chat here; for full local AI, start Ollama later.";
+      ? "Estoy usando Alien local porque Ollama no esta disponible. Aun asi puedo responderte aqui; si quieres IA local completa, abre Ollama mas tarde."
+      : "I am using Alien local because Ollama is not available. I can still chat here; for full local AI, start Ollama later.";
   }
   if (/[?¿]$/.test(text)) {
     return spanish
-      ? "Mi antena offline dice que si. Puedo ayudarte con respuestas cortas, ideas y compania mientras arreglamos lo que haga falta."
-      : "My offline antenna says yes. I can help with short answers, ideas, and company while we fix what needs fixing.";
+      ? "Mi antena local dice que si. Puedo ayudarte con respuestas cortas, ideas y compania mientras arreglamos lo que haga falta."
+      : "My local antenna says yes. I can help with short answers, ideas, and company while we fix what needs fixing.";
   }
   return spanish
-    ? "Recibido. Estoy aqui en modo offline, pero sigo conversando contigo. Cuentame un poco mas y seguimos."
-    : "Received. I am here in offline mode, but still chatting with you. Tell me a little more and we will keep going.";
+    ? "Recibido. Estoy aqui en modo local y sigo conversando contigo. Cuentame un poco mas y seguimos."
+    : "Received. I am here in local mode and still chatting with you. Tell me a little more and we will keep going.";
+}
+
+function _fireReminder(reminder) {
+  if (!isBubbleOpen()) {
+    openChatBubble();
+    setTimeout(() => _fireReminder(reminder), 450);
+    return;
+  }
+  try {
+    if (ctxRef && typeof ctxRef.applyState === "function") ctxRef.applyState("notification");
+  } catch {}
+  _send("chat-bubble-reminder-fired", reminder);
 }
 
 function _fetchOllama(method, pathStr, body, timeoutMs = 4000) {

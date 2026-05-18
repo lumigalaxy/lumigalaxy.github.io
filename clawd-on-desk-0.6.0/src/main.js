@@ -1071,6 +1071,7 @@ const _menuCtx = {
   syncHitWin,
   getPetWindowBounds,
   applyPetWindowBounds,
+  applyState: (state, svgOverride) => applyState(state, svgOverride),
   getCurrentPixelSize,
   isProportionalMode,
   PROPORTIONAL_RATIOS,

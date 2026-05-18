@@ -10,6 +10,7 @@ contextBridge.exposeInMainWorld("chatBubbleAPI", {
   clearHistory: () => ipcRenderer.send("chat-bubble-clear-history"),
   setModel: (model) => ipcRenderer.send("chat-bubble-set-model", model),
   listModels: () => ipcRenderer.invoke("chat-bubble-list-models"),
+  scheduleReminder: (payload) => ipcRenderer.invoke("chat-bubble-schedule-reminder", payload),
 
   // ← main
   onBootstrap:     (cb) => ipcRenderer.on("chat-bubble-bootstrap", (_, d) => cb(d)),
@@ -20,4 +21,5 @@ contextBridge.exposeInMainWorld("chatBubbleAPI", {
   onReplyEnd:      (cb) => ipcRenderer.on("chat-bubble-reply-end", () => cb()),
   onReplyError:    (cb) => ipcRenderer.on("chat-bubble-reply-error", (_, msg) => cb(msg)),
   onHistoryCleared:(cb) => ipcRenderer.on("chat-bubble-history-cleared", () => cb()),
+  onReminderFired: (cb) => ipcRenderer.on("chat-bubble-reminder-fired", (_, d) => cb(d)),
 });
